@@ -13,6 +13,7 @@
 		B532DBE819D47D62009B4518 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = B532DBE719D47D62009B4518 /* Images.xcassets */; };
 		B532DBEB19D47D62009B4518 /* LaunchScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = B532DBE919D47D62009B4518 /* LaunchScreen.xib */; };
 		B532DBF719D47D62009B4518 /* Hear_for_meTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = B532DBF619D47D62009B4518 /* Hear_for_meTests.swift */; };
+		B532DC0119D48383009B4518 /* LICENSE in Resources */ = {isa = PBXBuildFile; fileRef = B532DC0019D48383009B4518 /* LICENSE */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -36,6 +37,7 @@
 		B532DBF019D47D62009B4518 /* Hear for meTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "Hear for meTests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
 		B532DBF519D47D62009B4518 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		B532DBF619D47D62009B4518 /* Hear_for_meTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Hear_for_meTests.swift; sourceTree = "<group>"; };
+		B532DC0019D48383009B4518 /* LICENSE */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = LICENSE; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -77,6 +79,7 @@
 		B532DBDD19D47D62009B4518 /* Hear for me */ = {
 			isa = PBXGroup;
 			children = (
+				B532DC0019D48383009B4518 /* LICENSE */,
 				B532DBE019D47D62009B4518 /* AppDelegate.swift */,
 				B532DBE219D47D62009B4518 /* ViewController.swift */,
 				B532DBE419D47D62009B4518 /* Main.storyboard */,
@@ -195,6 +198,7 @@
 			files = (
 				B532DBE619D47D62009B4518 /* Main.storyboard in Resources */,
 				B532DBEB19D47D62009B4518 /* LaunchScreen.xib in Resources */,
+				B532DC0119D48383009B4518 /* LICENSE in Resources */,
 				B532DBE819D47D62009B4518 /* Images.xcassets in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
