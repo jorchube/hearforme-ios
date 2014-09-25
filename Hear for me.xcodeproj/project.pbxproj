@@ -161,6 +161,7 @@
 				TargetAttributes = {
 					B532DBDA19D47D62009B4518 = {
 						CreatedOnToolsVersion = 6.1;
+						DevelopmentTeam = 7SJ347CED9;
 					};
 					B532DBEF19D47D62009B4518 = {
 						CreatedOnToolsVersion = 6.1;
