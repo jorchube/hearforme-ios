@@ -8,7 +8,6 @@
 
 import UIKit
 
-
 class ViewController: UIViewController, settingsDelegate {
 
     @IBOutlet weak var prefButton: UIButton!
@@ -16,6 +15,7 @@ class ViewController: UIViewController, settingsDelegate {
     
     let settings:Settings = Settings.getSettings()
     
+    let speechRec:speechRecognizer = speechRecognizer()
     
     func setTextSize() {
         mainText.font = mainText.font.fontWithSize( CGFloat(settings.getFontSize()) )
@@ -35,6 +35,16 @@ class ViewController: UIViewController, settingsDelegate {
 
         // Do any additional setup after loading the view, typically from a nib.
         updateUI(textChanged: true, themeChanged: true)
+        
+        mainText.text = "Turn your phone upside down to start listening"
+        
+        speechRec.shouldListen =  0
+        speechRec.textview = self.mainText
+        speechRec.setup()
+    }
+    
+    override func supportedInterfaceOrientations() -> Int {
+        return Int(UIInterfaceOrientationMask.All.rawValue)
     }
 
     override func didReceiveMemoryWarning() {
@@ -49,7 +59,30 @@ class ViewController: UIViewController, settingsDelegate {
         }
         
     }
-
+    
+    func continueRecognizing() {
+        if speechRec.shouldListen == 1 {
+            NSLog("Should continue recognizing")
+            speechRec.recognizeNow(self)
+        }
+    }
+    
+    override func didRotateFromInterfaceOrientation(fromInterfaceOrientation: UIInterfaceOrientation) {
+        if fromInterfaceOrientation.rawValue == UIInterfaceOrientation.Portrait.rawValue {
+            /* was portrait, now upside down */
+            NSLog("Orientation from normal to upside down")
+            speechRec.shouldListen = 1
+            mainText.text = ""
+            speechRec.recognizeNow(self)
+        }
+        else {
+            /* back to normal */
+            speechRec.shouldListen = 0;
+            mainText.text = "Turn your phone upside down to start listening"
+            NSLog("Orientation again normal")
+        }
+    }
+    
     func useNewSettings() {
         /*
             Conforms to the settingsDelegate protocol.
@@ -58,4 +91,6 @@ class ViewController: UIViewController, settingsDelegate {
         updateUI(textChanged: true, themeChanged: true)
     }
 
+    
+    
 }

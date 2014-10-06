@@ -15,6 +15,16 @@
 		B532DC0119D48383009B4518 /* LICENSE in Resources */ = {isa = PBXBuildFile; fileRef = B532DC0019D48383009B4518 /* LICENSE */; };
 		B532DC3E19D57A74009B4518 /* PreferencesViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B532DC3D19D57A74009B4518 /* PreferencesViewController.swift */; };
 		B532DC4619D95710009B4518 /* Settings.swift in Sources */ = {isa = PBXBuildFile; fileRef = B532DC4519D95710009B4518 /* Settings.swift */; };
+		B5DFE63719E2A72900833541 /* speechRecognizer.m in Sources */ = {isa = PBXBuildFile; fileRef = B5DFE63619E2A72900833541 /* speechRecognizer.m */; };
+		B5DFE63C19E2B27000833541 /* SpeechKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B5DFE63319E2A4E300833541 /* SpeechKit.framework */; };
+		B5DFE6B019E2C25700833541 /* AudioToolbox.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B5DFE6A819E2C25700833541 /* AudioToolbox.framework */; };
+		B5DFE6B119E2C25700833541 /* AVFoundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B5DFE6A919E2C25700833541 /* AVFoundation.framework */; };
+		B5DFE6B219E2C25700833541 /* CFNetwork.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B5DFE6AA19E2C25700833541 /* CFNetwork.framework */; };
+		B5DFE6B319E2C25700833541 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B5DFE6AB19E2C25700833541 /* CoreGraphics.framework */; };
+		B5DFE6B419E2C25700833541 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B5DFE6AC19E2C25700833541 /* Foundation.framework */; };
+		B5DFE6B519E2C25700833541 /* Security.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B5DFE6AD19E2C25700833541 /* Security.framework */; };
+		B5DFE6B619E2C25700833541 /* SystemConfiguration.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B5DFE6AE19E2C25700833541 /* SystemConfiguration.framework */; };
+		B5DFE6B719E2C25700833541 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B5DFE6AF19E2C25700833541 /* UIKit.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -40,6 +50,18 @@
 		B532DC0019D48383009B4518 /* LICENSE */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = LICENSE; sourceTree = "<group>"; };
 		B532DC3D19D57A74009B4518 /* PreferencesViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PreferencesViewController.swift; sourceTree = "<group>"; };
 		B532DC4519D95710009B4518 /* Settings.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Settings.swift; sourceTree = "<group>"; };
+		B5DFE62D19E2997D00833541 /* Hear for me-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "Hear for me-Bridging-Header.h"; sourceTree = "<group>"; };
+		B5DFE63319E2A4E300833541 /* SpeechKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = SpeechKit.framework; sourceTree = "<group>"; };
+		B5DFE63519E2A72900833541 /* speechRecognizer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = speechRecognizer.h; sourceTree = "<group>"; };
+		B5DFE63619E2A72900833541 /* speechRecognizer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = speechRecognizer.m; sourceTree = "<group>"; };
+		B5DFE6A819E2C25700833541 /* AudioToolbox.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AudioToolbox.framework; path = System/Library/Frameworks/AudioToolbox.framework; sourceTree = SDKROOT; };
+		B5DFE6A919E2C25700833541 /* AVFoundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AVFoundation.framework; path = System/Library/Frameworks/AVFoundation.framework; sourceTree = SDKROOT; };
+		B5DFE6AA19E2C25700833541 /* CFNetwork.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CFNetwork.framework; path = System/Library/Frameworks/CFNetwork.framework; sourceTree = SDKROOT; };
+		B5DFE6AB19E2C25700833541 /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
+		B5DFE6AC19E2C25700833541 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
+		B5DFE6AD19E2C25700833541 /* Security.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Security.framework; path = System/Library/Frameworks/Security.framework; sourceTree = SDKROOT; };
+		B5DFE6AE19E2C25700833541 /* SystemConfiguration.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SystemConfiguration.framework; path = System/Library/Frameworks/SystemConfiguration.framework; sourceTree = SDKROOT; };
+		B5DFE6AF19E2C25700833541 /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -47,6 +69,15 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				B5DFE6B019E2C25700833541 /* AudioToolbox.framework in Frameworks */,
+				B5DFE6B119E2C25700833541 /* AVFoundation.framework in Frameworks */,
+				B5DFE6B219E2C25700833541 /* CFNetwork.framework in Frameworks */,
+				B5DFE6B319E2C25700833541 /* CoreGraphics.framework in Frameworks */,
+				B5DFE6B419E2C25700833541 /* Foundation.framework in Frameworks */,
+				B5DFE6B519E2C25700833541 /* Security.framework in Frameworks */,
+				B5DFE6B619E2C25700833541 /* SystemConfiguration.framework in Frameworks */,
+				B5DFE6B719E2C25700833541 /* UIKit.framework in Frameworks */,
+				B5DFE63C19E2B27000833541 /* SpeechKit.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -63,6 +94,14 @@
 		B532DBD219D47D62009B4518 = {
 			isa = PBXGroup;
 			children = (
+				B5DFE6A819E2C25700833541 /* AudioToolbox.framework */,
+				B5DFE6A919E2C25700833541 /* AVFoundation.framework */,
+				B5DFE6AA19E2C25700833541 /* CFNetwork.framework */,
+				B5DFE6AB19E2C25700833541 /* CoreGraphics.framework */,
+				B5DFE6AC19E2C25700833541 /* Foundation.framework */,
+				B5DFE6AD19E2C25700833541 /* Security.framework */,
+				B5DFE6AE19E2C25700833541 /* SystemConfiguration.framework */,
+				B5DFE6AF19E2C25700833541 /* UIKit.framework */,
 				B532DBDD19D47D62009B4518 /* Hear for me */,
 				B532DBF319D47D62009B4518 /* Hear for meTests */,
 				B532DBDC19D47D62009B4518 /* Products */,
@@ -81,6 +120,7 @@
 		B532DBDD19D47D62009B4518 /* Hear for me */ = {
 			isa = PBXGroup;
 			children = (
+				B5DFE63219E2A4E300833541 /* Frameworks */,
 				B532DC3C19D575C8009B4518 /* resources */,
 				B532DC0019D48383009B4518 /* LICENSE */,
 				B532DBE019D47D62009B4518 /* AppDelegate.swift */,
@@ -90,6 +130,9 @@
 				B532DBDE19D47D62009B4518 /* Supporting Files */,
 				B532DC3D19D57A74009B4518 /* PreferencesViewController.swift */,
 				B532DC4519D95710009B4518 /* Settings.swift */,
+				B5DFE62D19E2997D00833541 /* Hear for me-Bridging-Header.h */,
+				B5DFE63519E2A72900833541 /* speechRecognizer.h */,
+				B5DFE63619E2A72900833541 /* speechRecognizer.m */,
 			);
 			path = "Hear for me";
 			sourceTree = "<group>";
@@ -133,6 +176,14 @@
 			);
 			name = appIcon;
 			path = resources/appIcon;
+			sourceTree = "<group>";
+		};
+		B5DFE63219E2A4E300833541 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				B5DFE63319E2A4E300833541 /* SpeechKit.framework */,
+			);
+			path = Frameworks;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -239,6 +290,7 @@
 				B532DBE319D47D62009B4518 /* ViewController.swift in Sources */,
 				B532DBE119D47D62009B4518 /* AppDelegate.swift in Sources */,
 				B532DC4619D95710009B4518 /* Settings.swift in Sources */,
+				B5DFE63719E2A72900833541 /* speechRecognizer.m in Sources */,
 				B532DC3E19D57A74009B4518 /* PreferencesViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -354,12 +406,19 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"\"$(SRCROOT)\"/**",
+				);
 				INFOPLIST_FILE = "Hear for me/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "";
+				SWIFT_OBJC_BRIDGING_HEADER = "Hear for me/Hear for me-Bridging-Header.h";
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 			};
 			name = Debug;
 		};
@@ -367,12 +426,18 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"\"$(SRCROOT)\"/**",
+				);
 				INFOPLIST_FILE = "Hear for me/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "";
+				SWIFT_OBJC_BRIDGING_HEADER = "Hear for me/Hear for me-Bridging-Header.h";
 			};
 			name = Release;
 		};
@@ -429,6 +494,7 @@
 				B532DBFC19D47D62009B4518 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		B532DBFD19D47D62009B4518 /* Build configuration list for PBXNativeTarget "Hear for meTests" */ = {
 			isa = XCConfigurationList;
@@ -437,6 +503,7 @@
 				B532DBFF19D47D62009B4518 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};

@@ -44,7 +44,7 @@ class Settings: NSObject {
     override init() {
         super.init()
         /* Read from settings storage file */
-        self.theme.setCurrent(Theme.name.lightOnDark)
+        self.theme.setCurrent(Theme.name.darkOnLight)
     }
     
     class func getSettings() -> Settings {

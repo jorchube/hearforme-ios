@@ -26,6 +26,8 @@ class PreferencesViewController: UIViewController {
     
     var delegate:settingsDelegate?
     
+    
+    
     func setTextSize() {
         previewText.font = previewText.font.fontWithSize( CGFloat(settings.getFontSize()) )
     }
