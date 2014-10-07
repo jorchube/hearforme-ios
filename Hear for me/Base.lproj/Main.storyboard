@@ -176,6 +176,15 @@
                                     <action selector="fontValueChanged:" destination="EYj-3R-DPk" eventType="valueChanged" id="eTD-xP-3HK"/>
                                 </connections>
                             </stepper>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="JoK-AD-C04">
+                                <rect key="frame" x="-23" y="-15" width="46" height="30"/>
+                                <state key="normal" title="Language Settings">
+                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                                <connections>
+                                    <segue destination="D65-Af-q5x" kind="presentation" identifier="LangSegue" modalTransitionStyle="flipHorizontal" id="W9x-sb-UTX"/>
+                                </connections>
+                            </button>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
@@ -186,9 +195,11 @@
                             <constraint firstItem="58M-p7-3YR" firstAttribute="centerX" secondItem="PBN-yc-vtZ" secondAttribute="centerX" id="Llt-Eh-4nO"/>
                             <constraint firstItem="Whb-Lj-IGm" firstAttribute="top" secondItem="cMB-F5-vDx" secondAttribute="bottom" constant="104" id="OBq-LO-iS1"/>
                             <constraint firstItem="58M-p7-3YR" firstAttribute="centerX" secondItem="zwe-5x-R0x" secondAttribute="centerX" id="Qrh-Da-KMX"/>
+                            <constraint firstItem="AgK-Jj-gqd" firstAttribute="top" secondItem="JoK-AD-C04" secondAttribute="bottom" constant="20" id="RKq-P4-k4Y"/>
                             <constraint firstItem="PBN-yc-vtZ" firstAttribute="top" secondItem="Whb-Lj-IGm" secondAttribute="bottom" constant="23" id="T0F-qv-Z31"/>
                             <constraint firstItem="PBN-yc-vtZ" firstAttribute="leading" secondItem="fWk-uO-hxt" secondAttribute="leadingMargin" constant="13" id="cnW-Lf-YIW"/>
                             <constraint firstItem="58M-p7-3YR" firstAttribute="centerX" secondItem="fWk-uO-hxt" secondAttribute="centerX" id="ga1-xY-Nn1"/>
+                            <constraint firstItem="JoK-AD-C04" firstAttribute="trailing" secondItem="fWk-uO-hxt" secondAttribute="trailingMargin" id="hZg-aU-NMw"/>
                             <constraint firstItem="zwe-5x-R0x" firstAttribute="top" secondItem="cMB-F5-vDx" secondAttribute="bottom" constant="41" id="i0K-tj-sBa"/>
                             <constraint firstItem="aaj-gz-EeK" firstAttribute="leading" secondItem="fWk-uO-hxt" secondAttribute="leadingMargin" id="k8H-fM-8ol"/>
                             <constraint firstItem="58M-p7-3YR" firstAttribute="top" secondItem="zwe-5x-R0x" secondAttribute="bottom" constant="27" id="obg-oS-QDQ"/>
@@ -200,21 +211,24 @@
                                 <exclude reference="aaj-gz-EeK"/>
                                 <exclude reference="zwe-5x-R0x"/>
                                 <exclude reference="58M-p7-3YR"/>
+                                <exclude reference="JoK-AD-C04"/>
                             </mask>
                             <mask key="constraints">
                                 <exclude reference="3xj-zN-Yx8"/>
                                 <exclude reference="A7H-KI-yHI"/>
                                 <exclude reference="OBq-LO-iS1"/>
-                                <exclude reference="6Q7-qv-9MD"/>
-                                <exclude reference="k8H-fM-8ol"/>
+                                <exclude reference="i0K-tj-sBa"/>
+                                <exclude reference="T0F-qv-Z31"/>
+                                <exclude reference="cnW-Lf-YIW"/>
                                 <exclude reference="5Ua-wA-uco"/>
                                 <exclude reference="Llt-Eh-4nO"/>
                                 <exclude reference="Qrh-Da-KMX"/>
                                 <exclude reference="ga1-xY-Nn1"/>
                                 <exclude reference="obg-oS-QDQ"/>
-                                <exclude reference="i0K-tj-sBa"/>
-                                <exclude reference="T0F-qv-Z31"/>
-                                <exclude reference="cnW-Lf-YIW"/>
+                                <exclude reference="6Q7-qv-9MD"/>
+                                <exclude reference="k8H-fM-8ol"/>
+                                <exclude reference="hZg-aU-NMw"/>
+                                <exclude reference="RKq-P4-k4Y"/>
                             </mask>
                         </variation>
                         <variation key="heightClass=regular-widthClass=compact">
@@ -224,21 +238,24 @@
                                 <include reference="aaj-gz-EeK"/>
                                 <include reference="zwe-5x-R0x"/>
                                 <include reference="58M-p7-3YR"/>
+                                <include reference="JoK-AD-C04"/>
                             </mask>
                             <mask key="constraints">
                                 <include reference="3xj-zN-Yx8"/>
                                 <include reference="A7H-KI-yHI"/>
                                 <include reference="OBq-LO-iS1"/>
-                                <include reference="6Q7-qv-9MD"/>
-                                <include reference="k8H-fM-8ol"/>
+                                <include reference="i0K-tj-sBa"/>
+                                <include reference="T0F-qv-Z31"/>
+                                <include reference="cnW-Lf-YIW"/>
                                 <include reference="5Ua-wA-uco"/>
                                 <include reference="Llt-Eh-4nO"/>
                                 <include reference="Qrh-Da-KMX"/>
                                 <include reference="ga1-xY-Nn1"/>
                                 <include reference="obg-oS-QDQ"/>
-                                <include reference="i0K-tj-sBa"/>
-                                <include reference="T0F-qv-Z31"/>
-                                <include reference="cnW-Lf-YIW"/>
+                                <include reference="6Q7-qv-9MD"/>
+                                <include reference="k8H-fM-8ol"/>
+                                <include reference="hZg-aU-NMw"/>
+                                <include reference="RKq-P4-k4Y"/>
                             </mask>
                         </variation>
                     </view>
@@ -253,6 +270,23 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="O8Y-n4-MLN" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="222" y="359.25"/>
+        </scene>
+        <!--Languages View Controller-->
+        <scene sceneID="YOd-gc-n0o">
+            <objects>
+                <viewController id="D65-Af-q5x" customClass="languagesViewController" customModule="Hear_for_me" customModuleProvider="target" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="aH7-vo-3nS"/>
+                        <viewControllerLayoutGuide type="bottom" id="Tg2-2A-zaK"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="center" id="V0U-Jn-m1l">
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                    </view>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="LaU-R4-cIp" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1035" y="359.25"/>
         </scene>
     </scenes>
     <resources>

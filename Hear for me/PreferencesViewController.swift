@@ -12,7 +12,7 @@ protocol settingsDelegate {
     func useNewSettings()
 }
 
-class PreferencesViewController: UIViewController {
+class PreferencesViewController: UIViewController, languagesDelegate {
 
     @IBOutlet weak var backButton: UIButton!
     
@@ -100,6 +100,15 @@ class PreferencesViewController: UIViewController {
         self.updateUI(textChanged: false, themeChanged: true)
     }
 
+    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
+        if segue.identifier == "LangSegue" {
+            let calledVC = segue.destinationViewController as languagesViewController
+            calledVC.delegate = self
+        }
+    }
     
+    func setLanguagePreferences() {
+        return
+    }
 
 }

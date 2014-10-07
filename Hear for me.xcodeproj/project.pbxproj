@@ -15,6 +15,7 @@
 		B532DC0119D48383009B4518 /* LICENSE in Resources */ = {isa = PBXBuildFile; fileRef = B532DC0019D48383009B4518 /* LICENSE */; };
 		B532DC3E19D57A74009B4518 /* PreferencesViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B532DC3D19D57A74009B4518 /* PreferencesViewController.swift */; };
 		B532DC4619D95710009B4518 /* Settings.swift in Sources */ = {isa = PBXBuildFile; fileRef = B532DC4519D95710009B4518 /* Settings.swift */; };
+		B5AC585619E4497900C252C5 /* languagesViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5AC585519E4497900C252C5 /* languagesViewController.swift */; };
 		B5DFE63719E2A72900833541 /* speechRecognizer.m in Sources */ = {isa = PBXBuildFile; fileRef = B5DFE63619E2A72900833541 /* speechRecognizer.m */; };
 		B5DFE63C19E2B27000833541 /* SpeechKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B5DFE63319E2A4E300833541 /* SpeechKit.framework */; };
 		B5DFE6B019E2C25700833541 /* AudioToolbox.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B5DFE6A819E2C25700833541 /* AudioToolbox.framework */; };
@@ -50,6 +51,7 @@
 		B532DC0019D48383009B4518 /* LICENSE */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = LICENSE; sourceTree = "<group>"; };
 		B532DC3D19D57A74009B4518 /* PreferencesViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PreferencesViewController.swift; sourceTree = "<group>"; };
 		B532DC4519D95710009B4518 /* Settings.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Settings.swift; sourceTree = "<group>"; };
+		B5AC585519E4497900C252C5 /* languagesViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = languagesViewController.swift; sourceTree = "<group>"; };
 		B5DFE62D19E2997D00833541 /* Hear for me-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "Hear for me-Bridging-Header.h"; sourceTree = "<group>"; };
 		B5DFE63319E2A4E300833541 /* SpeechKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = SpeechKit.framework; sourceTree = "<group>"; };
 		B5DFE63519E2A72900833541 /* speechRecognizer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = speechRecognizer.h; sourceTree = "<group>"; };
@@ -133,6 +135,7 @@
 				B5DFE62D19E2997D00833541 /* Hear for me-Bridging-Header.h */,
 				B5DFE63519E2A72900833541 /* speechRecognizer.h */,
 				B5DFE63619E2A72900833541 /* speechRecognizer.m */,
+				B5AC585519E4497900C252C5 /* languagesViewController.swift */,
 			);
 			path = "Hear for me";
 			sourceTree = "<group>";
@@ -291,6 +294,7 @@
 				B532DBE119D47D62009B4518 /* AppDelegate.swift in Sources */,
 				B532DC4619D95710009B4518 /* Settings.swift in Sources */,
 				B5DFE63719E2A72900833541 /* speechRecognizer.m in Sources */,
+				B5AC585619E4497900C252C5 /* languagesViewController.swift in Sources */,
 				B532DC3E19D57A74009B4518 /* PreferencesViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
