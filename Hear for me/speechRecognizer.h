@@ -11,15 +11,23 @@
 
 #import <SpeechKit/SpeechKit.h>
 
+#define IDLE 0
+#define HEARING 1
+#define PROCESSING 2
+
+#define PREPARING 10
 
 @interface speechRecognizer : NSObject <SKRecognizerDelegate>
 
 @property SKRecognizer* recognizer;
 @property UITextView* textview;
 @property int shouldListen;
+@property int status;
 
-
--(void) setup;
--(void) recognizeNow: (UIViewController*) vc;
+-(void) setup:(UIViewController*) vc;
+-(void) startRecognition;
+-(void) stopRecognition;
+-(void) cancelRecognition;
+-(void) destroyRecognizer;
 
 @end

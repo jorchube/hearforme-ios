@@ -15,7 +15,10 @@ class ViewController: UIViewController, settingsDelegate {
     
     let settings:Settings = Settings.getSettings()
     
-    let speechRec:speechRecognizer = speechRecognizer()
+    var speechRec:speechRecognizer = speechRecognizer()
+    
+    var continueRecognizing = false
+    var wantsAnotherRecognition = false
     
     func setTextSize() {
         mainText.font = mainText.font.fontWithSize( CGFloat(settings.getFontSize()) )
@@ -30,17 +33,22 @@ class ViewController: UIViewController, settingsDelegate {
         if themeC {setColors()}
     }
     
+    func initSpeechRec() {
+        speechRec.shouldListen =  0
+        speechRec.setup(self)
+        speechRec.textview = self.mainText
+    }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
 
         // Do any additional setup after loading the view, typically from a nib.
         updateUI(textChanged: true, themeChanged: true)
-        
+        //let target = UIScreen.mainScreen().bounds
+        //mainText.frame = CGRectMake(target.minX, target.minY, target.width, target.height-400)
+    
         mainText.text = "Turn your phone upside down to start listening"
-        
-        speechRec.shouldListen =  0
-        speechRec.textview = self.mainText
-        speechRec.setup()
+        initSpeechRec()
     }
     
     override func supportedInterfaceOrientations() -> Int {
@@ -60,27 +68,49 @@ class ViewController: UIViewController, settingsDelegate {
         
     }
     
-    func continueRecognizing() {
-        if speechRec.shouldListen == 1 {
-            NSLog("Should continue recognizing")
-            speechRec.recognizeNow(self)
+    func periodicRecognition() {
+        NSLog("Starting periodic recognition")
+        while(continueRecognizing) {
+            if(speechRec.status == IDLE && wantsAnotherRecognition == true) {
+                speechRec.startRecognition()
+            }
         }
+        NSLog("End periodic recognition")
     }
+    
     
     override func didRotateFromInterfaceOrientation(fromInterfaceOrientation: UIInterfaceOrientation) {
         if fromInterfaceOrientation.rawValue == UIInterfaceOrientation.Portrait.rawValue {
             /* was portrait, now upside down */
             NSLog("Orientation from normal to upside down")
-            speechRec.shouldListen = 1
             mainText.text = ""
-            speechRec.recognizeNow(self)
+            continueRecognizing = true
+            wantsAnotherRecognition = true
+            prefButton.hidden = true
+            
+            let thread = NSThread(target: self, selector: "periodicRecognition", object: nil)
+            thread.start()
         }
         else {
             /* back to normal */
-            speechRec.shouldListen = 0;
+            prefButton.hidden = false
+            
+            continueRecognizing = false
+            speechRec.cancelRecognition()
             mainText.text = "Turn your phone upside down to start listening"
+            //mainText.sizeToFit()
             NSLog("Orientation again normal")
         }
+    }
+    
+    
+    func finishedRecognizing()
+    {
+        NSLog("Finished recognizing one stream")
+        if (continueRecognizing) {
+            wantsAnotherRecognition = true
+        }
+        else { wantsAnotherRecognition = false }
     }
     
     func useNewSettings() {
