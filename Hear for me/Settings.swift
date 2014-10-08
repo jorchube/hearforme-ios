@@ -39,15 +39,15 @@ public struct Languages{
     let hearginValues = ["eng-US", "eng-US", "eng-US", "eng-US", "eng-US"]
     let translatingValues = ["eng-US", "eng-US", "eng-US", "eng-US", "eng-US"]
     
-    var hearginFromSelection = 0
-    var translatingToSelection = 0
+    var hearginFromSelection: Int = 0
+    var translatingToSelection: Int = 0
     
-    func setHearingFrom(index: Int) {
+    mutating func setHearingFrom(index: Int) {
         if index >= 0 && index < self.hearginValues.count {
             self.hearginFromSelection = index
         }
     }
-    func setTranslatingTo(index: Int) {
+    mutating func setTranslatingTo(index: Int) {
         if index >= 0 && index < self.translatingValues.count {
             self.translatingToSelection = index
         }
@@ -68,7 +68,7 @@ class Settings: NSObject {
     private var _fontSize:Double = 20
     
     var theme:Theme = Theme()
-    let availableLanguages: Languages =  Languages()
+    var language: Languages = Languages()
     
     override init() {
         super.init()

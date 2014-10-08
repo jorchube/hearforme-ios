@@ -52,18 +52,25 @@ class fromLanguageViewController: UIViewController, UIPickerViewDelegate, UIPick
     }
     */
 
+    func updateSettings() {
+        settings.language.setHearingFrom(langPicker.selectedRowInComponent(0))
+    }
+    
     @IBAction func okButtonTouched(sender: AnyObject) {
+        updateSettings()
         self.dismissViewControllerAnimated(true, completion: nil)
     }
     
     func pickerView(pickerView: UIPickerView, numberOfRowsInComponent component: Int) -> Int {
-        return settings.availableLanguages.hearingFrom.count
+        return settings.language.hearingFrom.count
     }
     func pickerView(pickerView: UIPickerView, titleForRow row: Int, forComponent component: Int) -> String! {
-        return settings.availableLanguages.hearingFrom[row]
+        return settings.language.hearingFrom[row]
     }
     func numberOfComponentsInPickerView(pickerView: UIPickerView) -> Int {
         return 1
     }
+    
+    
     
 }
