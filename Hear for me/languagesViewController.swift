@@ -12,14 +12,25 @@ protocol languagesDelegate {
     func setLanguagePreferences()
 }
 
-class languagesViewController: ViewController {
+class languagesViewController: UIViewController {
 
+    @IBOutlet weak var backButton: UIButton!
+    
     var delegate:languagesDelegate?
+    
+    let settings:Settings = Settings.getSettings()
+    
+    
+    func loadSettings() {
+        self.view.backgroundColor = settings.theme.bgColor()
+    }
     
     override func viewDidLoad() {
         super.viewDidLoad()
 
         // Do any additional setup after loading the view.
+        loadSettings()
+        
     }
 
     override func didReceiveMemoryWarning() {
@@ -37,5 +48,18 @@ class languagesViewController: ViewController {
         // Pass the selected object to the new view controller.
     }
     */
+    
+    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
+        if segue.identifier == "fromLanguageSegue" {
+         /*   let calledVC = segue.destinationViewController as languagesViewController
+            calledVC.delegate = self*/
+                    NSLog("segue")
+        }
+    }
+
+    @IBAction func backButtonTouched(sender: AnyObject) {
+        self.dismissViewControllerAnimated(1, completion: nil)
+    }
+    
 
 }
