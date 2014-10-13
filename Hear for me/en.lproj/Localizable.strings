@@ -1,0 +1,139 @@
+/* 
+  Localizable.strings
+  Hear for me
+
+  Created by Jordi Chulia on 13/10/14.
+  Copyright (c) 2014 Jordi Chulia. All rights reserved.
+*/
+
+"TURN_UPSIDE_DOWN" = "Turn your phone upside down to start listening";
+
+"PREVIEW" = "This is a preview text in order to help you tune the theme and the font size the best for you. Thank you for using our app, we hope you find it useful. And please, consider donating to our project if you think we deserve it.";
+
+"SIZE" = "Text size:";
+
+"BACK" = "Back";
+"LANG_SETTINGS" = "Language settings";
+
+"LIGHT" = "Light theme";
+"DARK" = "Dark theme";
+
+"NO_TRANSLATION" = "There is no translation available";
+
+/*
+    Nuance languages
+ */
+
+"ara-EGY" = "Arabic (Egypt)";
+"ara-SAU" = "Arabic (Saudi Arabia)";
+"ara-XWW" = "Arabic (International)";
+"ind-IDN" = "Bahasa (Indonesia)";
+"yue-CHN" = "Cantonese (Simplified)";
+"cat-ESP" = "Catalan";
+"hrv-HRV" = "Croatian";
+"ces-CZE" = "Czech";
+"dan-DNK" = "Danish";
+"nld-NLD" = "Dutch";
+"eng-AUS" = "English (Australia)";
+"eng-GBR" = "English (GB)";
+"eng-USA" = "English (US)";
+"eng-IND" = "English (India)";
+"fin-FIN" = "Finnish";
+"fra-CAN" = "French (Canada)";
+"fra-FRA" = "French (France)";
+"deu-DEU" = "German";
+"ell-GRC" = "Greek";
+"heb-ISR" = "Hebrew";
+"hin-IND" = "Hindi New";
+"hun-HUN" = "Hungarian";
+"ita-ITA" = "Italian";
+"jpn-JPN" = "Japanese";
+"kor-KOR" = "Korean";
+"zlm-MYS" = "Malay";
+"cmn-CHN" = "Mandarin (China / Simplified)";
+"cmn-TWN" = "Mandarin (Taiwan / Traditional)";
+"nor-NOR" = "Norwegian";
+"pol-POL" = "Polish";
+"por-BRA" = "Portuguese (Brazil)";
+"por-PRT" = "Portuguese (Portugal)";
+"ron-ROU" = "Romanian";
+"rus-RUS" = "Russian";
+"slk-SVK" = "Slovak";
+"spa-ESP" = "Spanish (Spain)";
+"spa-XLA" = "Spanish (LatAm)";
+"swe-SWE" = "Swedish";
+"tha-THA" = "Thai";
+"tur-TUR" = "Turkish";
+"ukr-UKR" = "Ukrainian";
+"vie-VNM" = "Vietnamese";
+
+
+
+/*
+    Google languages
+ */
+
+"af" = "Afrikaans";
+"sq" = "Albanian";
+"ar" = "Arabic";
+"az" = "Azerbaijani";
+"eu" = "Basque";
+"bn" = "Bengali";
+"be" = "Belarusian";
+"bg" = "Bulgarian";
+"ca" = "Catalan";
+"zh-CN" = "Chinese Simplified";
+"zh-TW" = "Chinese Traditional";
+"hr" = "Croatian";
+"cs" = "Czech";
+"da" = "Danish";
+"nl" = "Dutch";
+"en" = "English";
+"eo" = "Esperanto";
+"et" = "Estonian";
+"tl" = "Filipino";
+"fi" = "Finnish";
+"fr" = "French";
+"gl" = "Galician";
+"ka" = "Georgian";
+"de" = "German";
+"el" = "Greek";
+"gu" = "Gujarati";
+"ht" = "Haitian Creole";
+"iw" = "Hebrew";
+"hi" = "Hindi";
+"hu" = "Hungarian";
+"is" = "Icelandic";
+"id" = "Indonesian";
+"ga" = "Irish";
+"it" = "Italian";
+"ja" = "Japanese";
+"kn" = "Kannada";
+"ko" = "Korean";
+"la" = "Latin";
+"lv" = "Latvian";
+"lt" = "Lithuanian";
+"mk" = "Macedonian";
+"ms" = "Malay";
+"mt" = "Maltese";
+"no" = "Norwegian";
+"fa" = "Persian";
+"pl" = "Polish";
+"pt" = "Portuguese";
+"ro" = "Romanian";
+"ru" = "Russian";
+"sr" = "Serbian";
+"sk" = "Slovak";
+"sl" = "Slovenian";
+"es" = "Spanish";
+"sw" = "Swahili";
+"sv" = "Swedish";
+"ta" = "Tamil";
+"te" = "Telugu";
+"th" = "Thai";
+"tr" = "Turkish";
+"uk" = "Ukrainian";
+"ur" = "Urdu";
+"vi" = "Vietnamese";
+"cy" = "Welsh";
+"yi" = "Yiddish";

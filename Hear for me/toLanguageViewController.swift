@@ -65,11 +65,10 @@ class toLanguageViewController: UIViewController, UIPickerViewDelegate, UIPicker
     }
     
     func pickerView(pickerView: UIPickerView, numberOfRowsInComponent component: Int) -> Int {
-        
-        return settings.language.translatingTo.count
+        return settings.language.translatingList.count
     }
     func pickerView(pickerView: UIPickerView, titleForRow row: Int, forComponent component: Int) -> String! {
-        return settings.language.translatingTo[row]
+        return settings.language.translatingList[row].name
     }
     func numberOfComponentsInPickerView(pickerView: UIPickerView) -> Int {
         return 1

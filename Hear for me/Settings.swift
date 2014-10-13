@@ -6,7 +6,7 @@
 //  Copyright (c) 2014 Jordi Chulia. All rights reserved.
 //
 
-import UIKit
+import Foundation
 
 private let _settings = {Settings()}()
 
@@ -32,37 +32,64 @@ public struct Theme{
     }
 }
 
+
+struct hearingLang {
+    let name:String
+    let code:String
+    let translatable:Bool
+}
+
+struct translatingLang {
+    let name:String
+    let code:String
+}
+
 public struct Languages{
-    let hearingFrom = ["English", "French", "German", "Italian", "Spanish"]
-    let translatingTo = ["English", "French", "German", "Italian", "Spanish"]
     
-    let hearginValues = ["eng-US", "eng-US", "eng-US", "eng-US", "eng-US"]
-    let translatingValues = ["eng-US", "eng-US", "eng-US", "eng-US", "eng-US"]
+    /*
+        [   name: "human readable string",
+            code: "nuance code",
+            translatable: "is translatable"
+        ]
+    */
+    var hearingList:Array<hearingLang> = []
     
-    var hearginFromSelection: Int = 0
-    var translatingToSelection: Int = 0
+    
+    /*
+        [
+            name: "human readable string",
+            code: "google code"
+        ]
+    */
+    var translatingList:Array<translatingLang> = []
+    
+    var hearingSelection: Int = 0
+    var translatingSelection: Int = 0
     
     mutating func setHearing(index: Int) {
-        if index >= 0 && index < self.hearginValues.count {
-            self.hearginFromSelection = index
+        if index >= 0 && index < self.hearingList.count {
+            self.hearingSelection = index
         }
     }
     mutating func setTranslating(index: Int) {
-        if index >= 0 && index < self.translatingValues.count {
-            self.translatingToSelection = index
+        if index >= 0 && index < self.translatingList.count {
+            self.translatingSelection = index
         }
     }
     func getHearingValue() -> String{
-        return self.hearginValues[self.hearginFromSelection]
+        return self.hearingList[self.hearingSelection].code
     }
     func getTranslatingValue() -> String{
-        return self.translatingValues[self.translatingToSelection]
+        return self.translatingList[self.translatingSelection].code
     }
     func getHearingString() -> String{
-        return self.hearingFrom[self.hearginFromSelection]
+        return self.hearingList[self.hearingSelection].name
     }
     func getTranslatingString() -> String{
-        return self.translatingTo[self.translatingToSelection]
+        return self.translatingList[self.translatingSelection].name
+    }
+    func hearingIsTranslatable() -> Bool {
+        return self.hearingList[hearingSelection].translatable
     }
 }
 
@@ -76,10 +103,22 @@ class Settings: NSObject {
     var theme:Theme = Theme()
     var language: Languages = Languages()
     
+    var wantsTranslation:Bool = false
+    
     override init() {
         super.init()
         /* Read from settings storage file */
         self.theme.setCurrent(Theme.name.darkOnLight)
+        
+        for l in hearingLanguageList {
+            self.language.hearingList.append( hearingLang(name: l[0] as NSString, code: l[1] as NSString, translatable: l[2] as Bool) )
+        }
+        self.language.hearingList.sort { $0.name < $1.name }
+        
+        for l in translatingLanguageList {
+            self.language.translatingList.append( translatingLang(name: l[0] as NSString, code: l[1] as NSString) )
+        }
+        self.language.translatingList.sort { $0.name < $1.name }
     }
     
     class func getSettings() -> Settings {

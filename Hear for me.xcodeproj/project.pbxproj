@@ -17,8 +17,11 @@
 		B532DC4619D95710009B4518 /* Settings.swift in Sources */ = {isa = PBXBuildFile; fileRef = B532DC4519D95710009B4518 /* Settings.swift */; };
 		B558347519EBD483009EA9C8 /* toLanguageViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B558347419EBD483009EA9C8 /* toLanguageViewController.swift */; };
 		B558347719EBE68E009EA9C8 /* Protocols.swift in Sources */ = {isa = PBXBuildFile; fileRef = B558347619EBE68E009EA9C8 /* Protocols.swift */; };
+		B558348319EBF230009EA9C8 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = B558348119EBF230009EA9C8 /* Localizable.strings */; };
+		B558348519EC1643009EA9C8 /* languageList.swift in Sources */ = {isa = PBXBuildFile; fileRef = B558348419EC1643009EA9C8 /* languageList.swift */; };
 		B58ACDE519E549A400C0F4BE /* fromLanguageViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B58ACDE419E549A400C0F4BE /* fromLanguageViewController.swift */; };
 		B5AC585619E4497900C252C5 /* languagesViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5AC585519E4497900C252C5 /* languagesViewController.swift */; };
+		B5B8B68F19EC313B008084A3 /* Translator.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5B8B68E19EC313B008084A3 /* Translator.swift */; };
 		B5DFE63719E2A72900833541 /* speechRecognizer.m in Sources */ = {isa = PBXBuildFile; fileRef = B5DFE63619E2A72900833541 /* speechRecognizer.m */; };
 		B5DFE63C19E2B27000833541 /* SpeechKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B5DFE63319E2A4E300833541 /* SpeechKit.framework */; };
 		B5DFE6B019E2C25700833541 /* AudioToolbox.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B5DFE6A819E2C25700833541 /* AudioToolbox.framework */; };
@@ -56,8 +59,11 @@
 		B532DC4519D95710009B4518 /* Settings.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Settings.swift; sourceTree = "<group>"; };
 		B558347419EBD483009EA9C8 /* toLanguageViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = toLanguageViewController.swift; sourceTree = "<group>"; };
 		B558347619EBE68E009EA9C8 /* Protocols.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Protocols.swift; sourceTree = "<group>"; };
+		B558348219EBF230009EA9C8 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/Localizable.strings; sourceTree = "<group>"; };
+		B558348419EC1643009EA9C8 /* languageList.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = languageList.swift; sourceTree = "<group>"; };
 		B58ACDE419E549A400C0F4BE /* fromLanguageViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = fromLanguageViewController.swift; sourceTree = "<group>"; };
 		B5AC585519E4497900C252C5 /* languagesViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = languagesViewController.swift; sourceTree = "<group>"; };
+		B5B8B68E19EC313B008084A3 /* Translator.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Translator.swift; sourceTree = "<group>"; };
 		B5DFE62D19E2997D00833541 /* Hear for me-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "Hear for me-Bridging-Header.h"; sourceTree = "<group>"; };
 		B5DFE63319E2A4E300833541 /* SpeechKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = SpeechKit.framework; sourceTree = "<group>"; };
 		B5DFE63519E2A72900833541 /* speechRecognizer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = speechRecognizer.h; sourceTree = "<group>"; };
@@ -128,6 +134,7 @@
 		B532DBDD19D47D62009B4518 /* Hear for me */ = {
 			isa = PBXGroup;
 			children = (
+				B558348019EBF1C5009EA9C8 /* en.lproj */,
 				B5DFE63219E2A4E300833541 /* Frameworks */,
 				B532DC3C19D575C8009B4518 /* resources */,
 				B532DC0019D48383009B4518 /* LICENSE */,
@@ -145,6 +152,8 @@
 				B58ACDE419E549A400C0F4BE /* fromLanguageViewController.swift */,
 				B558347419EBD483009EA9C8 /* toLanguageViewController.swift */,
 				B558347619EBE68E009EA9C8 /* Protocols.swift */,
+				B558348419EC1643009EA9C8 /* languageList.swift */,
+				B5B8B68E19EC313B008084A3 /* Translator.swift */,
 			);
 			path = "Hear for me";
 			sourceTree = "<group>";
@@ -188,6 +197,14 @@
 			);
 			name = appIcon;
 			path = resources/appIcon;
+			sourceTree = "<group>";
+		};
+		B558348019EBF1C5009EA9C8 /* en.lproj */ = {
+			isa = PBXGroup;
+			children = (
+				B558348119EBF230009EA9C8 /* Localizable.strings */,
+			);
+			name = en.lproj;
 			sourceTree = "<group>";
 		};
 		B5DFE63219E2A4E300833541 /* Frameworks */ = {
@@ -280,6 +297,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				B532DBE619D47D62009B4518 /* Main.storyboard in Resources */,
+				B558348319EBF230009EA9C8 /* Localizable.strings in Resources */,
 				B532DC0119D48383009B4518 /* LICENSE in Resources */,
 				B532DBE819D47D62009B4518 /* Images.xcassets in Resources */,
 			);
@@ -299,6 +317,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				B5B8B68F19EC313B008084A3 /* Translator.swift in Sources */,
 				B532DBE319D47D62009B4518 /* ViewController.swift in Sources */,
 				B532DBE119D47D62009B4518 /* AppDelegate.swift in Sources */,
 				B532DC4619D95710009B4518 /* Settings.swift in Sources */,
@@ -306,6 +325,7 @@
 				B5DFE63719E2A72900833541 /* speechRecognizer.m in Sources */,
 				B58ACDE519E549A400C0F4BE /* fromLanguageViewController.swift in Sources */,
 				B5AC585619E4497900C252C5 /* languagesViewController.swift in Sources */,
+				B558348519EC1643009EA9C8 /* languageList.swift in Sources */,
 				B532DC3E19D57A74009B4518 /* PreferencesViewController.swift in Sources */,
 				B558347519EBD483009EA9C8 /* toLanguageViewController.swift in Sources */,
 			);
@@ -336,6 +356,14 @@
 				B532DBE519D47D62009B4518 /* Base */,
 			);
 			name = Main.storyboard;
+			sourceTree = "<group>";
+		};
+		B558348119EBF230009EA9C8 /* Localizable.strings */ = {
+			isa = PBXVariantGroup;
+			children = (
+				B558348219EBF230009EA9C8 /* en */,
+			);
+			name = Localizable.strings;
 			sourceTree = "<group>";
 		};
 /* End PBXVariantGroup section */

@@ -47,7 +47,7 @@ class ViewController: UIViewController, settingsDelegate {
         //let target = UIScreen.mainScreen().bounds
         //mainText.frame = CGRectMake(target.minX, target.minY, target.width, target.height-400)
     
-        mainText.text = "Turn your phone upside down to start listening"
+        mainText.text = NSLocalizedString("TURN_UPSIDE_DOWN", comment: "")
         initSpeechRec()
     }
     
@@ -97,7 +97,7 @@ class ViewController: UIViewController, settingsDelegate {
             
             continueRecognizing = false
             speechRec.cancelRecognition()
-            mainText.text = "Turn your phone upside down to start listening"
+            mainText.text = NSLocalizedString("TURN_UPSIDE_DOWN", comment: "")
             //mainText.sizeToFit()
             NSLog("Orientation again normal")
         }

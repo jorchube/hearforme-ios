@@ -19,6 +19,7 @@ class PreferencesViewController: UIViewController, languagesDelegate {
     @IBOutlet weak var fontStepper: UIStepper!
     @IBOutlet weak var previewText: UITextView!
     @IBOutlet weak var sizeTextLabel: UILabel!
+    @IBOutlet weak var languageSettingsButton: UIButton!
     
     let settings:Settings = Settings.getSettings()
     
@@ -48,12 +49,31 @@ class PreferencesViewController: UIViewController, languagesDelegate {
         else {themeSwitch.selectedSegmentIndex = 1}
     }
     
+    func localize() {
+        backButton.setTitle(NSLocalizedString("BACK", comment: ""),
+            forState: UIControlState.allZeros)
+        
+        themeSwitch.setTitle(NSLocalizedString("DARK", comment: ""),
+            forSegmentAtIndex: 0)
+        themeSwitch.setTitle(NSLocalizedString("LIGHT", comment: ""),
+            forSegmentAtIndex: 1)
+        
+        sizeTextLabel.text = NSLocalizedString("SIZE", comment: "")
+        sizeTextLabel.sizeToFit()
+        
+        previewText.text = NSLocalizedString("PREVIEW", comment: "")
+        languageSettingsButton.setTitle(NSLocalizedString("LANG_SETTINGS", comment: ""),
+            forState: UIControlState.allZeros)
+    }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
         fontStepper.minimumValue = settings.getMinFontSize()
         fontStepper.maximumValue = settings.getMaxFontSize()
         fontStepper.value = settings.getFontSize()
+        
+        localize()
         
         updateUI(textChanged: true, themeChanged: true)
         // Do any additional setup after loading the view.

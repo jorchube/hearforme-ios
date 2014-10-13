@@ -23,6 +23,7 @@ class languagesViewController: UIViewController, languagePicker {
     
     func loadSettings() {
         self.view.backgroundColor = settings.theme.bgColor()
+        translateSwitch.on = settings.wantsTranslation
     }
     
     func updateUI() {
@@ -30,7 +31,22 @@ class languagesViewController: UIViewController, languagePicker {
         fromButton.sizeToFit()
         toButton.setTitle(settings.language.getTranslatingString(), forState: UIControlState.allZeros)
         toButton.sizeToFit()
-        toButton.enabled = translateSwitch.on
+        if !settings.language.hearingIsTranslatable() {
+            toButton.enabled = false
+            translateSwitch.enabled = false
+            translateSwitch.on = false
+            toButton.setTitle(NSLocalizedString("NO_TRANSLATION", comment: ""), forState:UIControlState.allZeros)
+        }
+        else {
+            translateSwitch.enabled = true
+            translateSwitch.on = settings.wantsTranslation
+        }
+        if translateSwitch.on {
+            toButton.enabled = true
+        }
+        else {
+            toButton.enabled = false
+        }
     }
     
     override func viewDidLoad() {
@@ -74,6 +90,7 @@ class languagesViewController: UIViewController, languagePicker {
     }
     
     @IBAction func translateSwitchChanged(sender: AnyObject) {
+        settings.wantsTranslation =  translateSwitch.on
         updateUI()
     }
     
