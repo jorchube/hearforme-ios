@@ -12,7 +12,11 @@ protocol languagesDelegate {
     func setLanguagePreferences()
 }
 
-class languagesViewController: UIViewController {
+protocol languagePicker {
+    func setSelectedLanguage()
+}
+
+class languagesViewController: UIViewController, languagePicker {
 
     @IBOutlet weak var backButton: UIButton!
     
@@ -20,9 +24,20 @@ class languagesViewController: UIViewController {
     
     let settings:Settings = Settings.getSettings()
     
+    @IBOutlet weak var fromButton: UIButton!
+    @IBOutlet weak var toButton: UIButton!
+    @IBOutlet weak var translateSwitch: UISwitch!
     
     func loadSettings() {
         self.view.backgroundColor = settings.theme.bgColor()
+    }
+    
+    func updateUI() {
+        fromButton.setTitle(settings.language.getHearingString(), forState: UIControlState.allZeros)
+        fromButton.sizeToFit()
+        toButton.setTitle(settings.language.getTranslatingString(), forState: UIControlState.allZeros)
+        toButton.sizeToFit()
+        toButton.enabled = translateSwitch.on
     }
     
     override func viewDidLoad() {
@@ -30,6 +45,7 @@ class languagesViewController: UIViewController {
 
         // Do any additional setup after loading the view.
         loadSettings()
+        updateUI()
         
     }
 
@@ -51,9 +67,12 @@ class languagesViewController: UIViewController {
     
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
         if segue.identifier == "fromLanguageSegue" {
-         /*   let calledVC = segue.destinationViewController as languagesViewController
-            calledVC.delegate = self*/
-                    NSLog("segue")
+            let calledVC = segue.destinationViewController as fromLanguageViewController
+            calledVC.languagePickerDelegate = self
+        }
+        if segue.identifier == "toLanguageSegue" {
+            let calledVC = segue.destinationViewController as toLanguageViewController
+            calledVC.languagePickerDelegate = self
         }
     }
 
@@ -61,5 +80,12 @@ class languagesViewController: UIViewController {
         self.dismissViewControllerAnimated(1, completion: nil)
     }
     
+    @IBAction func translateSwitchChanged(sender: AnyObject) {
+        updateUI()
+    }
+    
+    func setSelectedLanguage() {
+        updateUI()
+    }
 
 }

@@ -1,23 +1,23 @@
 //
-//  fromLanguageViewController.swift
+//  toLanguageViewController.swift
 //  Hear for me
 //
-//  Created by Jordi Chulia on 08/10/14.
+//  Created by Jordi Chulia on 13/10/14.
 //  Copyright (c) 2014 Jordi Chulia. All rights reserved.
 //
 
 import UIKit
 
-class fromLanguageViewController: UIViewController, UIPickerViewDelegate, UIPickerViewDataSource {
+
+class toLanguageViewController: UIViewController, UIPickerViewDelegate, UIPickerViewDataSource {
 
     @IBOutlet weak var okButton: UIButton!
     @IBOutlet weak var langPicker: UIPickerView!
     
-    var languagePickerDelegate:languagePicker?
-    
     let settings:Settings = Settings.getSettings()
     let blurHeight:CGFloat = 265
     
+    var languagePickerDelegate:languagePicker?
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -26,7 +26,7 @@ class fromLanguageViewController: UIViewController, UIPickerViewDelegate, UIPick
         
         langPicker.delegate = self
         langPicker.dataSource = self
-
+        
         var blur = UIBlurEffect( style: UIBlurEffectStyle.ExtraLight)
         var blurView = UIVisualEffectView(effect: blur)
         
@@ -36,7 +36,6 @@ class fromLanguageViewController: UIViewController, UIPickerViewDelegate, UIPick
             blurHeight)
         
         self.view.addSubview(blurView)
-        
     }
 
     override func didReceiveMemoryWarning() {
@@ -54,9 +53,9 @@ class fromLanguageViewController: UIViewController, UIPickerViewDelegate, UIPick
         // Pass the selected object to the new view controller.
     }
     */
-
+    
     func updateSettings() {
-        settings.language.setHearing(langPicker.selectedRowInComponent(0))
+        settings.language.setTranslating(langPicker.selectedRowInComponent(0))
     }
     
     @IBAction func okButtonTouched(sender: AnyObject) {
@@ -66,15 +65,15 @@ class fromLanguageViewController: UIViewController, UIPickerViewDelegate, UIPick
     }
     
     func pickerView(pickerView: UIPickerView, numberOfRowsInComponent component: Int) -> Int {
-        return settings.language.hearingFrom.count
+        
+        return settings.language.translatingTo.count
     }
     func pickerView(pickerView: UIPickerView, titleForRow row: Int, forComponent component: Int) -> String! {
-        return settings.language.hearingFrom[row]
+        return settings.language.translatingTo[row]
     }
     func numberOfComponentsInPickerView(pickerView: UIPickerView) -> Int {
         return 1
     }
     
-    
-    
+
 }

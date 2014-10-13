@@ -41,7 +41,7 @@ class ViewController: UIViewController, settingsDelegate {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-
+        
         // Do any additional setup after loading the view, typically from a nib.
         updateUI(textChanged: true, themeChanged: true)
         //let target = UIScreen.mainScreen().bounds

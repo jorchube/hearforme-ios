@@ -42,21 +42,27 @@ public struct Languages{
     var hearginFromSelection: Int = 0
     var translatingToSelection: Int = 0
     
-    mutating func setHearingFrom(index: Int) {
+    mutating func setHearing(index: Int) {
         if index >= 0 && index < self.hearginValues.count {
             self.hearginFromSelection = index
         }
     }
-    mutating func setTranslatingTo(index: Int) {
+    mutating func setTranslating(index: Int) {
         if index >= 0 && index < self.translatingValues.count {
             self.translatingToSelection = index
         }
     }
-    func getHearingFromValue() -> String{
+    func getHearingValue() -> String{
         return self.hearginValues[self.hearginFromSelection]
     }
-    func getTranslatingToValue() -> String{
+    func getTranslatingValue() -> String{
         return self.translatingValues[self.translatingToSelection]
+    }
+    func getHearingString() -> String{
+        return self.hearingFrom[self.hearginFromSelection]
+    }
+    func getTranslatingString() -> String{
+        return self.translatingTo[self.translatingToSelection]
     }
 }
 
