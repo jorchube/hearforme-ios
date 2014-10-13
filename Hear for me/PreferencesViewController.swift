@@ -8,9 +8,7 @@
 
 import UIKit
 
-protocol settingsDelegate {
-    func useNewSettings()
-}
+
 
 class PreferencesViewController: UIViewController, languagesDelegate {
 

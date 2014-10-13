@@ -8,13 +8,6 @@
 
 import UIKit
 
-protocol languagesDelegate {
-    func setLanguagePreferences()
-}
-
-protocol languagePicker {
-    func setSelectedLanguage()
-}
 
 class languagesViewController: UIViewController, languagePicker {
 
