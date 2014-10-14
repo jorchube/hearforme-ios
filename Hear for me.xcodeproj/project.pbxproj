@@ -64,6 +64,7 @@
 		B58ACDE419E549A400C0F4BE /* fromLanguageViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = fromLanguageViewController.swift; sourceTree = "<group>"; };
 		B5AC585519E4497900C252C5 /* languagesViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = languagesViewController.swift; sourceTree = "<group>"; };
 		B5B8B68E19EC313B008084A3 /* Translator.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Translator.swift; sourceTree = "<group>"; };
+		B5D8E4D319ED266700A55B1F /* PrivateKeys.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = PrivateKeys.h; sourceTree = "<group>"; };
 		B5DFE62D19E2997D00833541 /* Hear for me-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "Hear for me-Bridging-Header.h"; sourceTree = "<group>"; };
 		B5DFE63319E2A4E300833541 /* SpeechKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = SpeechKit.framework; sourceTree = "<group>"; };
 		B5DFE63519E2A72900833541 /* speechRecognizer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = speechRecognizer.h; sourceTree = "<group>"; };
@@ -154,6 +155,7 @@
 				B558347619EBE68E009EA9C8 /* Protocols.swift */,
 				B558348419EC1643009EA9C8 /* languageList.swift */,
 				B5B8B68E19EC313B008084A3 /* Translator.swift */,
+				B5D8E4D319ED266700A55B1F /* PrivateKeys.h */,
 			);
 			path = "Hear for me";
 			sourceTree = "<group>";

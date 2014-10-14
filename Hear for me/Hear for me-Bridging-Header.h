@@ -3,3 +3,5 @@
 //
 
 #import "speechRecognizer.h"
+
+#import "PrivateKeys.h"

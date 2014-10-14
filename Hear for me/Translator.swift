@@ -14,11 +14,11 @@ class Translator {
     GET https://www.googleapis.com/language/translate/v2?key=INSERT-YOUR-KEY&target=de&q=Hello
     */
     
-    private let key: String = AIzaSyA8cEH14rqC_uXz6XMxBxxqH8A4YoTvQUY
+    private let key: String = PRIVATE_googleKey
     
-    func translate(target: String, payload:String) -> String {
+   /* func translate(target: String, payload:String) -> String {
         var request: NSURLRequest = NSURLRequest(URL: "https://www.googleapis.com/language/translate/v2?key=" + key + "&target=" + target + "&q=" + payload )
         
-    }
+    }*/
 
 }
