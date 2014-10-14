@@ -77,7 +77,7 @@ class ViewController: UIViewController, settingsDelegate {
             wantsTranslation: settings.wantsTranslation.boolValue)
         
         while(continueRecognizing) {
-            if(speechRec.status == IDLE && wantsAnotherRecognition == true) {
+            if((speechRec.getStatus() == IDLE || speechRec.getStatus() == AVAILABLE) && wantsAnotherRecognition == true) {
                 speechRec.startRecognitionLanguage()
             }
         }

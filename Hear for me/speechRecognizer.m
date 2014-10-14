@@ -16,7 +16,8 @@ const unsigned char SpeechKitApplicationKey[] = PRIVATE_SpeechKitApplicationKey;
 
 @implementation speechRecognizer
 
-@synthesize recognizer;
+@synthesize recogUnit00;
+@synthesize recogUnit01;
 @synthesize textview;
 @synthesize shouldListen;
 @synthesize status;
@@ -32,6 +33,7 @@ bool    waitForTranslation;
 
 ViewController* vc;
 
+int currentRecognizer;
 
 -(id) init
 {
@@ -50,39 +52,51 @@ ViewController* vc;
                       port:443
                     useSSL:YES
                   delegate:nil];
-    status = IDLE;
+    
+    recogUnit00 = [[RecognizerUnit alloc] init];
+    recogUnit01 = [[RecognizerUnit alloc] init];
+    
 }
 
--(void) recognizeNowWithStopType:(SKEndOfSpeechDetection) StopDetectionType
+-(void) recognizeNowWithStopType:(SKEndOfSpeechDetection) StopDetectionType unit:(RecognizerUnit*) unit
 {
     status = PREPARING;
     NSLog(@"Recognizing");
-    if (recognizer) recognizer = nil;
-    recognizer = [[SKRecognizer alloc] initWithType:SKDictationRecognizerType
+    if (unit.recognizer) unit.recognizer = nil;
+    unit.recognizer = [[SKRecognizer alloc] initWithType:SKDictationRecognizerType
                                           detection:StopDetectionType
                                            language:hearingLanguage
                                            delegate:self];
 
-    if (recognizer == nil){ status = IDLE; }
+    if (unit.recognizer == nil){ unit.status = IDLE; }
 }
 
 -(void) recognizerDidBeginRecording:(SKRecognizer *)recognizer
 {
     NSLog(@"Begin recording");
-    status = HEARING;
+    if (recognizer == recogUnit00.recognizer){
+        NSLog(@"Recog 00");
+        recogUnit00.status = HEARING;
+    }
+    if (recognizer == recogUnit01.recognizer){
+        NSLog(@"Recog 01");
+        recogUnit01.status = HEARING;
+    }
 }
 
 -(void) recognizerDidFinishRecording:(SKRecognizer *)recognizer
 {
     NSLog(@"Finish recording");
-    status = PROCESSING;
+    if (recognizer == recogUnit00.recognizer) recogUnit00.status = PROCESSING;
+    if (recognizer == recogUnit01.recognizer) recogUnit01.status = PROCESSING;
 }
 
 -(void) recognizer:(SKRecognizer *)r didFinishWithError:(NSError *)error suggestion:(NSString *)suggestion
 {
     NSLog(@"Recognition error: %@", error);
-    status = IDLE;
-    recognizer = nil;
+    if (r == recogUnit00.recognizer) recogUnit00.status = IDLE;
+    if (r == recogUnit01.recognizer) recogUnit01.status = IDLE;
+    r = nil;
 }
 /*
 -(void) translationFinishedWithResult:(NSString *)str
@@ -115,29 +129,39 @@ ViewController* vc;
         }
     }
     NSLog(@"Heard string: %@", [textview text]);
-    status = IDLE;
+    if (r == recogUnit00.recognizer) recogUnit00.status = IDLE;
+    if (r == recogUnit01.recognizer) recogUnit01.status = IDLE;
     r = nil;
 }
 
 
 -(void) startRecognitionLanguage
 {
+    NSLog(@"Trying to start a recognition");
     shouldListen = 1;
-    while (status == IDLE)
-        [self recognizeNowWithStopType:SKShortEndOfSpeechDetection];
+    while(self.getStatus == AVAILABLE || self.getStatus == IDLE){
+        if(recogUnit00.status == IDLE){
+            recogUnit00.status = BUSY;
+            [self recognizeNowWithStopType:SKShortEndOfSpeechDetection unit:recogUnit00];
+        }
+
+        else if(self.status == AVAILABLE)
+            [self recognizeNowWithStopType:SKShortEndOfSpeechDetection unit:recogUnit01];
+    }
 }
 
 -(void) stopRecognition
 {
     shouldListen = 0;
-    [recognizer stopRecording];
+    [recogUnit00.recognizer stopRecording];
+    [recogUnit01.recognizer stopRecording];
 }
 
 -(void) cancelRecognition
 {
     shouldListen = 0;
-    [recognizer cancel];
-    //[SpeechKit destroy];
+    [recogUnit00.recognizer cancel];
+    [recogUnit01.recognizer cancel];
 }
 
 -(void) destroyRecognizer
@@ -150,6 +174,17 @@ ViewController* vc;
     hearingLanguage = hLang;
     translatingLanguage = tLang;
     wantsTranslation = hasToTranslate;
+}
+
+-(int) getStatus
+{
+    if (recogUnit00.status == HEARING || recogUnit01.status == HEARING) return HEARING;
+    
+    if (recogUnit00.status == IDLE && recogUnit01.status == IDLE) return IDLE;
+    
+    if (recogUnit00.status == IDLE || recogUnit01.status == IDLE) return AVAILABLE;
+    
+    return BUSY;
 }
 
 @end
