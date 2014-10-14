@@ -8,6 +8,7 @@
 
 import UIKit
 
+
 class ViewController: UIViewController, settingsDelegate {
 
     @IBOutlet weak var prefButton: UIButton!
@@ -70,9 +71,14 @@ class ViewController: UIViewController, settingsDelegate {
     
     func periodicRecognition() {
         NSLog("Starting periodic recognition")
+        
+        speechRec.setHearingLanguage(settings.language.getHearingValue(),
+            translatingLanguage: settings.language.getTranslatingValue(),
+            wantsTranslation: settings.wantsTranslation.boolValue)
+        
         while(continueRecognizing) {
             if(speechRec.status == IDLE && wantsAnotherRecognition == true) {
-                speechRec.startRecognition()
+                speechRec.startRecognitionLanguage()
             }
         }
         NSLog("End periodic recognition")
@@ -120,7 +126,13 @@ class ViewController: UIViewController, settingsDelegate {
         */
         updateUI(textChanged: true, themeChanged: true)
     }
-
-    
     
 }
+
+
+
+
+
+
+
+

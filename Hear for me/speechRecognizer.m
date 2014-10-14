@@ -8,7 +8,6 @@
 
 #import "speechRecognizer.h"
 #import "Hear_for_me-Swift.h"
-#import "PrivateKeys.h"
 
 #define REFRESH_INTERVAL 3 /* seconds */
 
@@ -23,16 +22,22 @@ const unsigned char SpeechKitApplicationKey[] = PRIVATE_SpeechKitApplicationKey;
 @synthesize status;
 
 const NSString* nuanceID = PRIVATE_nuanceID;
-const NSString* nuanceHost = @"sandbox.nmdp.nuancemobility.net";
+const NSString* nuanceHost = @"sslsandbox.nmdp.nuancemobility.net";
+
+
+NSString* hearingLanguage;
+NSString* translatingLanguage;
+bool    wantsTranslation;
+bool    waitForTranslation;
 
 ViewController* vc;
 
-int killerTurn = 1;
 
 -(id) init
 {
     self = [super init];
     shouldListen = 0;
+    
     return self;
 }
 
@@ -43,7 +48,7 @@ int killerTurn = 1;
     [SpeechKit setupWithID:(NSString*)nuanceID
                       host:(NSString*)nuanceHost
                       port:443
-                    useSSL:NO
+                    useSSL:YES
                   delegate:nil];
     status = IDLE;
 }
@@ -55,13 +60,10 @@ int killerTurn = 1;
     if (recognizer) recognizer = nil;
     recognizer = [[SKRecognizer alloc] initWithType:SKDictationRecognizerType
                                           detection:StopDetectionType
-                                           language:@"spa-ESP"
+                                           language:hearingLanguage
                                            delegate:self];
 
-    if (recognizer == nil){
-        NSLog(@"Fucking nil");
-        status = IDLE;
-    }
+    if (recognizer == nil){ status = IDLE; }
 }
 
 -(void) recognizerDidBeginRecording:(SKRecognizer *)recognizer
@@ -82,6 +84,12 @@ int killerTurn = 1;
     status = IDLE;
     recognizer = nil;
 }
+/*
+-(void) translationFinishedWithResult:(NSString *)str
+{
+    translatedResult = str;
+    waitForTranslation = false;
+}*/
 
 -(void) recognizer:(SKRecognizer *)r didFinishWithResults:(SKRecognition *)results
 {
@@ -89,19 +97,30 @@ int killerTurn = 1;
     NSLog(@"Result: %@", [results firstResult]);
     
     if ([results firstResult]){
-        [textview insertText:[results firstResult]];
-        [textview insertText:@"\n"];
-        NSRange range = NSMakeRange([textview.text length]-2, [textview.text length]-1);
-        [textview scrollRangeToVisible:range];
+        
+        NSString* finalText;
+        
+        /*if(wantsTranslation){
+            [Translator translate:[results firstResult]
+                           toLang:translatingLanguage
+                       inTextView:textview];
+        }
+        else*/ {
+            finalText = [results firstResult];
+        
+            [textview insertText:finalText];
+            [textview insertText:@"\n"];
+            NSRange range = NSMakeRange([textview.text length]-2, [textview.text length]-1);
+            [textview scrollRangeToVisible:range];
+        }
     }
-    NSLog(@"TextView string: %@", [textview text]);
+    NSLog(@"Heard string: %@", [textview text]);
     status = IDLE;
-    recognizer = nil;
-    //[vc finishedRecognizing];
+    r = nil;
 }
 
 
--(void) startRecognition
+-(void) startRecognitionLanguage
 {
     shouldListen = 1;
     while (status == IDLE)
@@ -117,7 +136,6 @@ int killerTurn = 1;
 -(void) cancelRecognition
 {
     shouldListen = 0;
-    killerTurn = 1;
     [recognizer cancel];
     //[SpeechKit destroy];
 }
@@ -125,6 +143,13 @@ int killerTurn = 1;
 -(void) destroyRecognizer
 {
     [SpeechKit destroy];
+}
+
+-(void) setHearingLanguage:(NSString *)hLang translatingLanguage:(NSString *)tLang wantsTranslation:(BOOL)hasToTranslate
+{
+    hearingLanguage = hLang;
+    translatingLanguage = tLang;
+    wantsTranslation = hasToTranslate;
 }
 
 @end

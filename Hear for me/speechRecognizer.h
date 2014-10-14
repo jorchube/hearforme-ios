@@ -11,11 +11,16 @@
 
 #import <SpeechKit/SpeechKit.h>
 
+#import "Translator.h"
+#import "PrivateKeys.h"
+
+
 #define IDLE 0
 #define HEARING 1
 #define PROCESSING 2
 
 #define PREPARING 10
+
 
 @interface speechRecognizer : NSObject <SKRecognizerDelegate>
 
@@ -25,9 +30,11 @@
 @property int status;
 
 -(void) setup:(UIViewController*) vc;
--(void) startRecognition;
+-(void) startRecognitionLanguage;
 -(void) stopRecognition;
 -(void) cancelRecognition;
 -(void) destroyRecognizer;
+-(void) setHearingLanguage:(NSString*) hLang translatingLanguage:(NSString*) tLang wantsTranslation:(BOOL) hasToTranslate;
+//-(void) translationFinishedWithResult:(NSString*)str;
 
 @end

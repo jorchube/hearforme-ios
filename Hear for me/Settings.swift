@@ -93,6 +93,8 @@ public struct Languages{
     }
 }
 
+
+@objc(Settings)
 class Settings: NSObject {
     
     private let _minFontSize:Double = 16
@@ -101,8 +103,10 @@ class Settings: NSObject {
     private var _fontSize:Double = 20
     
     var theme:Theme = Theme()
+    
     var language: Languages = Languages()
     
+    @objc(wantsTranslation)
     var wantsTranslation:Bool = false
     
     override init() {
