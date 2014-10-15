@@ -37,6 +37,8 @@ class fromLanguageViewController: UIViewController, UIPickerViewDelegate, UIPick
         
         self.view.addSubview(blurView)
         
+        langPicker.selectRow(settings.language.hearingIndex, inComponent: 0, animated: false)
+        
     }
 
     override func didReceiveMemoryWarning() {
@@ -56,7 +58,9 @@ class fromLanguageViewController: UIViewController, UIPickerViewDelegate, UIPick
     */
 
     func updateSettings() {
-        settings.language.setHearing(langPicker.selectedRowInComponent(0))
+        settings.language.setHearing(
+            settings.language.hearingList[langPicker.selectedRowInComponent(0)],
+            index: langPicker.selectedRowInComponent(0))
     }
     
     @IBAction func okButtonTouched(sender: AnyObject) {
@@ -75,6 +79,11 @@ class fromLanguageViewController: UIViewController, UIPickerViewDelegate, UIPick
         return 1
     }
     
+    @IBAction func swipeDown(sender: UISwipeGestureRecognizer) {
+        okButtonTouched(self)
+    }
     
-    
+    @IBAction func tapGesture(sender: UITapGestureRecognizer) {
+        okButtonTouched(self)
+    }
 }

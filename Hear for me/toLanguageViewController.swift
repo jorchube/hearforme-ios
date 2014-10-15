@@ -36,6 +36,8 @@ class toLanguageViewController: UIViewController, UIPickerViewDelegate, UIPicker
             blurHeight)
         
         self.view.addSubview(blurView)
+        
+        langPicker.selectRow(settings.language.translatingIndex, inComponent: 0, animated: false)
     }
 
     override func didReceiveMemoryWarning() {
@@ -55,7 +57,9 @@ class toLanguageViewController: UIViewController, UIPickerViewDelegate, UIPicker
     */
     
     func updateSettings() {
-        settings.language.setTranslating(langPicker.selectedRowInComponent(0))
+        settings.language.setTranslating(
+            settings.language.translatingList[langPicker.selectedRowInComponent(0)],
+            index: langPicker.selectedRowInComponent(0))
     }
     
     @IBAction func okButtonTouched(sender: AnyObject) {
@@ -74,5 +78,13 @@ class toLanguageViewController: UIViewController, UIPickerViewDelegate, UIPicker
         return 1
     }
     
+    @IBAction func swipeRight(sender: UISwipeGestureRecognizer) {
+        okButtonTouched(self)
+    }
 
+    @IBAction func tapGesture(sender: UITapGestureRecognizer) {
+        okButtonTouched(self)
+    }
 }
+
+

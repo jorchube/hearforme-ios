@@ -398,6 +398,7 @@
                             </switch>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <gestureRecognizers/>
                         <constraints>
                             <constraint firstAttribute="centerX" secondItem="sVq-dP-QJD" secondAttribute="centerX" id="9k7-3D-Ddy"/>
                             <constraint firstItem="sVq-dP-QJD" firstAttribute="top" secondItem="Ugq-F1-LLj" secondAttribute="bottom" constant="20" id="D9u-FA-EIQ"/>
@@ -465,7 +466,9 @@
                     <connections>
                         <outlet property="backButton" destination="xCi-dl-AI2" id="aFs-Rj-Mdv"/>
                         <outlet property="fromButton" destination="Che-dr-BNi" id="EZe-vn-Ko2"/>
+                        <outlet property="hearLangLabel" destination="0oQ-9e-TCL" id="SN0-H1-ldC"/>
                         <outlet property="toButton" destination="sVq-dP-QJD" id="P2i-MT-TQ2"/>
+                        <outlet property="transLangLabel" destination="1bV-lh-VrM" id="Hu8-SW-GMU"/>
                         <outlet property="translateSwitch" destination="Ugq-F1-LLj" id="c5Q-mS-89Y"/>
                     </connections>
                 </viewController>
@@ -498,6 +501,7 @@
                                 </connections>
                             </button>
                         </subviews>
+                        <gestureRecognizers/>
                         <constraints>
                             <constraint firstAttribute="trailingMargin" secondItem="7It-xx-gdI" secondAttribute="trailing" constant="-16" id="1FX-nR-hAz"/>
                             <constraint firstItem="7It-xx-gdI" firstAttribute="top" secondItem="KpK-1n-cud" secondAttribute="bottom" constant="8" id="GhC-9A-UTI"/>
@@ -531,6 +535,10 @@
                                 <include reference="y0C-oy-cdf"/>
                             </mask>
                         </variation>
+                        <connections>
+                            <outletCollection property="gestureRecognizers" destination="t6H-Et-1HO" appends="YES" id="YAk-8R-6yo"/>
+                            <outletCollection property="gestureRecognizers" destination="gyK-mA-68G" appends="YES" id="sn0-Yr-TmK"/>
+                        </connections>
                     </view>
                     <connections>
                         <outlet property="langPicker" destination="7It-xx-gdI" id="w6e-oZ-x1C"/>
@@ -538,6 +546,16 @@
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="i7i-io-IcL" userLabel="First Responder" sceneMemberID="firstResponder"/>
+                <swipeGestureRecognizer direction="down" id="t6H-Et-1HO">
+                    <connections>
+                        <action selector="swipeDown:" destination="sRA-uB-bt4" id="ALn-yr-wXO"/>
+                    </connections>
+                </swipeGestureRecognizer>
+                <tapGestureRecognizer id="gyK-mA-68G">
+                    <connections>
+                        <action selector="tapGesture:" destination="sRA-uB-bt4" id="SKW-wS-oU2"/>
+                    </connections>
+                </tapGestureRecognizer>
             </objects>
             <point key="canvasLocation" x="1830" y="359.25"/>
         </scene>
@@ -566,6 +584,7 @@
                                 </connections>
                             </button>
                         </subviews>
+                        <gestureRecognizers/>
                         <constraints>
                             <constraint firstItem="HRp-iA-DJd" firstAttribute="leading" secondItem="hom-J5-cly" secondAttribute="leadingMargin" constant="-16" id="15I-Dz-zRw"/>
                             <constraint firstItem="BNa-3P-Oa3" firstAttribute="top" secondItem="HRp-iA-DJd" secondAttribute="bottom" id="1ye-rh-V8f"/>
@@ -599,6 +618,9 @@
                                 <include reference="FdQ-9C-0sE"/>
                             </mask>
                         </variation>
+                        <connections>
+                            <outletCollection property="gestureRecognizers" destination="iIH-hN-zSF" appends="YES" id="DSg-GA-5l2"/>
+                        </connections>
                     </view>
                     <connections>
                         <outlet property="langPicker" destination="HRp-iA-DJd" id="B6j-wV-W6i"/>
@@ -606,6 +628,16 @@
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="pEU-25-Ycw" userLabel="First Responder" sceneMemberID="firstResponder"/>
+                <swipeGestureRecognizer direction="down" id="iIH-hN-zSF">
+                    <connections>
+                        <action selector="swipeRight:" destination="UZz-U0-Ufb" id="Udy-1C-pLM"/>
+                    </connections>
+                </swipeGestureRecognizer>
+                <tapGestureRecognizer id="yXw-Wh-dwD">
+                    <connections>
+                        <action selector="tapGesture:" destination="UZz-U0-Ufb" id="cOP-tR-l11"/>
+                    </connections>
+                </tapGestureRecognizer>
             </objects>
             <point key="canvasLocation" x="1830" y="1071"/>
         </scene>

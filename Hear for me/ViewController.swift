@@ -124,6 +124,7 @@ class ViewController: UIViewController, settingsDelegate {
             Conforms to the settingsDelegate protocol.
             Called from the preferencesViewController.
         */
+        settings.saveSettings()
         updateUI(textChanged: true, themeChanged: true)
     }
     

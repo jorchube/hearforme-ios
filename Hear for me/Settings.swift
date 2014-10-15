@@ -10,6 +10,7 @@ import Foundation
 
 private let _settings = {Settings()}()
 
+
 public struct Theme{
     enum name { case darkOnLight; case lightOnDark }
     var current:Theme.name = Theme.name.lightOnDark
@@ -33,17 +34,6 @@ public struct Theme{
 }
 
 
-struct hearingLang {
-    let name:String
-    let code:String
-    let translatable:Bool
-}
-
-struct translatingLang {
-    let name:String
-    let code:String
-}
-
 public struct Languages{
     
     /*
@@ -52,7 +42,7 @@ public struct Languages{
             translatable: "is translatable"
         ]
     */
-    var hearingList:Array<hearingLang> = []
+    var hearingList:Array<hearingLang>
     
     
     /*
@@ -61,41 +51,76 @@ public struct Languages{
             code: "google code"
         ]
     */
-    var translatingList:Array<translatingLang> = []
+    var translatingList:Array<translatingLang>
     
-    var hearingSelection: Int = 0
-    var translatingSelection: Int = 0
+    var hearingSelection: hearingLang
+    var hearingIndex: Int
     
-    mutating func setHearing(index: Int) {
-        if index >= 0 && index < self.hearingList.count {
-            self.hearingSelection = index
+    var translatingSelection: translatingLang
+    var translatingIndex: Int
+    
+    mutating func setHearing(lang: hearingLang, index: Int) {
+        if lang.name == nil || lang.code == nil ||
+            lang.code == nil || lang.code == "" {
+            self.hearingSelection = hearingLang(
+                name: hearingLanguageList[0].name,
+                code: hearingLanguageList[0].code,
+                translatable: hearingLanguageList[0].translatable)
+            hearingIndex = 0
         }
+        else { self.hearingSelection = lang; hearingIndex = index }
     }
-    mutating func setTranslating(index: Int) {
-        if index >= 0 && index < self.translatingList.count {
-            self.translatingSelection = index
+    mutating func setTranslating(lang: translatingLang, index: Int) {
+        if lang.name == nil || lang.name == "" ||
+            lang.code == nil || lang.code == "" {
+            self.translatingSelection = translatingLang(
+                name: translatingLanguageList[0].name,
+                code: translatingLanguageList[0].code)
+            translatingIndex = 0
         }
+        else { self.translatingSelection = lang; translatingIndex = index }
+    }
+    func getHearingLang() -> hearingLang{
+        return hearingSelection
+    }
+    func getTranslatingLang() -> translatingLang{
+        return translatingSelection
     }
     func getHearingValue() -> String{
-        return self.hearingList[self.hearingSelection].code
+        return self.hearingSelection.code!
     }
     func getTranslatingValue() -> String{
-        return self.translatingList[self.translatingSelection].code
+        return self.translatingSelection.code!
     }
     func getHearingString() -> String{
-        return self.hearingList[self.hearingSelection].name
+        return self.hearingSelection.name!
     }
     func getTranslatingString() -> String{
-        return self.translatingList[self.translatingSelection].name
+        return self.translatingSelection.name!
     }
     func hearingIsTranslatable() -> Bool {
-        return self.hearingList[hearingSelection].translatable
+        return self.hearingSelection.translatable
     }
+}
+
+struct PreferenceKeys {
+    let theme:String = "theme" /* Theme.name */
+    let wantsTranslation:String = "translate" /* Bool */
+    let hearingLangCode :String = "hearingLangCode" /* String */
+    let hearingLangName :String = "hearingLangName" /* String */
+    let hearingLangTranslatable :String = "hearingLangTranslatable" /* Bool */
+    let hearingIndex: String = "hearingIndex" /* Int */
+    let translatingLangCode :String = "translatingLangCode" /* String */
+    let translatingLangName :String = "translatingLangName" /* String */
+    let translatingIndex: String = "translatingIndex" /* Int */
+    let fontSize:String = "fontSize" /* Double */
 }
 
 
 @objc(Settings)
 class Settings: NSObject {
+
+    let prefKeys:PreferenceKeys = PreferenceKeys()
     
     private let _minFontSize:Double = 16
     private let _maxFontSize:Double = 56
@@ -104,29 +129,100 @@ class Settings: NSObject {
     
     var theme:Theme = Theme()
     
-    var language: Languages = Languages()
+    var language: Languages = Languages(
+        hearingList: hearingLanguageList,
+        translatingList: translatingLanguageList,
+        hearingSelection: hearingLang(
+            name: hearingLanguageList[0].name,
+            code: hearingLanguageList[0].code,
+            translatable: hearingLanguageList[0].translatable),
+        hearingIndex: 0,
+        translatingSelection: translatingLang(
+            name: translatingLanguageList[0].name,
+            code: translatingLanguageList[0].code),
+        translatingIndex: 0)
     
     @objc(wantsTranslation)
     var wantsTranslation:Bool = false
     
+    
+    func loadSettings() {
+        var _defaults: NSUserDefaults = NSUserDefaults.standardUserDefaults()
+        
+        NSLog("load font size")
+        if (_defaults.doubleForKey(prefKeys.fontSize) == 0) { self._fontSize = 20 }
+        else { self._fontSize = _defaults.doubleForKey(prefKeys.fontSize) }
+        NSLog("load wants translation")
+        self.wantsTranslation = _defaults.boolForKey(prefKeys.wantsTranslation)
+        NSLog("load theme")
+        self.theme.setCurrent( _defaults.integerForKey(prefKeys.theme) == 0 ? Theme.name.darkOnLight : Theme.name.lightOnDark )
+        
+        NSLog("load hearing lang")
+        self.language.setHearing(hearingLang(
+            name: _defaults.stringForKey(prefKeys.hearingLangName),
+            code: _defaults.stringForKey(prefKeys.hearingLangCode),
+            translatable: _defaults.boolForKey(prefKeys.hearingLangTranslatable)),
+            index: _defaults.integerForKey(prefKeys.hearingIndex)
+        )
+        self.language.hearingIndex = _defaults.integerForKey(prefKeys.hearingIndex)
+        
+        NSLog("load translating lang")
+        self.language.setTranslating(translatingLang(
+            name: _defaults.stringForKey(prefKeys.translatingLangName),
+            code: _defaults.stringForKey(prefKeys.translatingLangCode)),
+            index: _defaults.integerForKey(prefKeys.translatingIndex)
+        )
+        self.language.translatingIndex = _defaults.integerForKey(prefKeys.translatingIndex)
+
+    }
+    
     override init() {
         super.init()
-        /* Read from settings storage file */
-        self.theme.setCurrent(Theme.name.darkOnLight)
         
-        for l in hearingLanguageList {
-            self.language.hearingList.append( hearingLang(name: l[0] as NSString, code: l[1] as NSString, translatable: l[2] as Bool) )
-        }
-        self.language.hearingList.sort { $0.name < $1.name }
+        language.hearingList.sort { $0.name < $1.name }
+        language.translatingList.sort { $0.name < $1.name }
         
-        for l in translatingLanguageList {
-            self.language.translatingList.append( translatingLang(name: l[0] as NSString, code: l[1] as NSString) )
-        }
-        self.language.translatingList.sort { $0.name < $1.name }
+        loadSettings()
     }
     
     class func getSettings() -> Settings {
         return _settings
+    }
+    
+    func saveSettings() {
+        var _defaults:NSUserDefaults = NSUserDefaults.standardUserDefaults()
+        
+        _defaults.setDouble(self._fontSize,
+            forKey: prefKeys.fontSize)
+        
+        _defaults.setBool(self.wantsTranslation,
+            forKey: prefKeys.wantsTranslation)
+        
+        _defaults.setObject(language.getHearingLang().code,
+            forKey: prefKeys.hearingLangCode)
+        
+        _defaults.setObject(language.getHearingLang().name,
+            forKey: prefKeys.hearingLangName)
+        
+        _defaults.setBool(language.getHearingLang().translatable,
+            forKey: prefKeys.hearingLangTranslatable)
+        
+        _defaults.setInteger(language.hearingIndex,
+            forKey: prefKeys.hearingIndex)
+        
+        _defaults.setInteger(language.translatingIndex,
+            forKey: prefKeys.translatingIndex)
+        
+        _defaults.setObject(language.getTranslatingLang().code,
+            forKey: prefKeys.translatingLangCode)
+        
+        _defaults.setObject(language.getTranslatingLang().name,
+            forKey: prefKeys.translatingLangName)
+        
+        _defaults.setInteger( (self.theme.getCurrent() == Theme.name.darkOnLight ? 0:1),
+            forKey: prefKeys.theme)
+        
+        
     }
     
     func getTheme() -> Theme.name{ return theme.getCurrent() }

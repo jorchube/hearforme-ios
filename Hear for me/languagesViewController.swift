@@ -20,6 +20,8 @@ class languagesViewController: UIViewController, languagePicker {
     @IBOutlet weak var fromButton: UIButton!
     @IBOutlet weak var toButton: UIButton!
     @IBOutlet weak var translateSwitch: UISwitch!
+    @IBOutlet weak var hearLangLabel: UILabel!
+    @IBOutlet weak var transLangLabel: UILabel!
     
     func loadSettings() {
         self.view.backgroundColor = settings.theme.bgColor()
@@ -27,6 +29,9 @@ class languagesViewController: UIViewController, languagePicker {
     }
     
     func updateUI() {
+        hearLangLabel.textColor = settings.theme.fgColor()
+        transLangLabel.textColor = settings.theme.fgColor()
+        
         fromButton.setTitle(settings.language.getHearingString(), forState: UIControlState.allZeros)
         fromButton.sizeToFit()
         toButton.setTitle(settings.language.getTranslatingString(), forState: UIControlState.allZeros)
