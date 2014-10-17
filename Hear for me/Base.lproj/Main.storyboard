@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="6246" systemVersion="14A388a" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="vXZ-lx-hvc">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="6245" systemVersion="14A388a" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="vXZ-lx-hvc">
     <dependencies>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="6239"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="6238"/>
         <capability name="Alignment constraints with different attributes" minToolsVersion="5.1"/>
         <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
     </dependencies>
@@ -41,68 +41,117 @@
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="5sQ-yy-DoI">
                                 <rect key="frame" x="-23" y="-15" width="46" height="30"/>
                                 <constraints>
-                                    <constraint firstAttribute="height" constant="32" id="9YX-cw-udl"/>
-                                    <constraint firstAttribute="width" constant="32" id="VTu-1s-L2h"/>
+                                    <constraint firstAttribute="height" constant="32" id="MSH-wI-sVm"/>
+                                    <constraint firstAttribute="width" constant="32" id="Yge-7Q-TYh"/>
                                 </constraints>
                                 <state key="normal" title="prefButton" image="gear"/>
                                 <variation key="default">
                                     <mask key="constraints">
-                                        <exclude reference="9YX-cw-udl"/>
-                                        <exclude reference="VTu-1s-L2h"/>
+                                        <exclude reference="MSH-wI-sVm"/>
+                                        <exclude reference="Yge-7Q-TYh"/>
                                     </mask>
                                 </variation>
                                 <variation key="heightClass=regular-widthClass=compact">
                                     <mask key="constraints">
-                                        <include reference="9YX-cw-udl"/>
-                                        <include reference="VTu-1s-L2h"/>
+                                        <include reference="MSH-wI-sVm"/>
+                                        <include reference="Yge-7Q-TYh"/>
                                     </mask>
                                 </variation>
                                 <connections>
                                     <segue destination="EYj-3R-DPk" kind="presentation" identifier="PrefSegue" modalTransitionStyle="flipHorizontal" id="0P5-1y-6sl"/>
                                 </connections>
                             </button>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="eHX-eV-Ibn">
+                                <rect key="frame" x="-23" y="-15" width="46" height="30"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" relation="greaterThanOrEqual" constant="64" id="1az-DY-c0O"/>
+                                    <constraint firstAttribute="width" constant="64" id="BrQ-d9-zLd"/>
+                                    <constraint firstAttribute="height" constant="64" id="HZv-uA-FBc"/>
+                                    <constraint firstAttribute="width" constant="64" id="eIZ-Kd-5CT"/>
+                                    <constraint firstAttribute="height" constant="64" id="gCe-vV-ciK"/>
+                                    <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="64" id="gr7-TC-gqt"/>
+                                </constraints>
+                                <state key="normal" title="Button" image="roundear">
+                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                                <variation key="default">
+                                    <mask key="constraints">
+                                        <exclude reference="1az-DY-c0O"/>
+                                        <exclude reference="BrQ-d9-zLd"/>
+                                        <exclude reference="HZv-uA-FBc"/>
+                                        <exclude reference="eIZ-Kd-5CT"/>
+                                        <exclude reference="gCe-vV-ciK"/>
+                                        <exclude reference="gr7-TC-gqt"/>
+                                    </mask>
+                                </variation>
+                                <variation key="heightClass=regular-widthClass=compact">
+                                    <mask key="constraints">
+                                        <exclude reference="1az-DY-c0O"/>
+                                        <exclude reference="BrQ-d9-zLd"/>
+                                        <exclude reference="HZv-uA-FBc"/>
+                                        <include reference="eIZ-Kd-5CT"/>
+                                        <include reference="gCe-vV-ciK"/>
+                                        <exclude reference="gr7-TC-gqt"/>
+                                    </mask>
+                                </variation>
+                                <connections>
+                                    <action selector="hearButtonPressed:" destination="vXZ-lx-hvc" eventType="touchDown" id="P0O-cn-l67"/>
+                                </connections>
+                            </button>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                         <gestureRecognizers/>
                         <constraints>
-                            <constraint firstItem="5sQ-yy-DoI" firstAttribute="trailing" secondItem="kh9-bI-dsS" secondAttribute="trailingMargin" id="FVC-4i-RTd"/>
-                            <constraint firstItem="JhO-am-NVE" firstAttribute="trailing" secondItem="5sQ-yy-DoI" secondAttribute="trailing" id="RD2-Ww-75W"/>
-                            <constraint firstItem="2fi-mo-0CV" firstAttribute="top" secondItem="5sQ-yy-DoI" secondAttribute="bottom" constant="20" id="Ucg-6x-To6"/>
-                            <constraint firstItem="JhO-am-NVE" firstAttribute="leading" secondItem="kh9-bI-dsS" secondAttribute="leadingMargin" id="cKo-RP-itf"/>
-                            <constraint firstItem="JhO-am-NVE" firstAttribute="top" secondItem="jyV-Pf-zRb" secondAttribute="bottom" constant="8" symbolic="YES" id="em1-by-GrR"/>
-                            <constraint firstItem="JhO-am-NVE" firstAttribute="bottom" secondItem="5sQ-yy-DoI" secondAttribute="bottom" id="s7s-Q8-0b6"/>
+                            <constraint firstItem="2fi-mo-0CV" firstAttribute="top" secondItem="eHX-eV-Ibn" secondAttribute="bottom" constant="20" id="3D0-gA-eFl"/>
+                            <constraint firstAttribute="centerX" secondItem="eHX-eV-Ibn" secondAttribute="centerX" id="4Ry-oR-CIt"/>
+                            <constraint firstItem="2fi-mo-0CV" firstAttribute="top" secondItem="JhO-am-NVE" secondAttribute="bottom" constant="20" id="70I-r3-NzN"/>
+                            <constraint firstItem="2fi-mo-0CV" firstAttribute="top" secondItem="5sQ-yy-DoI" secondAttribute="bottom" constant="20" id="MCh-QR-AI2"/>
+                            <constraint firstItem="JhO-am-NVE" firstAttribute="trailing" secondItem="kh9-bI-dsS" secondAttribute="trailingMargin" id="ThQ-Gn-0EL"/>
+                            <constraint firstItem="JhO-am-NVE" firstAttribute="leading" secondItem="kh9-bI-dsS" secondAttribute="leadingMargin" id="Ve1-t5-AGa"/>
+                            <constraint firstAttribute="centerX" secondItem="JhO-am-NVE" secondAttribute="centerX" id="VxD-5z-Ddl"/>
+                            <constraint firstItem="JhO-am-NVE" firstAttribute="top" secondItem="jyV-Pf-zRb" secondAttribute="bottom" constant="8" id="hHd-Rs-Pv0"/>
+                            <constraint firstItem="5sQ-yy-DoI" firstAttribute="leading" secondItem="kh9-bI-dsS" secondAttribute="leadingMargin" id="lrA-ml-PAX"/>
                         </constraints>
                         <variation key="default">
                             <mask key="subviews">
                                 <exclude reference="JhO-am-NVE"/>
                                 <exclude reference="5sQ-yy-DoI"/>
+                                <exclude reference="eHX-eV-Ibn"/>
                             </mask>
                             <mask key="constraints">
-                                <exclude reference="Ucg-6x-To6"/>
-                                <exclude reference="FVC-4i-RTd"/>
-                                <exclude reference="RD2-Ww-75W"/>
-                                <exclude reference="cKo-RP-itf"/>
-                                <exclude reference="em1-by-GrR"/>
-                                <exclude reference="s7s-Q8-0b6"/>
+                                <exclude reference="3D0-gA-eFl"/>
+                                <exclude reference="70I-r3-NzN"/>
+                                <exclude reference="MCh-QR-AI2"/>
+                                <exclude reference="lrA-ml-PAX"/>
+                                <exclude reference="4Ry-oR-CIt"/>
+                                <exclude reference="ThQ-Gn-0EL"/>
+                                <exclude reference="Ve1-t5-AGa"/>
+                                <exclude reference="VxD-5z-Ddl"/>
+                                <exclude reference="hHd-Rs-Pv0"/>
                             </mask>
                         </variation>
                         <variation key="heightClass=regular-widthClass=compact">
                             <mask key="subviews">
                                 <include reference="JhO-am-NVE"/>
                                 <include reference="5sQ-yy-DoI"/>
+                                <include reference="eHX-eV-Ibn"/>
                             </mask>
                             <mask key="constraints">
-                                <include reference="Ucg-6x-To6"/>
-                                <include reference="FVC-4i-RTd"/>
-                                <include reference="RD2-Ww-75W"/>
-                                <include reference="cKo-RP-itf"/>
-                                <include reference="em1-by-GrR"/>
-                                <include reference="s7s-Q8-0b6"/>
+                                <include reference="3D0-gA-eFl"/>
+                                <include reference="70I-r3-NzN"/>
+                                <include reference="MCh-QR-AI2"/>
+                                <include reference="lrA-ml-PAX"/>
+                                <include reference="4Ry-oR-CIt"/>
+                                <include reference="ThQ-Gn-0EL"/>
+                                <include reference="Ve1-t5-AGa"/>
+                                <include reference="VxD-5z-Ddl"/>
+                                <include reference="hHd-Rs-Pv0"/>
                             </mask>
                         </variation>
                     </view>
                     <simulatedOrientationMetrics key="simulatedOrientationMetrics"/>
                     <connections>
+                        <outlet property="hearButton" destination="eHX-eV-Ibn" id="8j7-rb-0dD"/>
                         <outlet property="mainText" destination="JhO-am-NVE" id="2dq-ok-Vbk"/>
                         <outlet property="prefButton" destination="5sQ-yy-DoI" id="1YT-0Z-ehg"/>
                     </connections>
@@ -285,7 +334,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="O8Y-n4-MLN" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="222" y="359.25"/>
+            <point key="canvasLocation" x="240" y="359.25"/>
         </scene>
         <!--langView-->
         <scene sceneID="YOd-gc-n0o">
@@ -557,7 +606,7 @@
                     </connections>
                 </tapGestureRecognizer>
             </objects>
-            <point key="canvasLocation" x="1830" y="359.25"/>
+            <point key="canvasLocation" x="1938" y="10.5"/>
         </scene>
         <!--fromLanguageView-->
         <scene sceneID="9NT-NT-QzU">
@@ -639,10 +688,11 @@
                     </connections>
                 </tapGestureRecognizer>
             </objects>
-            <point key="canvasLocation" x="1830" y="1071"/>
+            <point key="canvasLocation" x="1938" y="707.25"/>
         </scene>
     </scenes>
     <resources>
         <image name="gear" width="640" height="640"/>
+        <image name="roundear" width="868" height="867"/>
     </resources>
 </document>

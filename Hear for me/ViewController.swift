@@ -7,19 +7,23 @@
 //
 
 import UIKit
+import SystemConfiguration
+
 
 
 class ViewController: UIViewController, settingsDelegate {
 
     @IBOutlet weak var prefButton: UIButton!
     @IBOutlet weak var mainText: UITextView!
+    @IBOutlet weak var hearButton: UIButton!
     
     let settings:Settings = Settings.getSettings()
     
     var speechRec:speechRecognizer = speechRecognizer()
     
-    var continueRecognizing = false
-    var wantsAnotherRecognition = false
+    var continueRecognizing = false /* Recognition is over antd the device is back at its normal orientation */
+    var wantsAnotherRecognition = false /* Partial pause of the recognition process */
+    
     
     func setTextSize() {
         mainText.font = mainText.font.fontWithSize( CGFloat(settings.getFontSize()) )
@@ -39,6 +43,7 @@ class ViewController: UIViewController, settingsDelegate {
         speechRec.setup(self)
         speechRec.textview = self.mainText
     }
+
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -49,11 +54,13 @@ class ViewController: UIViewController, settingsDelegate {
         //mainText.frame = CGRectMake(target.minX, target.minY, target.width, target.height-400)
     
         mainText.text = NSLocalizedString("TURN_UPSIDE_DOWN", comment: "")
+        hearButton.hidden = true
         initSpeechRec()
     }
     
     override func supportedInterfaceOrientations() -> Int {
-        return Int(UIInterfaceOrientationMask.All.rawValue)
+        // return Int(UIInterfaceOrientationMask.All.rawValue) /* Xcode 6.1 */
+        return Int( UIInterfaceOrientationMask.All.toRaw() ) /* Xcode 6.0 */
     }
 
     override func didReceiveMemoryWarning() {
@@ -66,7 +73,6 @@ class ViewController: UIViewController, settingsDelegate {
             let calledVC = segue.destinationViewController as PreferencesViewController
             calledVC.delegate = self
         }
-        
     }
     
     func periodicRecognition() {
@@ -86,13 +92,15 @@ class ViewController: UIViewController, settingsDelegate {
     
     
     override func didRotateFromInterfaceOrientation(fromInterfaceOrientation: UIInterfaceOrientation) {
-        if fromInterfaceOrientation.rawValue == UIInterfaceOrientation.Portrait.rawValue {
+        //if fromInterfaceOrientation.rawValue == UIInterfaceOrientation.Portrait.rawValue { /* Xcode 6.1 */
+        if fromInterfaceOrientation.toRaw() == UIInterfaceOrientation.Portrait.toRaw() { /* Xcode 6.0 */
             /* was portrait, now upside down */
             NSLog("Orientation from normal to upside down")
             mainText.text = ""
             continueRecognizing = true
             wantsAnotherRecognition = true
             prefButton.hidden = true
+            hearButton.hidden = false
             
             let thread = NSThread(target: self, selector: "periodicRecognition", object: nil)
             thread.start()
@@ -100,6 +108,7 @@ class ViewController: UIViewController, settingsDelegate {
         else {
             /* back to normal */
             prefButton.hidden = false
+            hearButton.hidden = true
             
             continueRecognizing = false
             speechRec.cancelRecognition()
@@ -128,6 +137,9 @@ class ViewController: UIViewController, settingsDelegate {
         updateUI(textChanged: true, themeChanged: true)
     }
     
+    @IBAction func hearButtonPressed(sender: AnyObject) {
+        wantsAnotherRecognition = !wantsAnotherRecognition
+    }
 }
 
 

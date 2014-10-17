@@ -29,7 +29,7 @@
 		B5DFE6B319E2C25700833541 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B5DFE6AB19E2C25700833541 /* CoreGraphics.framework */; };
 		B5DFE6B419E2C25700833541 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B5DFE6AC19E2C25700833541 /* Foundation.framework */; };
 		B5DFE6B519E2C25700833541 /* Security.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B5DFE6AD19E2C25700833541 /* Security.framework */; };
-		B5DFE6B619E2C25700833541 /* SystemConfiguration.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B5DFE6AE19E2C25700833541 /* SystemConfiguration.framework */; };
+		B5DFE6B619E2C25700833541 /* SystemConfiguration.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B5DFE6AE19E2C25700833541 /* SystemConfiguration.framework */; settings = {ATTRIBUTES = (Required, ); }; };
 		B5DFE6B719E2C25700833541 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B5DFE6AF19E2C25700833541 /* UIKit.framework */; };
 		B5EDDD8219ED57A60068D1F5 /* Translator.m in Sources */ = {isa = PBXBuildFile; fileRef = B5EDDD8119ED57A60068D1F5 /* Translator.m */; };
 /* End PBXBuildFile section */
