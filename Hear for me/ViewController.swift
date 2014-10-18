@@ -13,11 +13,13 @@ import SystemConfiguration
 
 class ViewController: UIViewController, settingsDelegate {
 
+    let settings:Settings = Settings.getSettings()
+    
     @IBOutlet weak var prefButton: UIButton!
     @IBOutlet weak var mainText: UITextView!
-    @IBOutlet weak var hearButton: UIButton!
     
-    let settings:Settings = Settings.getSettings()
+    @IBOutlet weak var hearButton: UIButton!
+    @IBOutlet weak var waveView: WaveView!
     
     var speechRec:speechRecognizer = speechRecognizer()
     
@@ -31,6 +33,15 @@ class ViewController: UIViewController, settingsDelegate {
     func setColors() {
         mainText.textColor = settings.theme.fgColor()
         self.view.backgroundColor = settings.theme.bgColor()
+        waveView.backgroundColor = settings.theme.bgColor()
+        
+        /*var blur = UIBlurEffect( style: UIBlurEffectStyle.Dark)
+        var blurView = UIVisualEffectView(effect: blur)
+        
+        blurView.frame = self.view.frame
+        
+        self.view.addSubview(blurView)*/
+        
     }
     
     func updateUI(textChanged textC: Bool, themeChanged themeC: Bool) {
@@ -54,13 +65,16 @@ class ViewController: UIViewController, settingsDelegate {
         //mainText.frame = CGRectMake(target.minX, target.minY, target.width, target.height-400)
     
         mainText.text = NSLocalizedString("TURN_UPSIDE_DOWN", comment: "")
+        
         hearButton.hidden = true
+        waveView.hidden = true
+        
         initSpeechRec()
     }
     
     override func supportedInterfaceOrientations() -> Int {
-        // return Int(UIInterfaceOrientationMask.All.rawValue) /* Xcode 6.1 */
-        return Int( UIInterfaceOrientationMask.All.toRaw() ) /* Xcode 6.0 */
+        return Int(UIInterfaceOrientationMask.All.rawValue) /* Xcode 6.1 */
+        //return Int( UIInterfaceOrientationMask.All.toRaw() ) /* Xcode 6.0 */
     }
 
     override func didReceiveMemoryWarning() {
@@ -92,15 +106,18 @@ class ViewController: UIViewController, settingsDelegate {
     
     
     override func didRotateFromInterfaceOrientation(fromInterfaceOrientation: UIInterfaceOrientation) {
-        //if fromInterfaceOrientation.rawValue == UIInterfaceOrientation.Portrait.rawValue { /* Xcode 6.1 */
-        if fromInterfaceOrientation.toRaw() == UIInterfaceOrientation.Portrait.toRaw() { /* Xcode 6.0 */
+        if fromInterfaceOrientation.rawValue == UIInterfaceOrientation.Portrait.rawValue { /* Xcode 6.1 */
+        //if fromInterfaceOrientation.toRaw() == UIInterfaceOrientation.Portrait.toRaw() { /* Xcode 6.0 */
             /* was portrait, now upside down */
             NSLog("Orientation from normal to upside down")
             mainText.text = ""
             continueRecognizing = true
             wantsAnotherRecognition = true
             prefButton.hidden = true
+            
+            /* TODO : hearButton and waveView need to play nicely yet */
             hearButton.hidden = false
+            waveView.hidden = false
             
             let thread = NSThread(target: self, selector: "periodicRecognition", object: nil)
             thread.start()
@@ -109,6 +126,7 @@ class ViewController: UIViewController, settingsDelegate {
             /* back to normal */
             prefButton.hidden = false
             hearButton.hidden = true
+            waveView.hidden = true
             
             continueRecognizing = false
             speechRec.cancelRecognition()
@@ -136,9 +154,12 @@ class ViewController: UIViewController, settingsDelegate {
         settings.saveSettings()
         updateUI(textChanged: true, themeChanged: true)
     }
+
     
     @IBAction func hearButtonPressed(sender: AnyObject) {
+        waveView.setNeedsDisplay()
         wantsAnotherRecognition = !wantsAnotherRecognition
+        if !wantsAnotherRecognition { speechRec.cancelRecognition() }
     }
 }
 

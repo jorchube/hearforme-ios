@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="6245" systemVersion="14A388a" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="vXZ-lx-hvc">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="6246" systemVersion="14A388a" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="vXZ-lx-hvc">
     <dependencies>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="6238"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="6239"/>
         <capability name="Alignment constraints with different attributes" minToolsVersion="5.1"/>
         <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
     </dependencies>
@@ -9,12 +9,12 @@
         <!--mainView-->
         <scene sceneID="ufC-wZ-h7g">
             <objects>
-                <viewController storyboardIdentifier="main" title="mainView" id="vXZ-lx-hvc" customClass="ViewController" customModule="Hear_for_me" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="main" title="mainView" modalPresentationStyle="overFullScreen" id="vXZ-lx-hvc" customClass="ViewController" customModule="Hear_for_me" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="jyV-Pf-zRb"/>
                         <viewControllerLayoutGuide type="bottom" id="2fi-mo-0CV"/>
                     </layoutGuides>
-                    <view key="view" contentMode="scaleToFill" id="kh9-bI-dsS">
+                    <view key="view" opaque="NO" contentMode="scaleToFill" id="kh9-bI-dsS">
                         <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                         <subviews>
@@ -38,6 +38,23 @@
                                     </mask>
                                 </variation>
                             </textView>
+                            <view contentMode="scaleToFill" restorationIdentifier="waveView" translatesAutoresizingMaskIntoConstraints="NO" id="PQY-6l-bHK" customClass="WaveView" customModule="Hear_for_me" customModuleProvider="target">
+                                <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="72" id="Nlp-V6-ceH"/>
+                                </constraints>
+                                <variation key="default">
+                                    <mask key="constraints">
+                                        <exclude reference="Nlp-V6-ceH"/>
+                                    </mask>
+                                </variation>
+                                <variation key="heightClass=regular-widthClass=compact">
+                                    <mask key="constraints">
+                                        <include reference="Nlp-V6-ceH"/>
+                                    </mask>
+                                </variation>
+                            </view>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="5sQ-yy-DoI">
                                 <rect key="frame" x="-23" y="-15" width="46" height="30"/>
                                 <constraints>
@@ -65,10 +82,10 @@
                                 <rect key="frame" x="-23" y="-15" width="46" height="30"/>
                                 <constraints>
                                     <constraint firstAttribute="height" relation="greaterThanOrEqual" constant="64" id="1az-DY-c0O"/>
+                                    <constraint firstAttribute="width" constant="64" id="7H5-wq-Cf6"/>
                                     <constraint firstAttribute="width" constant="64" id="BrQ-d9-zLd"/>
                                     <constraint firstAttribute="height" constant="64" id="HZv-uA-FBc"/>
-                                    <constraint firstAttribute="width" constant="64" id="eIZ-Kd-5CT"/>
-                                    <constraint firstAttribute="height" constant="64" id="gCe-vV-ciK"/>
+                                    <constraint firstAttribute="height" constant="64" id="ZLx-dH-Ab7"/>
                                     <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="64" id="gr7-TC-gqt"/>
                                 </constraints>
                                 <state key="normal" title="Button" image="roundear">
@@ -77,83 +94,94 @@
                                 <variation key="default">
                                     <mask key="constraints">
                                         <exclude reference="1az-DY-c0O"/>
+                                        <exclude reference="7H5-wq-Cf6"/>
                                         <exclude reference="BrQ-d9-zLd"/>
                                         <exclude reference="HZv-uA-FBc"/>
-                                        <exclude reference="eIZ-Kd-5CT"/>
-                                        <exclude reference="gCe-vV-ciK"/>
+                                        <exclude reference="ZLx-dH-Ab7"/>
                                         <exclude reference="gr7-TC-gqt"/>
                                     </mask>
                                 </variation>
                                 <variation key="heightClass=regular-widthClass=compact">
                                     <mask key="constraints">
                                         <exclude reference="1az-DY-c0O"/>
+                                        <include reference="7H5-wq-Cf6"/>
                                         <exclude reference="BrQ-d9-zLd"/>
                                         <exclude reference="HZv-uA-FBc"/>
-                                        <include reference="eIZ-Kd-5CT"/>
-                                        <include reference="gCe-vV-ciK"/>
+                                        <include reference="ZLx-dH-Ab7"/>
                                         <exclude reference="gr7-TC-gqt"/>
                                     </mask>
                                 </variation>
                                 <connections>
-                                    <action selector="hearButtonPressed:" destination="vXZ-lx-hvc" eventType="touchDown" id="P0O-cn-l67"/>
+                                    <action selector="hearButtonPressed:" destination="vXZ-lx-hvc" eventType="touchDown" id="oXh-r2-zag"/>
                                 </connections>
                             </button>
                         </subviews>
-                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                         <gestureRecognizers/>
                         <constraints>
-                            <constraint firstItem="2fi-mo-0CV" firstAttribute="top" secondItem="eHX-eV-Ibn" secondAttribute="bottom" constant="20" id="3D0-gA-eFl"/>
-                            <constraint firstAttribute="centerX" secondItem="eHX-eV-Ibn" secondAttribute="centerX" id="4Ry-oR-CIt"/>
+                            <constraint firstAttribute="centerX" secondItem="eHX-eV-Ibn" secondAttribute="centerX" id="0Uu-eL-Zgk"/>
                             <constraint firstItem="2fi-mo-0CV" firstAttribute="top" secondItem="JhO-am-NVE" secondAttribute="bottom" constant="20" id="70I-r3-NzN"/>
+                            <constraint firstItem="PQY-6l-bHK" firstAttribute="leading" secondItem="kh9-bI-dsS" secondAttribute="leadingMargin" constant="-16" id="LmQ-jy-h0K"/>
                             <constraint firstItem="2fi-mo-0CV" firstAttribute="top" secondItem="5sQ-yy-DoI" secondAttribute="bottom" constant="20" id="MCh-QR-AI2"/>
                             <constraint firstItem="JhO-am-NVE" firstAttribute="trailing" secondItem="kh9-bI-dsS" secondAttribute="trailingMargin" id="ThQ-Gn-0EL"/>
+                            <constraint firstItem="2fi-mo-0CV" firstAttribute="top" secondItem="eHX-eV-Ibn" secondAttribute="bottom" constant="8" id="U3X-ix-Roe"/>
                             <constraint firstItem="JhO-am-NVE" firstAttribute="leading" secondItem="kh9-bI-dsS" secondAttribute="leadingMargin" id="Ve1-t5-AGa"/>
                             <constraint firstAttribute="centerX" secondItem="JhO-am-NVE" secondAttribute="centerX" id="VxD-5z-Ddl"/>
+                            <constraint firstAttribute="trailingMargin" secondItem="PQY-6l-bHK" secondAttribute="trailing" constant="-16" id="Wcx-zH-b2R"/>
+                            <constraint firstItem="2fi-mo-0CV" firstAttribute="top" secondItem="PQY-6l-bHK" secondAttribute="bottom" id="X4X-Jk-ZOf"/>
                             <constraint firstItem="JhO-am-NVE" firstAttribute="top" secondItem="jyV-Pf-zRb" secondAttribute="bottom" constant="8" id="hHd-Rs-Pv0"/>
                             <constraint firstItem="5sQ-yy-DoI" firstAttribute="leading" secondItem="kh9-bI-dsS" secondAttribute="leadingMargin" id="lrA-ml-PAX"/>
                         </constraints>
                         <variation key="default">
                             <mask key="subviews">
                                 <exclude reference="JhO-am-NVE"/>
+                                <exclude reference="PQY-6l-bHK"/>
                                 <exclude reference="5sQ-yy-DoI"/>
                                 <exclude reference="eHX-eV-Ibn"/>
                             </mask>
                             <mask key="constraints">
-                                <exclude reference="3D0-gA-eFl"/>
                                 <exclude reference="70I-r3-NzN"/>
                                 <exclude reference="MCh-QR-AI2"/>
+                                <exclude reference="U3X-ix-Roe"/>
+                                <exclude reference="X4X-Jk-ZOf"/>
                                 <exclude reference="lrA-ml-PAX"/>
-                                <exclude reference="4Ry-oR-CIt"/>
+                                <exclude reference="0Uu-eL-Zgk"/>
                                 <exclude reference="ThQ-Gn-0EL"/>
                                 <exclude reference="Ve1-t5-AGa"/>
                                 <exclude reference="VxD-5z-Ddl"/>
                                 <exclude reference="hHd-Rs-Pv0"/>
+                                <exclude reference="LmQ-jy-h0K"/>
+                                <exclude reference="Wcx-zH-b2R"/>
                             </mask>
                         </variation>
                         <variation key="heightClass=regular-widthClass=compact">
                             <mask key="subviews">
                                 <include reference="JhO-am-NVE"/>
+                                <include reference="PQY-6l-bHK"/>
                                 <include reference="5sQ-yy-DoI"/>
                                 <include reference="eHX-eV-Ibn"/>
                             </mask>
                             <mask key="constraints">
-                                <include reference="3D0-gA-eFl"/>
                                 <include reference="70I-r3-NzN"/>
                                 <include reference="MCh-QR-AI2"/>
+                                <include reference="U3X-ix-Roe"/>
+                                <include reference="X4X-Jk-ZOf"/>
                                 <include reference="lrA-ml-PAX"/>
-                                <include reference="4Ry-oR-CIt"/>
+                                <include reference="0Uu-eL-Zgk"/>
                                 <include reference="ThQ-Gn-0EL"/>
                                 <include reference="Ve1-t5-AGa"/>
                                 <include reference="VxD-5z-Ddl"/>
                                 <include reference="hHd-Rs-Pv0"/>
+                                <include reference="LmQ-jy-h0K"/>
+                                <include reference="Wcx-zH-b2R"/>
                             </mask>
                         </variation>
                     </view>
                     <simulatedOrientationMetrics key="simulatedOrientationMetrics"/>
                     <connections>
-                        <outlet property="hearButton" destination="eHX-eV-Ibn" id="8j7-rb-0dD"/>
+                        <outlet property="hearButton" destination="eHX-eV-Ibn" id="9jW-6p-1As"/>
                         <outlet property="mainText" destination="JhO-am-NVE" id="2dq-ok-Vbk"/>
                         <outlet property="prefButton" destination="5sQ-yy-DoI" id="1YT-0Z-ehg"/>
+                        <outlet property="waveView" destination="PQY-6l-bHK" id="qav-T4-0eJ"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="x5A-6p-PRh" sceneMemberID="firstResponder"/>
@@ -243,7 +271,7 @@
                                     <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                 </state>
                                 <connections>
-                                    <segue destination="D65-Af-q5x" kind="presentation" identifier="LangSegue" modalTransitionStyle="flipHorizontal" id="W9x-sb-UTX"/>
+                                    <segue destination="D65-Af-q5x" kind="presentation" identifier="LangSegue" modalPresentationStyle="overCurrentContext" id="W9x-sb-UTX"/>
                                 </connections>
                             </button>
                         </subviews>
@@ -339,7 +367,7 @@
         <!--langView-->
         <scene sceneID="YOd-gc-n0o">
             <objects>
-                <viewController title="langView" id="D65-Af-q5x" customClass="languagesViewController" customModule="Hear_for_me" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController title="langView" modalPresentationStyle="overCurrentContext" id="D65-Af-q5x" customClass="languagesViewController" customModule="Hear_for_me" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="aH7-vo-3nS"/>
                         <viewControllerLayoutGuide type="bottom" id="Tg2-2A-zaK"/>
@@ -364,7 +392,7 @@
                                 </constraints>
                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                 <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
-                                <nil key="highlightedColor"/>
+                                <color key="highlightedColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                 <variation key="default">
                                     <mask key="constraints">
                                         <exclude reference="L8L-fK-rwp"/>
@@ -446,7 +474,6 @@
                                 </connections>
                             </switch>
                         </subviews>
-                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <gestureRecognizers/>
                         <constraints>
                             <constraint firstAttribute="centerX" secondItem="sVq-dP-QJD" secondAttribute="centerX" id="9k7-3D-Ddy"/>

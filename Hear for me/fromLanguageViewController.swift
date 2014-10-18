@@ -16,7 +16,7 @@ class fromLanguageViewController: UIViewController, UIPickerViewDelegate, UIPick
     var languagePickerDelegate:languagePicker?
     
     let settings:Settings = Settings.getSettings()
-    let blurHeight:CGFloat = 265
+    let blurHeight:CGFloat = 265 /* TODO : Fix this shit */
     
     
     override func viewDidLoad() {
@@ -27,15 +27,24 @@ class fromLanguageViewController: UIViewController, UIPickerViewDelegate, UIPick
         langPicker.delegate = self
         langPicker.dataSource = self
 
-        var blur = UIBlurEffect( style: UIBlurEffectStyle.ExtraLight)
+        var blur = UIBlurEffect( style: UIBlurEffectStyle.Light)
         var blurView = UIVisualEffectView(effect: blur)
-        
         blurView.frame = CGRectMake(0,
             self.view.frame.maxY - blurHeight,
             self.view.frame.width,
             blurHeight)
-        
         self.view.addSubview(blurView)
+        
+        var vibrancy = UIVibrancyEffect(forBlurEffect: blur)
+        var vibrancyView = UIVisualEffectView(effect: vibrancy)
+        vibrancyView.frame = CGRectMake(0,
+            self.view.frame.maxY - blurHeight,
+            self.view.frame.width,
+            blurHeight)
+        blurView.addSubview(vibrancyView)
+    
+        vibrancyView.addSubview(okButton)
+        vibrancyView.addSubview(langPicker)
         
         langPicker.selectRow(settings.language.hearingIndex, inComponent: 0, animated: false)
         

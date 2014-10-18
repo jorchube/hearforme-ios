@@ -29,6 +29,7 @@ class languagesViewController: UIViewController, languagePicker {
     }
     
     func updateUI() {
+        
         hearLangLabel.textColor = settings.theme.fgColor()
         transLangLabel.textColor = settings.theme.fgColor()
         
@@ -56,7 +57,7 @@ class languagesViewController: UIViewController, languagePicker {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-
+        
         // Do any additional setup after loading the view.
         loadSettings()
         updateUI()
