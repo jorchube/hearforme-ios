@@ -41,6 +41,7 @@
                             <view contentMode="scaleToFill" restorationIdentifier="waveView" translatesAutoresizingMaskIntoConstraints="NO" id="PQY-6l-bHK" customClass="WaveView" customModule="Hear_for_me" customModuleProvider="target">
                                 <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <gestureRecognizers/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="72" id="Nlp-V6-ceH"/>
                                 </constraints>
@@ -54,6 +55,9 @@
                                         <include reference="Nlp-V6-ceH"/>
                                     </mask>
                                 </variation>
+                                <connections>
+                                    <outletCollection property="gestureRecognizers" destination="QSE-Q5-HVd" appends="YES" id="bNn-YJ-fHC"/>
+                                </connections>
                             </view>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="5sQ-yy-DoI">
                                 <rect key="frame" x="-23" y="-15" width="46" height="30"/>
@@ -115,6 +119,25 @@
                                     <action selector="hearButtonPressed:" destination="vXZ-lx-hvc" eventType="touchDown" id="oXh-r2-zag"/>
                                 </connections>
                             </button>
+                            <activityIndicatorView opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" style="whiteLarge" translatesAutoresizingMaskIntoConstraints="NO" id="L8o-Iy-rU8">
+                                <rect key="frame" x="-10" y="-10" width="20" height="20"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="37" id="291-rf-wjd"/>
+                                    <constraint firstAttribute="height" constant="37" id="7mp-aM-6Xz"/>
+                                </constraints>
+                                <variation key="default">
+                                    <mask key="constraints">
+                                        <exclude reference="291-rf-wjd"/>
+                                        <exclude reference="7mp-aM-6Xz"/>
+                                    </mask>
+                                </variation>
+                                <variation key="heightClass=regular-widthClass=compact">
+                                    <mask key="constraints">
+                                        <include reference="291-rf-wjd"/>
+                                        <include reference="7mp-aM-6Xz"/>
+                                    </mask>
+                                </variation>
+                            </activityIndicatorView>
                         </subviews>
                         <gestureRecognizers/>
                         <constraints>
@@ -129,7 +152,9 @@
                             <constraint firstAttribute="trailingMargin" secondItem="PQY-6l-bHK" secondAttribute="trailing" constant="-16" id="Wcx-zH-b2R"/>
                             <constraint firstItem="2fi-mo-0CV" firstAttribute="top" secondItem="PQY-6l-bHK" secondAttribute="bottom" id="X4X-Jk-ZOf"/>
                             <constraint firstItem="JhO-am-NVE" firstAttribute="top" secondItem="jyV-Pf-zRb" secondAttribute="bottom" constant="8" id="hHd-Rs-Pv0"/>
+                            <constraint firstItem="2fi-mo-0CV" firstAttribute="top" secondItem="L8o-Iy-rU8" secondAttribute="bottom" constant="22" id="kD5-xE-Hxy"/>
                             <constraint firstItem="5sQ-yy-DoI" firstAttribute="leading" secondItem="kh9-bI-dsS" secondAttribute="leadingMargin" id="lrA-ml-PAX"/>
+                            <constraint firstAttribute="centerX" secondItem="L8o-Iy-rU8" secondAttribute="centerX" id="pfK-FF-qBm"/>
                         </constraints>
                         <variation key="default">
                             <mask key="subviews">
@@ -137,20 +162,23 @@
                                 <exclude reference="PQY-6l-bHK"/>
                                 <exclude reference="5sQ-yy-DoI"/>
                                 <exclude reference="eHX-eV-Ibn"/>
+                                <exclude reference="L8o-Iy-rU8"/>
                             </mask>
                             <mask key="constraints">
-                                <exclude reference="70I-r3-NzN"/>
-                                <exclude reference="MCh-QR-AI2"/>
-                                <exclude reference="U3X-ix-Roe"/>
-                                <exclude reference="X4X-Jk-ZOf"/>
-                                <exclude reference="lrA-ml-PAX"/>
-                                <exclude reference="0Uu-eL-Zgk"/>
                                 <exclude reference="ThQ-Gn-0EL"/>
                                 <exclude reference="Ve1-t5-AGa"/>
                                 <exclude reference="VxD-5z-Ddl"/>
                                 <exclude reference="hHd-Rs-Pv0"/>
                                 <exclude reference="LmQ-jy-h0K"/>
                                 <exclude reference="Wcx-zH-b2R"/>
+                                <exclude reference="0Uu-eL-Zgk"/>
+                                <exclude reference="lrA-ml-PAX"/>
+                                <exclude reference="pfK-FF-qBm"/>
+                                <exclude reference="70I-r3-NzN"/>
+                                <exclude reference="MCh-QR-AI2"/>
+                                <exclude reference="U3X-ix-Roe"/>
+                                <exclude reference="X4X-Jk-ZOf"/>
+                                <exclude reference="kD5-xE-Hxy"/>
                             </mask>
                         </variation>
                         <variation key="heightClass=regular-widthClass=compact">
@@ -159,25 +187,29 @@
                                 <include reference="PQY-6l-bHK"/>
                                 <include reference="5sQ-yy-DoI"/>
                                 <include reference="eHX-eV-Ibn"/>
+                                <include reference="L8o-Iy-rU8"/>
                             </mask>
                             <mask key="constraints">
-                                <include reference="70I-r3-NzN"/>
-                                <include reference="MCh-QR-AI2"/>
-                                <include reference="U3X-ix-Roe"/>
-                                <include reference="X4X-Jk-ZOf"/>
-                                <include reference="lrA-ml-PAX"/>
-                                <include reference="0Uu-eL-Zgk"/>
                                 <include reference="ThQ-Gn-0EL"/>
                                 <include reference="Ve1-t5-AGa"/>
                                 <include reference="VxD-5z-Ddl"/>
                                 <include reference="hHd-Rs-Pv0"/>
                                 <include reference="LmQ-jy-h0K"/>
                                 <include reference="Wcx-zH-b2R"/>
+                                <include reference="0Uu-eL-Zgk"/>
+                                <include reference="lrA-ml-PAX"/>
+                                <include reference="pfK-FF-qBm"/>
+                                <include reference="70I-r3-NzN"/>
+                                <include reference="MCh-QR-AI2"/>
+                                <include reference="U3X-ix-Roe"/>
+                                <include reference="X4X-Jk-ZOf"/>
+                                <include reference="kD5-xE-Hxy"/>
                             </mask>
                         </variation>
                     </view>
                     <simulatedOrientationMetrics key="simulatedOrientationMetrics"/>
                     <connections>
+                        <outlet property="activityIndicator" destination="L8o-Iy-rU8" id="SEl-Vt-6gY"/>
                         <outlet property="hearButton" destination="eHX-eV-Ibn" id="9jW-6p-1As"/>
                         <outlet property="mainText" destination="JhO-am-NVE" id="2dq-ok-Vbk"/>
                         <outlet property="prefButton" destination="5sQ-yy-DoI" id="1YT-0Z-ehg"/>
@@ -185,6 +217,11 @@
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="x5A-6p-PRh" sceneMemberID="firstResponder"/>
+                <tapGestureRecognizer id="QSE-Q5-HVd">
+                    <connections>
+                        <action selector="wavePressed:" destination="vXZ-lx-hvc" id="MNx-9O-ToV"/>
+                    </connections>
+                </tapGestureRecognizer>
             </objects>
             <point key="canvasLocation" x="-579" y="359.25"/>
         </scene>
@@ -271,7 +308,7 @@
                                     <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                 </state>
                                 <connections>
-                                    <segue destination="D65-Af-q5x" kind="presentation" identifier="LangSegue" modalPresentationStyle="overCurrentContext" id="W9x-sb-UTX"/>
+                                    <segue destination="D65-Af-q5x" kind="presentation" identifier="LangSegue" modalTransitionStyle="flipHorizontal" id="W9x-sb-UTX"/>
                                 </connections>
                             </button>
                         </subviews>

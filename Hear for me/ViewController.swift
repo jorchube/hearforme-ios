@@ -21,11 +21,14 @@ class ViewController: UIViewController, settingsDelegate {
     @IBOutlet weak var hearButton: UIButton!
     @IBOutlet weak var waveView: WaveView!
     
+    @IBOutlet weak var activityIndicator: UIActivityIndicatorView!
+    
     var speechRec:speechRecognizer = speechRecognizer()
     
     var continueRecognizing = false /* Recognition is over antd the device is back at its normal orientation */
     var wantsAnotherRecognition = false /* Partial pause of the recognition process */
     
+    var audioReadTimer: NSTimer?
     
     func setTextSize() {
         mainText.font = mainText.font.fontWithSize( CGFloat(settings.getFontSize()) )
@@ -34,6 +37,7 @@ class ViewController: UIViewController, settingsDelegate {
         mainText.textColor = settings.theme.fgColor()
         self.view.backgroundColor = settings.theme.bgColor()
         waveView.backgroundColor = settings.theme.bgColor()
+        activityIndicator.color = settings.theme.fgColor()
         
         /*var blur = UIBlurEffect( style: UIBlurEffectStyle.Dark)
         var blurView = UIVisualEffectView(effect: blur)
@@ -68,9 +72,33 @@ class ViewController: UIViewController, settingsDelegate {
         
         hearButton.hidden = true
         waveView.hidden = true
+        activityIndicator.hidesWhenStopped = true
         
         initSpeechRec()
     }
+    
+    func setRecognizerStatus(status:integer_t)
+    {
+        
+        if !continueRecognizing { return }
+        
+        switch status {
+        case IDLE:
+            activityIndicator.stopAnimating()
+        case HEARING:
+            activityIndicator.stopAnimating()
+            waveView.hidden = false
+        case PROCESSING:
+            fallthrough
+        case PREPARING:
+            activityIndicator.startAnimating()
+            waveView.hidden = true
+        default:
+            activityIndicator.stopAnimating()
+            waveView.hidden = false
+        }
+    }
+
     
     override func supportedInterfaceOrientations() -> Int {
         return Int(UIInterfaceOrientationMask.All.rawValue) /* Xcode 6.1 */
@@ -104,6 +132,13 @@ class ViewController: UIViewController, settingsDelegate {
         NSLog("End periodic recognition")
     }
     
+
+    func periodicAudioVolumeFeedback() {
+        if (speechRec.status == HEARING){
+            waveView.setAudioLevel( CGFloat(speechRec.getAudioLevel()) )
+            waveView.setNeedsDisplay()
+        }
+    }
     
     override func didRotateFromInterfaceOrientation(fromInterfaceOrientation: UIInterfaceOrientation) {
         if fromInterfaceOrientation.rawValue == UIInterfaceOrientation.Portrait.rawValue { /* Xcode 6.1 */
@@ -116,11 +151,13 @@ class ViewController: UIViewController, settingsDelegate {
             prefButton.hidden = true
             
             /* TODO : hearButton and waveView need to play nicely yet */
-            hearButton.hidden = false
-            waveView.hidden = false
+            hearButton.hidden = true
+            waveView.hidden = true
+            activityIndicator.startAnimating()
             
-            let thread = NSThread(target: self, selector: "periodicRecognition", object: nil)
-            thread.start()
+            let recogThread = NSThread(target: self, selector: "periodicRecognition", object: nil)
+            recogThread.start()
+            audioReadTimer = NSTimer.scheduledTimerWithTimeInterval(0.05, target: self, selector: Selector("periodicAudioVolumeFeedback"), userInfo: nil, repeats: true)
         }
         else {
             /* back to normal */
@@ -130,6 +167,9 @@ class ViewController: UIViewController, settingsDelegate {
             
             continueRecognizing = false
             speechRec.cancelRecognition()
+            
+            audioReadTimer?.invalidate()
+            
             mainText.text = NSLocalizedString("TURN_UPSIDE_DOWN", comment: "")
             //mainText.sizeToFit()
             NSLog("Orientation again normal")
@@ -157,10 +197,23 @@ class ViewController: UIViewController, settingsDelegate {
 
     
     @IBAction func hearButtonPressed(sender: AnyObject) {
-        waveView.setNeedsDisplay()
         wantsAnotherRecognition = !wantsAnotherRecognition
-        if !wantsAnotherRecognition { speechRec.cancelRecognition() }
+        if !wantsAnotherRecognition {
+            speechRec.cancelRecognition()
+            hearButton.hidden = false
+            waveView.hidden = true
+            activityIndicator.stopAnimating()
+        }
+        else {
+            hearButton.hidden = true
+            activityIndicator.startAnimating()
+        }
     }
+    
+    @IBAction func wavePressed(sender: UITapGestureRecognizer) {
+            hearButtonPressed(self)
+    }
+    
 }
 
 

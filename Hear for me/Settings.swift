@@ -31,6 +31,13 @@ public struct Theme{
         }
         return UIColor(red: 255/255.0, green: 252/255.0, blue: 235/255.0, alpha: 1)
     }
+    
+    func waveColor() -> UIColor {
+        if self.current == Theme.name.lightOnDark {
+            return UIColor(red: 131/255.0, green: 127/255.0, blue: 166/255.0, alpha: 1)
+        }
+        return UIColor(red: 206/255.0, green: 134/255.0, blue: 49/255.0, alpha: 1)
+    }
 }
 
 

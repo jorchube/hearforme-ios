@@ -36,5 +36,6 @@
 -(void) destroyRecognizer;
 -(void) setHearingLanguage:(NSString*) hLang translatingLanguage:(NSString*) tLang wantsTranslation:(BOOL) hasToTranslate;
 //-(void) translationFinishedWithResult:(NSString*)str;
+-(float) getAudioLevel; /* returns a value between 0 and 1 */
 
 @end

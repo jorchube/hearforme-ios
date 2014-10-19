@@ -51,6 +51,7 @@ ViewController* vc;
                     useSSL:YES
                   delegate:nil];
     status = IDLE;
+    [self broadcastStatus];
 }
 
 -(void) recognizeNowWithStopType:(SKEndOfSpeechDetection) StopDetectionType
@@ -64,18 +65,21 @@ ViewController* vc;
                                            delegate:self];
 
     if (recognizer == nil){ status = IDLE; }
+    [self broadcastStatus];
 }
 
 -(void) recognizerDidBeginRecording:(SKRecognizer *)recognizer
 {
     NSLog(@"Begin recording");
     status = HEARING;
+    [self broadcastStatus];
 }
 
 -(void) recognizerDidFinishRecording:(SKRecognizer *)recognizer
 {
     NSLog(@"Finish recording");
     status = PROCESSING;
+    [self broadcastStatus];
 }
 
 -(void) recognizer:(SKRecognizer *)r didFinishWithError:(NSError *)error suggestion:(NSString *)suggestion
@@ -83,6 +87,7 @@ ViewController* vc;
     NSLog(@"Recognition error: %@", error);
     status = IDLE;
     recognizer = nil;
+    [self broadcastStatus];
 }
 /*
 -(void) translationFinishedWithResult:(NSString *)str
@@ -93,7 +98,7 @@ ViewController* vc;
 
 -(void) recognizer:(SKRecognizer *)r didFinishWithResults:(SKRecognition *)results
 {
-    
+
     NSLog(@"Result: %@", [results firstResult]);
     
     if ([results firstResult]){
@@ -117,6 +122,7 @@ ViewController* vc;
     NSLog(@"Heard string: %@", [textview text]);
     status = IDLE;
     r = nil;
+    [self broadcastStatus];
 }
 
 
@@ -150,6 +156,20 @@ ViewController* vc;
     hearingLanguage = hLang;
     translatingLanguage = tLang;
     wantsTranslation = hasToTranslate;
+}
+
+-(float) getAudioLevel
+{
+    /*
+     recognizer.audioLevel ranges from -90 to 0
+     This function returns a value between 0 and 1
+     */
+    return (recognizer.audioLevel + 90)/90;
+}
+
+-(void) broadcastStatus
+{
+    [vc setRecognizerStatus:status];
 }
 
 @end
