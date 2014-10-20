@@ -12,12 +12,12 @@ class WaveView: UIView {
     
     let settings:Settings = Settings.getSettings()
     
-    var audioLevel:CGFloat = 0
     var xOffset:CGFloat = 0
+    
+    var audioLevel:CGFloat = 0
 
-    // Only override drawRect: if you perform custom drawing.
-    // An empty implementation adversely affects performance during animation.
-    override func drawRect(rect: CGRect)
+    
+    func createWaveInRect(rect:CGRect) -> UIBezierPath
     {
         let zeroY:CGFloat = rect.size.height/2
         let maxX:CGFloat = rect.size.width
@@ -43,7 +43,7 @@ class WaveView: UIView {
             CGPointMake(maxX * 0.95 + xOffset, zeroY),
             CGPointMake(maxX, zeroY)
         ]
-        let waveControls:Array<CGPoint> = [
+        var waveControls:Array<CGPoint> = [
             CGPointMake(maxX * 0.025 + xOffset, zeroY + 05 * audioLevel),
             CGPointMake(maxX * 0.075 + xOffset, zeroY - 05 * audioLevel),
             CGPointMake(maxX * 0.125 + xOffset, zeroY + 10 * audioLevel),
@@ -69,23 +69,25 @@ class WaveView: UIView {
         /*xOffset = xOffset + (rect.size.width / CGFloat(wavePoints.count) / 5)
         if xOffset > (rect.size.width / CGFloat(wavePoints.count/2)) { xOffset = 0 }*/
         
-        var context:CGContextRef = UIGraphicsGetCurrentContext()
-        var wave = UIBezierPath()
-        
+        var wave:UIBezierPath = UIBezierPath()
         wave.moveToPoint(CGPointMake(0, zeroY))
         
         for i in 0..<wavePoints.count {
             wave.addQuadCurveToPoint(wavePoints[i], controlPoint: waveControls[i])
         }
         
-        CGContextSetStrokeColorWithColor( context, settings.theme.waveColor().CGColor )
+        return wave
+    }
     
-        //wave.stroke()
+    
+    // Only override drawRect: if you perform custom drawing.
+    // An empty implementation adversely affects performance during animation.
+    override func drawRect(rect: CGRect)
+    {
+        var context:CGContextRef = UIGraphicsGetCurrentContext()
+        CGContextSetStrokeColorWithColor( context, settings.theme.waveColor().CGColor)
         
-        CGContextAddPath(context, wave.CGPath)
-        CGContextStrokePath(context)
-        
-        //CGContextFlush(context)
+        createWaveInRect(rect).stroke()
         
     }
     
@@ -94,3 +96,7 @@ class WaveView: UIView {
         audioLevel = level * level * level /* y = x^3 is better looking than y = x for the waves */
     }
 }
+
+
+
+

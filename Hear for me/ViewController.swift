@@ -23,6 +23,8 @@ class ViewController: UIViewController, settingsDelegate {
     
     @IBOutlet weak var activityIndicator: UIActivityIndicatorView!
     
+    let audioSamplingPeriod = 0.05
+    
     var speechRec:speechRecognizer = speechRecognizer()
     
     var continueRecognizing = false /* Recognition is over antd the device is back at its normal orientation */
@@ -161,7 +163,11 @@ class ViewController: UIViewController, settingsDelegate {
             
             let recogThread = NSThread(target: self, selector: "periodicRecognition", object: nil)
             recogThread.start()
-            audioReadTimer = NSTimer.scheduledTimerWithTimeInterval(0.05, target: self, selector: Selector("periodicAudioVolumeFeedback"), userInfo: nil, repeats: true)
+            audioReadTimer = NSTimer.scheduledTimerWithTimeInterval(audioSamplingPeriod,
+                target: self,
+                selector: Selector("periodicAudioVolumeFeedback"),
+                userInfo: nil,
+                repeats: true)
         }
         else {
             /* back to normal */
