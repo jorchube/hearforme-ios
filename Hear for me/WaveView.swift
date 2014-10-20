@@ -87,13 +87,72 @@ class WaveView: UIView {
         var context:CGContextRef = UIGraphicsGetCurrentContext()
         CGContextSetStrokeColorWithColor( context, settings.theme.waveColor().CGColor)
         
-        createWaveInRect(rect).stroke()
+        CGContextAddPath(context, createWaveInRect(rect).CGPath)
+        CGContextDrawPath(context, kCGPathStroke)
         
+        audioLevel = audioLevel/1.5
+        CGContextSetAlpha(context, 0.5)
+        CGContextAddPath(context, createWaveInRect(rect).CGPath)
+        CGContextDrawPath(context, kCGPathStroke)
+        
+        audioLevel = audioLevel/2
+        CGContextSetAlpha(context, 0.25)
+        CGContextAddPath(context, createWaveInRect(rect).CGPath)
+        CGContextDrawPath(context, kCGPathStroke)
+        
+        audioLevel = audioLevel/3
+        CGContextSetAlpha(context, 0.1)
+        CGContextAddPath(context, createWaveInRect(rect).CGPath)
+        CGContextDrawPath(context, kCGPathStroke)
+        
+       /* let colors:CFArray =
+        [
+            CGColorCreateCopyWithAlpha(settings.theme.bgColor().CGColor, 1),
+            CGColorCreateCopyWithAlpha(settings.theme.bgColor().CGColor, 0),
+            CGColorCreateCopyWithAlpha(settings.theme.bgColor().CGColor, 1),
+        ]*/
+        
+        //let locations:[CGFloat] = [0.0, 0.1, 0.9]
+       
+        let colorspace = CGColorSpaceCreateDeviceRGB()
+        
+        /*let gradient = CGGradientCreateWithColors(
+            CGColorSpaceCreateDeviceRGB(),
+            [
+                CGColorCreateCopyWithAlpha(settings.theme.bgColor().CGColor, 1.0),
+                CGColorCreateCopyWithAlpha(settings.theme.bgColor().CGColor, 0.0),
+                CGColorCreateCopyWithAlpha(settings.theme.bgColor().CGColor, 1.0),
+            ],
+            [0.0, 0.1, 0.9]
+        )*/
+        
+        let components = CGColorGetComponents(settings.theme.bgColor().CGColor)
+        
+        CGContextSetAlpha(context, 1.0)
+        let gradient = CGGradientCreateWithColorComponents(
+            CGColorSpaceCreateDeviceRGB(),
+            [
+                components[0], components[1], components[2], 1,
+                components[0], components[1], components[2], 0,
+                components[0], components[1], components[2], 0,
+                components[0], components[1], components[2], 1
+            ],
+            [0, 0.2, 0.8, 1],
+            4)
+        
+       CGContextDrawLinearGradient(
+            context,
+            gradient,
+            CGPointMake(0, 0),
+            CGPointMake(rect.width, 0),
+            0
+        )
     }
     
     func setAudioLevel (level: CGFloat)
     {
-        audioLevel = level * level * level /* y = x^3 is better looking than y = x for the waves */
+        /* y = 2x^4 is a nice fit */
+        audioLevel = 2*(level * level * level * level)
     }
 }
 
