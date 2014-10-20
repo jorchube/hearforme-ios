@@ -85,17 +85,21 @@ class ViewController: UIViewController, settingsDelegate {
         switch status {
         case IDLE:
             activityIndicator.stopAnimating()
+            hearButton.hidden = false
         case HEARING:
             activityIndicator.stopAnimating()
             waveView.hidden = false
+            hearButton.hidden = true
         case PROCESSING:
             fallthrough
         case PREPARING:
             activityIndicator.startAnimating()
             waveView.hidden = true
+            hearButton.hidden = true
         default:
             activityIndicator.stopAnimating()
-            waveView.hidden = false
+            waveView.hidden = true
+            hearButton.hidden = false
         }
     }
 
@@ -199,10 +203,10 @@ class ViewController: UIViewController, settingsDelegate {
     @IBAction func hearButtonPressed(sender: AnyObject) {
         wantsAnotherRecognition = !wantsAnotherRecognition
         if !wantsAnotherRecognition {
-            speechRec.cancelRecognition()
-            hearButton.hidden = false
+            //activityIndicator.stopAnimating()
+            speechRec.stopRecognition()
+            hearButton.hidden = true
             waveView.hidden = true
-            activityIndicator.stopAnimating()
         }
         else {
             hearButton.hidden = true

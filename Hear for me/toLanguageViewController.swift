@@ -27,7 +27,7 @@ class toLanguageViewController: UIViewController, UIPickerViewDelegate, UIPicker
         langPicker.delegate = self
         langPicker.dataSource = self
         
-        var blur = UIBlurEffect( style: UIBlurEffectStyle.Light)
+        var blur = UIBlurEffect( style: UIBlurEffectStyle.ExtraLight)
         var blurView = UIVisualEffectView(effect: blur)
         blurView.frame = CGRectMake(0,
             self.view.frame.maxY - blurHeight,
@@ -45,6 +45,7 @@ class toLanguageViewController: UIViewController, UIPickerViewDelegate, UIPicker
         
         vibrancyView.addSubview(okButton)
         vibrancyView.addSubview(langPicker)
+        
         
         langPicker.selectRow(settings.language.translatingIndex, inComponent: 0, animated: false)
     }

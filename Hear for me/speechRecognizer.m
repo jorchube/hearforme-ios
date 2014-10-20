@@ -50,13 +50,12 @@ ViewController* vc;
                       port:443
                     useSSL:YES
                   delegate:nil];
-    status = IDLE;
-    [self broadcastStatus];
+    [self setRecognizerStatus:IDLE];
 }
 
 -(void) recognizeNowWithStopType:(SKEndOfSpeechDetection) StopDetectionType
 {
-    status = PREPARING;
+    [self setRecognizerStatus:PREPARING];
     NSLog(@"Recognizing");
     if (recognizer) recognizer = nil;
     recognizer = [[SKRecognizer alloc] initWithType:SKDictationRecognizerType
@@ -64,37 +63,28 @@ ViewController* vc;
                                            language:hearingLanguage
                                            delegate:self];
 
-    if (recognizer == nil){ status = IDLE; }
-    [self broadcastStatus];
+    if (recognizer == nil){ [self setRecognizerStatus:IDLE]; }
 }
 
 -(void) recognizerDidBeginRecording:(SKRecognizer *)recognizer
 {
     NSLog(@"Begin recording");
-    status = HEARING;
-    [self broadcastStatus];
+    [self setRecognizerStatus:HEARING];
 }
 
 -(void) recognizerDidFinishRecording:(SKRecognizer *)recognizer
 {
     NSLog(@"Finish recording");
-    status = PROCESSING;
-    [self broadcastStatus];
+    [self setRecognizerStatus:PROCESSING];
 }
 
 -(void) recognizer:(SKRecognizer *)r didFinishWithError:(NSError *)error suggestion:(NSString *)suggestion
 {
     NSLog(@"Recognition error: %@", error);
-    status = IDLE;
     recognizer = nil;
-    [self broadcastStatus];
+    [self setRecognizerStatus:IDLE];
 }
-/*
--(void) translationFinishedWithResult:(NSString *)str
-{
-    translatedResult = str;
-    waitForTranslation = false;
-}*/
+
 
 -(void) recognizer:(SKRecognizer *)r didFinishWithResults:(SKRecognition *)results
 {
@@ -120,9 +110,8 @@ ViewController* vc;
         }
     }
     NSLog(@"Heard string: %@", [textview text]);
-    status = IDLE;
     r = nil;
-    [self broadcastStatus];
+    [self setRecognizerStatus:IDLE];
 }
 
 
@@ -130,25 +119,27 @@ ViewController* vc;
 {
     shouldListen = 1;
     while (status == IDLE)
-        [self recognizeNowWithStopType:SKShortEndOfSpeechDetection];
+        [self recognizeNowWithStopType:SKLongEndOfSpeechDetection];
 }
 
 -(void) stopRecognition
 {
     shouldListen = 0;
     [recognizer stopRecording];
+    [self setRecognizerStatus:PROCESSING];
 }
 
 -(void) cancelRecognition
 {
     shouldListen = 0;
     [recognizer cancel];
-    //[SpeechKit destroy];
+    [self setRecognizerStatus:IDLE];
 }
 
 -(void) destroyRecognizer
 {
     [SpeechKit destroy];
+    [self setRecognizerStatus:IDLE];
 }
 
 -(void) setHearingLanguage:(NSString *)hLang translatingLanguage:(NSString *)tLang wantsTranslation:(BOOL)hasToTranslate
@@ -170,6 +161,12 @@ ViewController* vc;
 -(void) broadcastStatus
 {
     [vc setRecognizerStatus:status];
+}
+
+-(void) setRecognizerStatus: (int) newStatus
+{
+    status = newStatus;
+    [self broadcastStatus];
 }
 
 @end

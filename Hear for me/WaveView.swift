@@ -91,6 +91,6 @@ class WaveView: UIView {
     
     func setAudioLevel (level: CGFloat)
     {
-        audioLevel = level * level /* y = x^2 is better looking than y = x for the waves */
+        audioLevel = level * level * level /* y = x^3 is better looking than y = x for the waves */
     }
 }
