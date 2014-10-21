@@ -105,27 +105,7 @@ class WaveView: UIView {
         CGContextAddPath(context, createWaveInRect(rect).CGPath)
         CGContextDrawPath(context, kCGPathStroke)
         
-       /* let colors:CFArray =
-        [
-            CGColorCreateCopyWithAlpha(settings.theme.bgColor().CGColor, 1),
-            CGColorCreateCopyWithAlpha(settings.theme.bgColor().CGColor, 0),
-            CGColorCreateCopyWithAlpha(settings.theme.bgColor().CGColor, 1),
-        ]*/
-        
-        //let locations:[CGFloat] = [0.0, 0.1, 0.9]
-       
-        let colorspace = CGColorSpaceCreateDeviceRGB()
-        
-        /*let gradient = CGGradientCreateWithColors(
-            CGColorSpaceCreateDeviceRGB(),
-            [
-                CGColorCreateCopyWithAlpha(settings.theme.bgColor().CGColor, 1.0),
-                CGColorCreateCopyWithAlpha(settings.theme.bgColor().CGColor, 0.0),
-                CGColorCreateCopyWithAlpha(settings.theme.bgColor().CGColor, 1.0),
-            ],
-            [0.0, 0.1, 0.9]
-        )*/
-        
+        let colorspace = CGColorSpaceCreateDeviceRGB()        
         let components = CGColorGetComponents(settings.theme.bgColor().CGColor)
         
         CGContextSetAlpha(context, 1.0)

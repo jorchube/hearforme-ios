@@ -15,24 +15,25 @@
 #import "PrivateKeys.h"
 
 
-#define IDLE 0
-#define HEARING 1
-#define PROCESSING 2
+#define IDLE        00
+#define PREPARING   10
+#define HEARING     20
+#define PROCESSING  30
+#define RESTARTING  40
 
-#define PREPARING 10
+
 
 
 @interface speechRecognizer : NSObject <SKRecognizerDelegate>
 
 @property SKRecognizer* recognizer;
 @property UITextView* textview;
-@property int shouldListen;
-@property int status;
+@property BOOL shouldListen;
 
 -(void) setup:(UIViewController*) vc;
--(void) startRecognitionLanguage;
--(void) stopRecognition;
--(void) cancelRecognition;
+-(void) startRecognition;
+-(void) stopRecognitionShouldBroadcastStatus:(BOOL) shouldBroadcast;;
+-(void) cancelRecognitionShouldBroadcastStatus:(BOOL) shouldBroadcast;;
 -(void) destroyRecognizer;
 -(void) setHearingLanguage:(NSString*) hLang translatingLanguage:(NSString*) tLang wantsTranslation:(BOOL) hasToTranslate;
 //-(void) translationFinishedWithResult:(NSString*)str;

@@ -24,6 +24,7 @@ class ViewController: UIViewController, settingsDelegate {
     @IBOutlet weak var activityIndicator: UIActivityIndicatorView!
     
     let audioSamplingPeriod = 0.05
+    let networkCheckPeriod = 5.0
     
     var speechRec:speechRecognizer = speechRecognizer()
     
@@ -32,10 +33,19 @@ class ViewController: UIViewController, settingsDelegate {
     
     var audioReadTimer: NSTimer?
     
+    /*
+        Having a dedicated status variable instead of using the one from the recognizer object,
+        because at the time the recognizer sets the status some things should happen,
+        such as setting the visual elements in place,
+        and that should happen before the status is seen as the new one by the view controller itself
+    */
+    var recognizerStatus:integer_t = IDLE
     
     var networkAvailable:Bool = true
     var networkUnreachableOverlay:UIView?
-    var networkCheckTimer:NSTimer?
+    var networkCheckTimer: NSTimer?
+    
+    var upsideDown:Bool = false
     
     func setTextSize() {
         mainText.font = mainText.font.fontWithSize( CGFloat(settings.getFontSize()) )
@@ -61,7 +71,7 @@ class ViewController: UIViewController, settingsDelegate {
     }
     
     func initSpeechRec() {
-        speechRec.shouldListen =  0
+        speechRec.shouldListen =  false
         speechRec.setup(self)
         speechRec.textview = self.mainText
     }
@@ -101,15 +111,6 @@ class ViewController: UIViewController, settingsDelegate {
         self.view.addSubview(networkUnreachableOverlay!)
         
         UIView.animateWithDuration(0.5, animations: {self.networkUnreachableOverlay!.alpha = 1})
-        
-        
-        networkCheckTimer = NSTimer.scheduledTimerWithTimeInterval(
-            5,
-            target: self,
-            selector: Selector("checkNetworkConnection"),
-            userInfo: nil,
-            repeats: true
-        )
     }
     
     
@@ -120,8 +121,6 @@ class ViewController: UIViewController, settingsDelegate {
             message: NSLocalizedString("NETWORK_ERROR_MESSAGE", comment: ""),
             preferredStyle: UIAlertControllerStyle.Alert
         )
-        
-        let aaa = UIApplicationOpenSettingsURLString
         
         alert.addAction(UIAlertAction(
             title: NSLocalizedString("NETWORK_ERROR_APP_SETTINGS_BUTTON", comment: ""),
@@ -143,17 +142,17 @@ class ViewController: UIViewController, settingsDelegate {
         self.presentViewController(alert, animated: true, completion: nil)
     }
     
-    func checkNetworkConnection() {
+    func checkNetworkConnection() -> Bool {
+        /*
+            Sets 'networkAvailable' to true or false, and also returns its value.
+            Triggers relevant actions regarding network availability.
+        */
+        
         let URLForNetworkCheck:CFURLRef = NSURL(string: "http://www.google.com")!
-        
-        //let URLForNetworkCheck:CFString = CFStringCreateWithCString(kCFAllocatorDefault, "http://www.google.com" , CFStringEncodings.UTF7)
-        
         var diagnostic:Unmanaged<CFNetDiagnostic> = CFNetDiagnosticCreateWithURL(
             kCFAllocatorDefault,
             URLForNetworkCheck
         )
-        
-        //let status:CFNetDiagnosticStatus = CFNetDiagnosticDiagnoseProblemInteractively(diagnostic.takeUnretainedValue())
         let status:CFNetDiagnosticStatus = CFNetDiagnosticCopyNetworkStatusPassively(diagnostic.takeUnretainedValue(), nil)
         
 
@@ -172,26 +171,48 @@ class ViewController: UIViewController, settingsDelegate {
         */
         if status.hashValue == CFNetDiagnosticStatusValues.ConnectionUp.rawValue.hashValue {
             NSLog("Network status Ok")
-            networkAvailable = true
-            if networkCheckTimer != nil {
-                networkCheckTimer!.invalidate()
-                networkCheckTimer = nil
-                networkUnreachableOverlay!.removeFromSuperview()
-                networkUnreachableOverlay = nil
+            if networkAvailable == false {
+                NSLog("Restoring service")
+                networkAvailable = true
+                if upsideDown { startDoingTheJob() /* ...again */}
+            }
+            if networkUnreachableOverlay != nil {
+                networkUnreachableOverlay!.alpha = 1
+                //UIView.animateWithDuration(0.5, animations: {self.networkUnreachableOverlay!.alpha = 0})
+                UIView.animateWithDuration(0.5,
+                    animations: {
+                        self.networkUnreachableOverlay!.alpha = 0
+                    },
+                    completion: { Bool in
+                        self.networkUnreachableOverlay!.removeFromSuperview()
+                        self.networkUnreachableOverlay = nil
+                    }
+                )
             }
         }
         else {
             NSLog("Network error: %@", status.description)
             if networkAvailable { showNoNetworkAlert() }
             networkAvailable = false
+            stopDoingTheJob()
         }
         
+        return networkAvailable
     }
     
     override func viewDidAppear(animated: Bool) {
         super.viewDidAppear(animated)
         
-        checkNetworkConnection()
+        /*checkNetworkConnection()*/
+        if networkCheckTimer == nil {
+            networkCheckTimer = NSTimer.scheduledTimerWithTimeInterval(
+                networkCheckPeriod,
+                target: self,
+                selector: Selector("periodicNetworkCheck"),
+                userInfo: nil,
+                repeats: true)
+        }
+        
     }
     
     override func viewDidLoad() {
@@ -211,30 +232,39 @@ class ViewController: UIViewController, settingsDelegate {
         initSpeechRec()
     }
     
-    func setRecognizerStatus(status:integer_t)
+    
+    
+    func setRecognizerStatusInMainVC(status:integer_t)
     {
+        NSLog("Recognizer status: %d", status)
         
-        if !continueRecognizing { return }
-        
-        switch status {
-        case IDLE:
-            activityIndicator.stopAnimating()
-            hearButton.hidden = false
-        case HEARING:
-            activityIndicator.stopAnimating()
-            waveView.hidden = false
-            hearButton.hidden = true
-        case PROCESSING:
-            fallthrough
-        case PREPARING:
-            activityIndicator.startAnimating()
-            waveView.hidden = true
-            hearButton.hidden = true
-        default:
-            activityIndicator.stopAnimating()
-            waveView.hidden = true
-            hearButton.hidden = false
+        if !continueRecognizing {
+            recognizerStatus = IDLE
+            return
         }
+        switch status {
+            case IDLE:
+                activityIndicator.stopAnimating()
+                hearButton.hidden = false
+                waveView.hidden = true
+            case HEARING:
+                activityIndicator.stopAnimating()
+                hearButton.hidden = true
+                waveView.hidden = false
+            case PROCESSING:
+                fallthrough
+            case RESTARTING:
+                fallthrough
+            case PREPARING:
+                activityIndicator.startAnimating()
+                waveView.hidden = true
+                hearButton.hidden = true
+            default:
+                activityIndicator.stopAnimating()
+                waveView.hidden = true
+                hearButton.hidden = false
+        }
+        recognizerStatus = status
     }
 
     
@@ -262,9 +292,9 @@ class ViewController: UIViewController, settingsDelegate {
             translatingLanguage: settings.language.getTranslatingValue(),
             wantsTranslation: settings.wantsTranslation.boolValue)
         
-        while(continueRecognizing) {
-            if(speechRec.status == IDLE && wantsAnotherRecognition == true) {
-                speechRec.startRecognitionLanguage()
+        while(continueRecognizing && networkAvailable) {
+            if( (recognizerStatus == IDLE || recognizerStatus == RESTARTING) && wantsAnotherRecognition) {
+                speechRec.startRecognition()
             }
         }
         NSLog("End periodic recognition")
@@ -272,10 +302,61 @@ class ViewController: UIViewController, settingsDelegate {
     
 
     func periodicAudioVolumeFeedback() {
-        if (speechRec.status == HEARING){
+        if (recognizerStatus == HEARING){
             waveView.setAudioLevel( CGFloat(speechRec.getAudioLevel()) )
             waveView.setNeedsDisplay()
         }
+    }
+    
+    func periodicNetworkCheck() {
+        if  !checkNetworkConnection() {
+            activityIndicator.stopAnimating()
+            waveView.hidden = true
+            hearButton.hidden = true
+            
+            wantsAnotherRecognition = false
+            speechRec.cancelRecognitionShouldBroadcastStatus(false)
+            continueRecognizing = false
+            
+            recognizerStatus = IDLE
+        }
+    }
+    
+    func startDoingTheJob() {
+        activityIndicator.startAnimating()
+        
+        continueRecognizing = true
+        wantsAnotherRecognition = true
+        
+        let recogThread = NSThread(target: self, selector: "periodicRecognition", object: nil)
+        recogThread.start()
+        
+        if audioReadTimer == nil {
+            audioReadTimer = NSTimer.scheduledTimerWithTimeInterval(
+                audioSamplingPeriod,
+                target: self,
+                selector: Selector("periodicAudioVolumeFeedback"),
+                userInfo: nil,
+                repeats: true)
+        }
+
+        if networkCheckTimer == nil {
+            networkCheckTimer = NSTimer.scheduledTimerWithTimeInterval(
+                networkCheckPeriod,
+                target: self,
+                selector: Selector("periodicNetworkCheck"),
+                userInfo: nil,
+                repeats: true)
+        }
+    }
+    
+    func stopDoingTheJob() {
+        
+        continueRecognizing = false
+        speechRec.cancelRecognitionShouldBroadcastStatus(true)
+        
+        audioReadTimer?.invalidate()
+        audioReadTimer = nil
     }
     
     override func didRotateFromInterfaceOrientation(fromInterfaceOrientation: UIInterfaceOrientation) {
@@ -283,39 +364,32 @@ class ViewController: UIViewController, settingsDelegate {
         //if fromInterfaceOrientation.toRaw() == UIInterfaceOrientation.Portrait.toRaw() { /* Xcode 6.0 */
             /* was portrait, now upside down */
             NSLog("Orientation from normal to upside down")
-            mainText.text = ""
-            continueRecognizing = true
-            wantsAnotherRecognition = true
-            prefButton.hidden = true
+            upsideDown = true
             
-            /* TODO : hearButton and waveView need to play nicely yet */
+            mainText.text = ""
+            prefButton.hidden = true
             hearButton.hidden = true
             waveView.hidden = true
-            activityIndicator.startAnimating()
             
-            let recogThread = NSThread(target: self, selector: "periodicRecognition", object: nil)
-            recogThread.start()
-            audioReadTimer = NSTimer.scheduledTimerWithTimeInterval(audioSamplingPeriod,
-                target: self,
-                selector: Selector("periodicAudioVolumeFeedback"),
-                userInfo: nil,
-                repeats: true)
+            if checkNetworkConnection() {
+                startDoingTheJob()
+            }
         }
         else {
             /* back to normal */
+            NSLog("Orientation again normal")
+            upsideDown = false
+            
             prefButton.hidden = false
             hearButton.hidden = true
             waveView.hidden = true
             activityIndicator.stopAnimating()
             
-            continueRecognizing = false
-            speechRec.cancelRecognition()
+            /*networkCheckTimer?.invalidate()
+            networkCheckTimer = nil*/
             
-            audioReadTimer?.invalidate()
-            
+            stopDoingTheJob()
             mainText.text = NSLocalizedString("TURN_UPSIDE_DOWN", comment: "")
-            //mainText.sizeToFit()
-            NSLog("Orientation again normal")
         }
     }
     
@@ -343,7 +417,7 @@ class ViewController: UIViewController, settingsDelegate {
         wantsAnotherRecognition = !wantsAnotherRecognition
         if !wantsAnotherRecognition {
             //activityIndicator.stopAnimating()
-            speechRec.stopRecognition()
+            speechRec.stopRecognitionShouldBroadcastStatus(true)
             hearButton.hidden = true
             waveView.hidden = true
         }

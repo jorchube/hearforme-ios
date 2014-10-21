@@ -19,7 +19,6 @@ const unsigned char SpeechKitApplicationKey[] = PRIVATE_SpeechKitApplicationKey;
 @synthesize recognizer;
 @synthesize textview;
 @synthesize shouldListen;
-@synthesize status;
 
 const NSString* nuanceID = PRIVATE_nuanceID;
 const NSString* nuanceHost = @"sslsandbox.nmdp.nuancemobility.net";
@@ -29,6 +28,7 @@ NSString* hearingLanguage;
 NSString* translatingLanguage;
 bool    wantsTranslation;
 bool    waitForTranslation;
+integer_t    status;
 
 ViewController* vc;
 
@@ -55,8 +55,8 @@ ViewController* vc;
 
 -(void) recognizeNowWithStopType:(SKEndOfSpeechDetection) StopDetectionType
 {
+    NSLog(@"Starting recognition");
     [self setRecognizerStatus:PREPARING];
-    NSLog(@"Recognizing");
     if (recognizer) recognizer = nil;
     recognizer = [[SKRecognizer alloc] initWithType:SKDictationRecognizerType
                                           detection:StopDetectionType
@@ -111,29 +111,35 @@ ViewController* vc;
     }
     NSLog(@"Heard string: %@", [textview text]);
     r = nil;
-    [self setRecognizerStatus:IDLE];
+    
+    if (shouldListen) {
+        [self setRecognizerStatus:RESTARTING];
+    }
+    else {
+        [self setRecognizerStatus:IDLE];
+    }
 }
 
 
--(void) startRecognitionLanguage
+-(void) startRecognition
 {
-    shouldListen = 1;
-    while (status == IDLE)
+    shouldListen = true;
+    while (status == IDLE || status == RESTARTING)
         [self recognizeNowWithStopType:SKLongEndOfSpeechDetection];
 }
 
--(void) stopRecognition
+-(void) stopRecognitionShouldBroadcastStatus:(BOOL)shouldBroadcast
 {
-    shouldListen = 0;
+    shouldListen = false;
     [recognizer stopRecording];
-    [self setRecognizerStatus:PROCESSING];
+    if (shouldBroadcast) [self setRecognizerStatus:PROCESSING];
 }
 
--(void) cancelRecognition
+-(void) cancelRecognitionShouldBroadcastStatus:(BOOL) shouldBroadcast;
 {
     shouldListen = 0;
     [recognizer cancel];
-    [self setRecognizerStatus:IDLE];
+    if (shouldBroadcast) [self setRecognizerStatus:IDLE];
 }
 
 -(void) destroyRecognizer
@@ -160,7 +166,7 @@ ViewController* vc;
 
 -(void) broadcastStatus
 {
-    [vc setRecognizerStatus:status];
+    [vc setRecognizerStatusInMainVC:status];
 }
 
 -(void) setRecognizerStatus: (int) newStatus
