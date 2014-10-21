@@ -20,6 +20,14 @@
 
 "NO_TRANSLATION" = "There is no translation available";
 
+
+
+"NETWORK_ERROR_TITLE" = "Network Unreachable";
+"NETWORK_ERROR_MESSAGE" = "\nIt seems that there is a connectivity problem: Please check your network configuration.\n\nHear For Me needs internet access in order to convert the speech to text and, if enabled, in order to offer a translated result.";
+
+"NETWORK_ERROR_APP_SETTINGS_BUTTON" = "Check App Permissions";
+"NETWORK_ERROR_OK_BUTTON" = "OK";
+
 /*
     Nuance languages
  */

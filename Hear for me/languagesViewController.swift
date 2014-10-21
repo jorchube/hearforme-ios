@@ -92,7 +92,7 @@ class languagesViewController: UIViewController, languagePicker {
     }
 
     @IBAction func backButtonTouched(sender: AnyObject) {
-        self.dismissViewControllerAnimated(1, completion: nil)
+        self.dismissViewControllerAnimated(true, completion: nil)
     }
     
     @IBAction func translateSwitchChanged(sender: AnyObject) {

@@ -102,7 +102,7 @@ class PreferencesViewController: UIViewController, languagesDelegate {
         if delegate != nil {
             delegate?.useNewSettings()
         }
-        self.dismissViewControllerAnimated(1, completion: nil)
+        self.dismissViewControllerAnimated(true, completion: nil)
     }
     
     @IBAction func fontValueChanged(sender: AnyObject) {

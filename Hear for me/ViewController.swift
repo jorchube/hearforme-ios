@@ -32,6 +32,11 @@ class ViewController: UIViewController, settingsDelegate {
     
     var audioReadTimer: NSTimer?
     
+    
+    var networkAvailable:Bool = true
+    var networkUnreachableOverlay:UIView?
+    var networkCheckTimer:NSTimer?
+    
     func setTextSize() {
         mainText.font = mainText.font.fontWithSize( CGFloat(settings.getFontSize()) )
     }
@@ -60,7 +65,134 @@ class ViewController: UIViewController, settingsDelegate {
         speechRec.setup(self)
         speechRec.textview = self.mainText
     }
+    
+    func transitionToNetworkUnreachableOverlay()
+    {
+        let frame: CGRect = UIScreen.mainScreen().bounds
+        networkUnreachableOverlay = UIView(frame: frame)
+        let message: UITextView = UITextView(frame: CGRect(
+            x: frame.width * 1/10,
+            y: frame.height * 1/10,
+            width: frame.width * 8/10,
+            height: frame.height * 8/10)
+        )
+        
+        message.text = NSLocalizedString("NETWORK_ERROR_MESSAGE", comment: "")
+        message.textColor = UIColor.lightGrayColor()
+        message.font = message.font.fontWithSize(18)
+        message.backgroundColor = UIColor.clearColor()
+        message.textAlignment = NSTextAlignment.Center
+        message.editable = false
+        
+        var blur = UIBlurEffect( style: UIBlurEffectStyle.Dark)
+        var blurView = UIVisualEffectView(effect: blur)
+        blurView.frame = frame
+        networkUnreachableOverlay!.addSubview(blurView)
+        
+        var vibrancy = UIVibrancyEffect(forBlurEffect: blur)
+        var vibrancyView = UIVisualEffectView(effect: vibrancy)
+        vibrancyView.frame = frame
+        blurView.addSubview(vibrancyView)
+        
+        vibrancyView.addSubview(message)
+        
+        
+        networkUnreachableOverlay!.alpha = 0
+        self.view.addSubview(networkUnreachableOverlay!)
+        
+        UIView.animateWithDuration(0.5, animations: {self.networkUnreachableOverlay!.alpha = 1})
+        
+        
+        networkCheckTimer = NSTimer.scheduledTimerWithTimeInterval(
+            5,
+            target: self,
+            selector: Selector("checkNetworkConnection"),
+            userInfo: nil,
+            repeats: true
+        )
+    }
+    
+    
+    
+    func showNoNetworkAlert() {
+        let alert: UIAlertController = UIAlertController(
+            title: NSLocalizedString("NETWORK_ERROR_TITLE", comment: ""),
+            message: NSLocalizedString("NETWORK_ERROR_MESSAGE", comment: ""),
+            preferredStyle: UIAlertControllerStyle.Alert
+        )
+        
+        let aaa = UIApplicationOpenSettingsURLString
+        
+        alert.addAction(UIAlertAction(
+            title: NSLocalizedString("NETWORK_ERROR_APP_SETTINGS_BUTTON", comment: ""),
+            style: UIAlertActionStyle.Default,
+            handler: { (alert:UIAlertAction!) in
+                UIApplication.sharedApplication().openURL(
+                    NSURL(string: UIApplicationOpenSettingsURLString)! )
+                self.transitionToNetworkUnreachableOverlay()  }
+            )
+        )
+        
+        alert.addAction(UIAlertAction(
+            title: NSLocalizedString("NETWORK_ERROR_OK_BUTTON", comment: ""),
+            style: UIAlertActionStyle.Default,
+            handler: { (alert:UIAlertAction!) in self.transitionToNetworkUnreachableOverlay()  }
+            )
+        )
+        
+        self.presentViewController(alert, animated: true, completion: nil)
+    }
+    
+    func checkNetworkConnection() {
+        let URLForNetworkCheck:CFURLRef = NSURL(string: "http://www.google.com")!
+        
+        //let URLForNetworkCheck:CFString = CFStringCreateWithCString(kCFAllocatorDefault, "http://www.google.com" , CFStringEncodings.UTF7)
+        
+        var diagnostic:Unmanaged<CFNetDiagnostic> = CFNetDiagnosticCreateWithURL(
+            kCFAllocatorDefault,
+            URLForNetworkCheck
+        )
+        
+        //let status:CFNetDiagnosticStatus = CFNetDiagnosticDiagnoseProblemInteractively(diagnostic.takeUnretainedValue())
+        let status:CFNetDiagnosticStatus = CFNetDiagnosticCopyNetworkStatusPassively(diagnostic.takeUnretainedValue(), nil)
+        
 
+        /*
+            I know, all this shitty rawValue and hashValue dance is ugly,
+            but I've not found the supposed correct way (tm).
+            Obj-C examples do what here is done, but without the raw-hash thingy,
+            which seems the only way in Swift. And since Swift is new there is no
+            wild code to hunt...
+        
+            (I coould have left ..ConnectionUp.rawValue,
+            but at least using hashValue in both sides seems more... I don't know, symmetric?)
+        
+            Future me, are you mad at past you?
+        
+        */
+        if status.hashValue == CFNetDiagnosticStatusValues.ConnectionUp.rawValue.hashValue {
+            NSLog("Network status Ok")
+            networkAvailable = true
+            if networkCheckTimer != nil {
+                networkCheckTimer!.invalidate()
+                networkCheckTimer = nil
+                networkUnreachableOverlay!.removeFromSuperview()
+                networkUnreachableOverlay = nil
+            }
+        }
+        else {
+            NSLog("Network error: %@", status.description)
+            if networkAvailable { showNoNetworkAlert() }
+            networkAvailable = false
+        }
+        
+    }
+    
+    override func viewDidAppear(animated: Bool) {
+        super.viewDidAppear(animated)
+        
+        checkNetworkConnection()
+    }
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -174,6 +306,7 @@ class ViewController: UIViewController, settingsDelegate {
             prefButton.hidden = false
             hearButton.hidden = true
             waveView.hidden = true
+            activityIndicator.stopAnimating()
             
             continueRecognizing = false
             speechRec.cancelRecognition()
