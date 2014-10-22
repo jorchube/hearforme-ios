@@ -33,6 +33,9 @@ class ViewController: UIViewController, settingsDelegate {
     
     var audioReadTimer: NSTimer?
     
+    let networkCheckURL1: String = "http://www.google.com"
+    let networkCheckURL2: String = "http://www.amazon.co.uk"
+    
     /*
         Having a dedicated status variable instead of using the one from the recognizer object,
         because at the time the recognizer sets the status some things should happen,
@@ -84,15 +87,25 @@ class ViewController: UIViewController, settingsDelegate {
             x: frame.width * 1/10,
             y: frame.height * 1/10,
             width: frame.width * 8/10,
-            height: frame.height * 8/10)
-        )
+            height: frame.height * 8/10))
         
         message.text = NSLocalizedString("NETWORK_ERROR_MESSAGE", comment: "")
         message.textColor = UIColor.lightGrayColor()
-        message.font = message.font.fontWithSize(18)
+        message.font = message.font.fontWithSize(16)
         message.backgroundColor = UIColor.clearColor()
         message.textAlignment = NSTextAlignment.Center
         message.editable = false
+        
+        var image = UIImage(named: "sad_cloud.png")
+        
+        let imageView: UIImageView = UIImageView(image: image)
+        imageView.frame = CGRect(
+            x: frame.width * 3/10,
+            y: frame.height * 5/10,
+            width: frame.width * 4/10,
+            height: frame.height * 4/10)
+        imageView.contentMode = UIViewContentMode.ScaleAspectFit
+        imageView.alpha = 0.8
         
         var blur = UIBlurEffect( style: UIBlurEffectStyle.Dark)
         var blurView = UIVisualEffectView(effect: blur)
@@ -105,6 +118,7 @@ class ViewController: UIViewController, settingsDelegate {
         blurView.addSubview(vibrancyView)
         
         vibrancyView.addSubview(message)
+        vibrancyView.addSubview(imageView)
         
         
         networkUnreachableOverlay!.alpha = 0
@@ -119,8 +133,7 @@ class ViewController: UIViewController, settingsDelegate {
         let alert: UIAlertController = UIAlertController(
             title: NSLocalizedString("NETWORK_ERROR_TITLE", comment: ""),
             message: NSLocalizedString("NETWORK_ERROR_MESSAGE", comment: ""),
-            preferredStyle: UIAlertControllerStyle.Alert
-        )
+            preferredStyle: UIAlertControllerStyle.Alert)
         
         alert.addAction(UIAlertAction(
             title: NSLocalizedString("NETWORK_ERROR_APP_SETTINGS_BUTTON", comment: ""),
@@ -128,18 +141,63 @@ class ViewController: UIViewController, settingsDelegate {
             handler: { (alert:UIAlertAction!) in
                 UIApplication.sharedApplication().openURL(
                     NSURL(string: UIApplicationOpenSettingsURLString)! )
-                self.transitionToNetworkUnreachableOverlay()  }
-            )
-        )
+                self.transitionToNetworkUnreachableOverlay() }) )
         
         alert.addAction(UIAlertAction(
             title: NSLocalizedString("NETWORK_ERROR_OK_BUTTON", comment: ""),
             style: UIAlertActionStyle.Default,
-            handler: { (alert:UIAlertAction!) in self.transitionToNetworkUnreachableOverlay()  }
-            )
-        )
+            handler: { (alert:UIAlertAction!) in self.transitionToNetworkUnreachableOverlay() }) )
         
         self.presentViewController(alert, animated: true, completion: nil)
+    }
+    
+    
+    func networkCheckSuccessful() {
+        if networkAvailable == false {
+            NSLog("Restoring service")
+            networkAvailable = true
+            if upsideDown { startDoingTheJob() /* ...again */}
+        }
+        if networkUnreachableOverlay != nil {
+            networkUnreachableOverlay!.alpha = 1
+            //UIView.animateWithDuration(0.5, animations: {self.networkUnreachableOverlay!.alpha = 0})
+            UIView.animateWithDuration(0.5,
+                animations: {
+                    self.networkUnreachableOverlay!.alpha = 0
+                },
+                completion: { Bool in
+                    self.networkUnreachableOverlay!.removeFromSuperview()
+                    self.networkUnreachableOverlay = nil} )
+        }
+    }
+    
+    func networkCheckFailed() {
+        if networkAvailable { showNoNetworkAlert() }
+        networkAvailable = false
+        stopDoingTheJob()
+    }
+    
+    func checkNetworkWithURLFromString(str_url: String ) -> Bool {
+        let URLForNetworkCheck:CFURLRef = NSURL(string: networkCheckURL1)!
+        var diagnostic:Unmanaged<CFNetDiagnostic> = CFNetDiagnosticCreateWithURL(
+            kCFAllocatorDefault,
+            URLForNetworkCheck)
+        let status:CFNetDiagnosticStatus = CFNetDiagnosticCopyNetworkStatusPassively(diagnostic.takeUnretainedValue(), nil)
+        
+        /*
+        I know, all this shitty rawValue and hashValue dance is ugly,
+        but I've not found the supposed correct way (tm).
+        Obj-C examples do what here is done, but without the raw-hash thingy,
+        which seems the only way in Swift. And since Swift is new there is no
+        wild code to hunt...
+        
+        (I coould have left ..ConnectionUp.rawValue,
+        but at least using hashValue in both sides seems more... I don't know, symmetric?)
+        
+        Future me, are you mad at past you?
+        
+        */
+        return status.hashValue == CFNetDiagnosticStatusValues.ConnectionUp.rawValue.hashValue
     }
     
     func checkNetworkConnection() -> Bool {
@@ -147,54 +205,20 @@ class ViewController: UIViewController, settingsDelegate {
             Sets 'networkAvailable' to true or false, and also returns its value.
             Triggers relevant actions regarding network availability.
         */
-        
-        let URLForNetworkCheck:CFURLRef = NSURL(string: "http://www.google.com")!
-        var diagnostic:Unmanaged<CFNetDiagnostic> = CFNetDiagnosticCreateWithURL(
-            kCFAllocatorDefault,
-            URLForNetworkCheck
-        )
-        let status:CFNetDiagnosticStatus = CFNetDiagnosticCopyNetworkStatusPassively(diagnostic.takeUnretainedValue(), nil)
-        
 
-        /*
-            I know, all this shitty rawValue and hashValue dance is ugly,
-            but I've not found the supposed correct way (tm).
-            Obj-C examples do what here is done, but without the raw-hash thingy,
-            which seems the only way in Swift. And since Swift is new there is no
-            wild code to hunt...
-        
-            (I coould have left ..ConnectionUp.rawValue,
-            but at least using hashValue in both sides seems more... I don't know, symmetric?)
-        
-            Future me, are you mad at past you?
-        
-        */
-        if status.hashValue == CFNetDiagnosticStatusValues.ConnectionUp.rawValue.hashValue {
+        if checkNetworkWithURLFromString(networkCheckURL1) {
             NSLog("Network status Ok")
-            if networkAvailable == false {
-                NSLog("Restoring service")
-                networkAvailable = true
-                if upsideDown { startDoingTheJob() /* ...again */}
-            }
-            if networkUnreachableOverlay != nil {
-                networkUnreachableOverlay!.alpha = 1
-                //UIView.animateWithDuration(0.5, animations: {self.networkUnreachableOverlay!.alpha = 0})
-                UIView.animateWithDuration(0.5,
-                    animations: {
-                        self.networkUnreachableOverlay!.alpha = 0
-                    },
-                    completion: { Bool in
-                        self.networkUnreachableOverlay!.removeFromSuperview()
-                        self.networkUnreachableOverlay = nil
-                    }
-                )
-            }
+            networkCheckSuccessful()
         }
         else {
-            NSLog("Network error: %@", status.description)
-            if networkAvailable { showNoNetworkAlert() }
-            networkAvailable = false
-            stopDoingTheJob()
+            /* Double check */
+            if checkNetworkWithURLFromString(networkCheckURL2) {
+                networkCheckSuccessful()
+            }
+            else {
+                NSLog("Network failed")
+                networkCheckFailed()
+            }
         }
         
         return networkAvailable
@@ -255,16 +279,24 @@ class ViewController: UIViewController, settingsDelegate {
                 fallthrough
             case RESTARTING:
                 fallthrough
+            case SETUP:
+                fallthrough
             case PREPARING:
                 activityIndicator.startAnimating()
                 waveView.hidden = true
                 hearButton.hidden = true
+            case ERROR:
+                activityIndicator.startAnimating()
+                hearButton.hidden = true
+                waveView.hidden = true
             default:
                 activityIndicator.stopAnimating()
                 waveView.hidden = true
                 hearButton.hidden = false
         }
         recognizerStatus = status
+        
+        if recognizerStatus == ERROR { checkNetworkConnection() }
     }
 
     
@@ -324,6 +356,7 @@ class ViewController: UIViewController, settingsDelegate {
     
     func startDoingTheJob() {
         activityIndicator.startAnimating()
+        //initSpeechRec()
         
         continueRecognizing = true
         wantsAnotherRecognition = true
@@ -351,9 +384,9 @@ class ViewController: UIViewController, settingsDelegate {
     }
     
     func stopDoingTheJob() {
-        
         continueRecognizing = false
         speechRec.cancelRecognitionShouldBroadcastStatus(true)
+        //speechRec.destroyRecognizer()
         
         audioReadTimer?.invalidate()
         audioReadTimer = nil

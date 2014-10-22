@@ -33,6 +33,12 @@ class languagesViewController: UIViewController, languagePicker {
         hearLangLabel.textColor = settings.theme.fgColor()
         transLangLabel.textColor = settings.theme.fgColor()
         
+        fromButton.tintColor = settings.theme.getTintColot()
+        toButton.tintColor = settings.theme.getTintColot()
+        translateSwitch.tintColor = settings.theme.getTintColot()
+        translateSwitch.onTintColor = settings.theme.getTintColot()
+        backButton.tintColor = settings.theme.getTintColot()
+        
         fromButton.setTitle(settings.language.getHearingString(), forState: UIControlState.allZeros)
         fromButton.sizeToFit()
         toButton.setTitle(settings.language.getTranslatingString(), forState: UIControlState.allZeros)

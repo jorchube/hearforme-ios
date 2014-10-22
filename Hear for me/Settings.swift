@@ -25,6 +25,13 @@ public struct Theme{
         return UIColor.darkGrayColor()
     }
     
+    func getTintColot() -> UIColor {
+        if self.current == Theme.name.lightOnDark {
+            return UIColor(red: 131/255.0, green: 127/255.0, blue: 166/255.0, alpha: 1)
+        }
+        return UIColor(red: 206/255.0, green: 134/255.0, blue: 49/255.0, alpha: 1)
+    }
+    
     func bgColor() -> UIColor {
         if self.current == Theme.name.lightOnDark {
             return UIColor(red: 4/255.0, green: 43/255.0, blue: 53/255.0, alpha: 1)
@@ -129,10 +136,10 @@ class Settings: NSObject {
 
     let prefKeys:PreferenceKeys = PreferenceKeys()
     
-    private let _minFontSize:Double = 16
-    private let _maxFontSize:Double = 56
+    private let _minFontSize:Float = 16
+    private let _maxFontSize:Float = 56
     
-    private var _fontSize:Double = 20
+    private var _fontSize:Float = 20
     
     var theme:Theme = Theme()
     
@@ -157,8 +164,8 @@ class Settings: NSObject {
         var _defaults: NSUserDefaults = NSUserDefaults.standardUserDefaults()
         
         NSLog("load font size")
-        if (_defaults.doubleForKey(prefKeys.fontSize) == 0) { self._fontSize = 20 }
-        else { self._fontSize = _defaults.doubleForKey(prefKeys.fontSize) }
+        if (_defaults.floatForKey(prefKeys.fontSize) == 0) { self._fontSize = 20 }
+        else { self._fontSize = _defaults.floatForKey(prefKeys.fontSize) }
         NSLog("load wants translation")
         self.wantsTranslation = _defaults.boolForKey(prefKeys.wantsTranslation)
         NSLog("load theme")
@@ -199,7 +206,7 @@ class Settings: NSObject {
     func saveSettings() {
         var _defaults:NSUserDefaults = NSUserDefaults.standardUserDefaults()
         
-        _defaults.setDouble(self._fontSize,
+        _defaults.setFloat(self._fontSize,
             forKey: prefKeys.fontSize)
         
         _defaults.setBool(self.wantsTranslation,
@@ -235,10 +242,10 @@ class Settings: NSObject {
     func getTheme() -> Theme.name{ return theme.getCurrent() }
     func setTheme(newTheme: Theme.name) { theme.setCurrent(newTheme) }
     
-    func getMinFontSize() -> Double {return _minFontSize}
-    func getMaxFontSize() -> Double {return _maxFontSize}
-    func getFontSize() -> Double {return _fontSize}
-    func setFontSize(newSize: Double) {
+    func getMinFontSize() -> Float {return _minFontSize}
+    func getMaxFontSize() -> Float {return _maxFontSize}
+    func getFontSize() -> Float {return _fontSize}
+    func setFontSize(newSize: Float) {
         if newSize < _minFontSize || newSize > _maxFontSize { return }
         _fontSize = newSize
     }

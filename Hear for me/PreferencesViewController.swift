@@ -16,10 +16,14 @@ class PreferencesViewController: UIViewController, languagesDelegate {
     
     @IBOutlet weak var themeSwitch: UISegmentedControl!
     
-    @IBOutlet weak var fontStepper: UIStepper!
+    @IBOutlet weak var fontSlider: UISlider!
     @IBOutlet weak var previewText: UITextView!
     @IBOutlet weak var sizeTextLabel: UILabel!
     @IBOutlet weak var languageSettingsButton: UIButton!
+    
+    @IBOutlet weak var smallA: UILabel!
+    @IBOutlet weak var bigA: UILabel!
+    
     
     let settings:Settings = Settings.getSettings()
     
@@ -28,18 +32,25 @@ class PreferencesViewController: UIViewController, languagesDelegate {
     
     
     func setTextSize() {
-        previewText.font = previewText.font.fontWithSize( CGFloat(settings.getFontSize()) )
+        previewText.font = previewText.font.fontWithSize( CGFloat(settings.getFontSize()))
     }
     func setColors() {
         previewText.textColor = settings.theme.fgColor()
         sizeTextLabel.textColor = settings.theme.fgColor()
         self.view.backgroundColor = settings.theme.bgColor()
+        smallA.textColor = settings.theme.fgColor()
+        bigA.textColor = settings.theme.fgColor()
+        
+        backButton.tintColor = settings.theme.getTintColot()
+        fontSlider.tintColor = settings.theme.getTintColot()
+        themeSwitch.tintColor = settings.theme.getTintColot()
+        languageSettingsButton.tintColor = settings.theme.getTintColot()
     }
     
     func updateUI(textChanged textC:Bool, themeChanged themeC: Bool) {
         if textC {
-            previewText.sizeToFit()
             setTextSize()
+            //previewText.sizeToFit()
         }
         if themeC { setColors() }
         
@@ -69,9 +80,9 @@ class PreferencesViewController: UIViewController, languagesDelegate {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        fontStepper.minimumValue = settings.getMinFontSize()
-        fontStepper.maximumValue = settings.getMaxFontSize()
-        fontStepper.value = settings.getFontSize()
+        fontSlider.minimumValue = settings.getMinFontSize()
+        fontSlider.maximumValue = settings.getMaxFontSize()
+        fontSlider.value = settings.getFontSize()
         
         localize()
         
@@ -105,8 +116,8 @@ class PreferencesViewController: UIViewController, languagesDelegate {
         self.dismissViewControllerAnimated(true, completion: nil)
     }
     
-    @IBAction func fontValueChanged(sender: AnyObject) {
-        settings.setFontSize(fontStepper.value)
+    @IBAction func fontSizeChanged(sender: AnyObject) {
+        settings.setFontSize(fontSlider.value)
         updateUI(textChanged: true, themeChanged: false)
     }
     

@@ -43,6 +43,7 @@ ViewController* vc;
 
 -(void) setup: (ViewController *) sender
 {
+    //[self setRecognizerStatus:SETUP];
     NSLog(@"Setting up");
     vc = sender;
     [SpeechKit setupWithID:(NSString*)nuanceID
@@ -82,7 +83,12 @@ ViewController* vc;
 {
     NSLog(@"Recognition error: %@", error);
     recognizer = nil;
-    [self setRecognizerStatus:IDLE];
+    if (error.code == SKCancelledError) {
+        [self setRecognizerStatus:IDLE];
+    }
+    else {
+        [self setRecognizerStatus:ERROR];
+    }
 }
 
 

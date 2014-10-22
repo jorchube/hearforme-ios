@@ -15,11 +15,15 @@
 #import "PrivateKeys.h"
 
 
-#define IDLE        00
-#define PREPARING   10
-#define HEARING     20
-#define PROCESSING  30
-#define RESTARTING  40
+#define SETUP       00
+
+#define IDLE        10
+#define PREPARING   20
+#define HEARING     30
+#define PROCESSING  40
+#define RESTARTING  50
+
+#define ERROR       99
 
 
 

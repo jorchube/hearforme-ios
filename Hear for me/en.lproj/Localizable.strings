@@ -8,7 +8,10 @@
 
 "TURN_UPSIDE_DOWN" = "Turn your phone upside down to start listening";
 
-"PREVIEW" = "This is a preview text in order to help you tune the theme and the font size the best for you. Thank you for using our app, we hope you find it useful. And please, consider donating to our project if you think we deserve it.";
+/*"PREVIEW" = "This is a preview text in order to help you tune the theme and the font size the best for you. Thank you for using our app, we hope you find it useful. And please, consider donating to our project if you think we deserve it.";
+*/
+
+"PREVIEW" = "This is a preview text";
 
 "SIZE" = "Text size:";
 
