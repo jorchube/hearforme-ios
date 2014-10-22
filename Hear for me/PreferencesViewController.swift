@@ -98,6 +98,9 @@ class PreferencesViewController: UIViewController, languagePicker {
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        hearFromLabel.sizeToFit()
+        translateToLabel.sizeToFit()
+        
         fontSlider.minimumValue = settings.getMinFontSize()
         fontSlider.maximumValue = settings.getMaxFontSize()
         fontSlider.value = settings.getFontSize()
