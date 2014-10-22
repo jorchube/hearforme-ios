@@ -253,6 +253,7 @@ class ViewController: UIViewController, settingsDelegate {
         waveView.hidden = true
         activityIndicator.hidesWhenStopped = true
         
+        
         initSpeechRec()
     }
     

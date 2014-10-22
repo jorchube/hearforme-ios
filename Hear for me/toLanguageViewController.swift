@@ -13,9 +13,11 @@ class toLanguageViewController: UIViewController, UIPickerViewDelegate, UIPicker
 
     @IBOutlet weak var okButton: UIButton!
     @IBOutlet weak var langPicker: UIPickerView!
+    @IBOutlet weak var translationLabel: UILabel!
+    @IBOutlet weak var translationSwitch: UISwitch!
     
     let settings:Settings = Settings.getSettings()
-    let blurHeight:CGFloat = 265 /* TODO : Fix this shit */
+    let blurHeight:CGFloat = 315 /* TODO : Fix this shit */
     
     var languagePickerDelegate:languagePicker?
     
@@ -28,6 +30,17 @@ class toLanguageViewController: UIViewController, UIPickerViewDelegate, UIPicker
         langPicker.dataSource = self
         
         okButton.tintColor = settings.theme.getTintColot()
+        translationSwitch.tintColor = settings.theme.getTintColot()
+        translationSwitch.onTintColor = settings.theme.getTintColot()
+        
+        if !settings.language.hearingIsTranslatable() {
+            translationSwitch.on = false
+            translationSwitch.enabled = false
+        }
+        else {
+            translationSwitch.enabled = true
+            translationSwitch.on = settings.wantsTranslation
+        }
         
         var blur = UIBlurEffect( style: UIBlurEffectStyle.ExtraLight)
         var blurView = UIVisualEffectView(effect: blur)
@@ -47,6 +60,8 @@ class toLanguageViewController: UIViewController, UIPickerViewDelegate, UIPicker
         
         vibrancyView.addSubview(okButton)
         vibrancyView.addSubview(langPicker)
+        vibrancyView.addSubview(translationSwitch)
+        vibrancyView.addSubview(translationLabel)
         
         
         langPicker.selectRow(settings.language.translatingIndex, inComponent: 0, animated: false)
@@ -88,6 +103,10 @@ class toLanguageViewController: UIViewController, UIPickerViewDelegate, UIPicker
     }
     func numberOfComponentsInPickerView(pickerView: UIPickerView) -> Int {
         return 1
+    }
+    
+    @IBAction func translationSwitchChanged(sender: AnyObject) {
+        settings.wantsTranslation = translationSwitch.on
     }
     
     @IBAction func swipeRight(sender: UISwipeGestureRecognizer) {

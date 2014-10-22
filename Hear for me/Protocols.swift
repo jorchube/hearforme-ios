@@ -10,10 +10,6 @@ protocol settingsDelegate {
     func useNewSettings()
 }
 
-protocol languagesDelegate {
-    func setLanguagePreferences()
-}
-
 protocol languagePicker {
     func setSelectedLanguage()
 }

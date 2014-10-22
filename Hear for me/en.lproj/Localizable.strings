@@ -21,7 +21,8 @@
 "LIGHT" = "Light theme";
 "DARK" = "Dark theme";
 
-"NO_TRANSLATION" = "There is no translation available";
+"NO_TRANSLATION" = "Not available";
+"NO_WANT_TRANSLATION" = "None";
 
 
 
