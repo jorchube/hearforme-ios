@@ -23,6 +23,9 @@ class ViewController: UIViewController, settingsDelegate {
     
     @IBOutlet weak var activityIndicator: UIActivityIndicatorView!
     
+    
+    let textFadeHeight: CGFloat = 5.0
+    
     let audioSamplingPeriod = 0.05
     let networkCheckPeriod = 5.0
     
@@ -49,6 +52,13 @@ class ViewController: UIViewController, settingsDelegate {
     var networkCheckTimer: NSTimer?
     
     var upsideDown:Bool = false
+
+    
+    // MARK: - UI
+    
+    override func preferredStatusBarStyle() -> UIStatusBarStyle {
+        return settings.theme.statusBarStyle()
+    }
     
     func setTextSize() {
         mainText.font = mainText.font.fontWithSize( CGFloat(settings.getFontSize()) )
@@ -72,12 +82,34 @@ class ViewController: UIViewController, settingsDelegate {
         if textC {setTextSize()}
         if themeC {setColors()}
     }
-    
-    func initSpeechRec() {
-        speechRec.shouldListen =  false
-        speechRec.setup(self)
-        speechRec.textview = self.mainText
+
+    func fadeTextViewLimits() {
+        
+        /* Fading at top */
+        
+        let topFade: UIView = UIView(frame: CGRect( //Bad positioned!
+            x: self.view.bounds.minX,
+            y: mainText.frame.origin.y,
+            width: self.view.bounds.maxX,
+            height: textFadeHeight))
+        
+        let topGradientLayer = CAGradientLayer()
+        topGradientLayer.frame = topFade.bounds
+       
+        topGradientLayer.colors = [
+            //CGColorCreateCopyWithAlpha(settings.theme.bgColor().CGColor, 1.0),
+            //CGColorCreateCopyWithAlpha(settings.theme.bgColor().CGColor, 0.0)]
+            UIColor.redColor().CGColor,
+            UIColor.blueColor().CGColor]
+        
+        topFade.layer.insertSublayer(topGradientLayer, atIndex: 0)
+        
+        self.view.addSubview(topFade)
+        
     }
+    
+    
+    // MARK: - Network check
     
     func transitionToNetworkUnreachableOverlay()
     {
@@ -224,6 +256,43 @@ class ViewController: UIViewController, settingsDelegate {
         return networkAvailable
     }
     
+    func periodicNetworkCheck() {
+        if  !checkNetworkConnection() {
+            activityIndicator.stopAnimating()
+            waveView.hidden = true
+            hearButton.hidden = true
+            
+            wantsAnotherRecognition = false
+            speechRec.cancelRecognitionShouldBroadcastStatus(false)
+            continueRecognizing = false
+            
+            recognizerStatus = IDLE
+        }
+    }
+ 
+    
+    // MARK: - Setup
+    
+    func useNewSettings() {
+        /*
+        Conforms to the settingsDelegate protocol.
+        Called from the preferencesViewController.
+        */
+        settings.saveSettings()
+        updateUI(textChanged: true, themeChanged: true)
+    }
+    
+    func initSpeechRec() {
+        speechRec.shouldListen =  false
+        speechRec.setup(self)
+        speechRec.textview = self.mainText
+    }
+    
+    override func supportedInterfaceOrientations() -> Int {
+        return Int(UIInterfaceOrientationMask.All.rawValue) /* Xcode 6.1 */
+        //return Int( UIInterfaceOrientationMask.All.toRaw() ) /* Xcode 6.0 */
+    }
+    
     override func viewDidAppear(animated: Bool) {
         super.viewDidAppear(animated)
         
@@ -243,6 +312,9 @@ class ViewController: UIViewController, settingsDelegate {
         super.viewDidLoad()
         
         // Do any additional setup after loading the view, typically from a nib.
+        
+        fadeTextViewLimits()
+        
         updateUI(textChanged: true, themeChanged: true)
         //let target = UIScreen.mainScreen().bounds
         //mainText.frame = CGRectMake(target.minX, target.minY, target.width, target.height-400)
@@ -256,10 +328,7 @@ class ViewController: UIViewController, settingsDelegate {
         initSpeechRec()
     }
     
-    override func preferredStatusBarStyle() -> UIStatusBarStyle {
-        return settings.theme.statusBarStyle()
-    }
-    
+    //MARK: - Recognition
     
     func setRecognizerStatusInMainVC(status:integer_t)
     {
@@ -302,23 +371,7 @@ class ViewController: UIViewController, settingsDelegate {
         if recognizerStatus == ERROR { checkNetworkConnection() }
     }
 
-    
-    override func supportedInterfaceOrientations() -> Int {
-        return Int(UIInterfaceOrientationMask.All.rawValue) /* Xcode 6.1 */
-        //return Int( UIInterfaceOrientationMask.All.toRaw() ) /* Xcode 6.0 */
-    }
 
-    override func didReceiveMemoryWarning() {
-        super.didReceiveMemoryWarning()
-        // Dispose of any resources that can be recreated.
-    }
-    
-    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
-        if segue.identifier == "PrefSegue" {
-            let calledVC = segue.destinationViewController as PreferencesViewController
-            calledVC.delegate = self
-        }
-    }
     
     func periodicRecognition() {
         NSLog("Starting periodic recognition")
@@ -340,20 +393,6 @@ class ViewController: UIViewController, settingsDelegate {
         if (recognizerStatus == HEARING){
             waveView.setAudioLevel( CGFloat(speechRec.getAudioLevel()) )
             waveView.setNeedsDisplay()
-        }
-    }
-    
-    func periodicNetworkCheck() {
-        if  !checkNetworkConnection() {
-            activityIndicator.stopAnimating()
-            waveView.hidden = true
-            hearButton.hidden = true
-            
-            wantsAnotherRecognition = false
-            speechRec.cancelRecognitionShouldBroadcastStatus(false)
-            continueRecognizing = false
-            
-            recognizerStatus = IDLE
         }
     }
     
@@ -395,9 +434,21 @@ class ViewController: UIViewController, settingsDelegate {
         audioReadTimer = nil
     }
     
+    func finishedRecognizing()
+    {
+        NSLog("Finished recognizing one stream")
+        if (continueRecognizing) {
+            wantsAnotherRecognition = true
+        }
+        else { wantsAnotherRecognition = false }
+    }
+
+    // MARK: - UI events
+    
+    
     override func didRotateFromInterfaceOrientation(fromInterfaceOrientation: UIInterfaceOrientation) {
         if fromInterfaceOrientation.rawValue == UIInterfaceOrientation.Portrait.rawValue { /* Xcode 6.1 */
-        //if fromInterfaceOrientation.toRaw() == UIInterfaceOrientation.Portrait.toRaw() { /* Xcode 6.0 */
+            //if fromInterfaceOrientation.toRaw() == UIInterfaceOrientation.Portrait.toRaw() { /* Xcode 6.0 */
             /* was portrait, now upside down */
             NSLog("Orientation from normal to upside down")
             upsideDown = true
@@ -430,24 +481,12 @@ class ViewController: UIViewController, settingsDelegate {
     }
     
     
-    func finishedRecognizing()
-    {
-        NSLog("Finished recognizing one stream")
-        if (continueRecognizing) {
-            wantsAnotherRecognition = true
+    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
+        if segue.identifier == "PrefSegue" {
+            let calledVC = segue.destinationViewController as PreferencesViewController
+            calledVC.delegate = self
         }
-        else { wantsAnotherRecognition = false }
     }
-    
-    func useNewSettings() {
-        /*
-            Conforms to the settingsDelegate protocol.
-            Called from the preferencesViewController.
-        */
-        settings.saveSettings()
-        updateUI(textChanged: true, themeChanged: true)
-    }
-
     
     @IBAction func hearButtonPressed(sender: AnyObject) {
         wantsAnotherRecognition = !wantsAnotherRecognition
@@ -466,11 +505,16 @@ class ViewController: UIViewController, settingsDelegate {
     @IBAction func wavePressed(sender: UITapGestureRecognizer) {
             hearButtonPressed(self)
     }
+
+    
+    // MARK: - Others
+    
+    override func didReceiveMemoryWarning() {
+        super.didReceiveMemoryWarning()
+        // Dispose of any resources that can be recreated.
+    }
     
 }
-
-
-
 
 
 
