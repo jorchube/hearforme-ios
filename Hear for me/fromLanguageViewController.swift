@@ -19,6 +19,10 @@ class fromLanguageViewController: UIViewController, UIPickerViewDelegate, UIPick
     let blurHeight:CGFloat = 265 /* TODO : Fix this shit */
     
     
+    override func preferredStatusBarStyle() -> UIStatusBarStyle {
+        return settings.theme.statusBarStyle()
+    }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
 

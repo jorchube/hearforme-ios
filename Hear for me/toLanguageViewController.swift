@@ -21,6 +21,10 @@ class toLanguageViewController: UIViewController, UIPickerViewDelegate, UIPicker
     
     var languagePickerDelegate:languagePicker?
     
+    override func preferredStatusBarStyle() -> UIStatusBarStyle {
+        return settings.theme.statusBarStyle()
+    }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
 

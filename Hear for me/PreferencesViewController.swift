@@ -52,6 +52,7 @@ class PreferencesViewController: UIViewController, languagePicker {
         translateToLabel.textColor = settings.theme.fgColor()
         
         backButton.tintColor = settings.theme.getTintColot()
+        
     }
     
     func updateUI(textChanged textC:Bool, themeChanged themeC: Bool, languageChanged langC: Bool) {
@@ -95,6 +96,10 @@ class PreferencesViewController: UIViewController, languagePicker {
         sizeTextLabel.sizeToFit()
     }
     
+    override func preferredStatusBarStyle() -> UIStatusBarStyle {
+        return settings.theme.statusBarStyle()
+    }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -105,10 +110,14 @@ class PreferencesViewController: UIViewController, languagePicker {
         fontSlider.maximumValue = settings.getMaxFontSize()
         fontSlider.value = settings.getFontSize()
         
+        smallA.alpha = 0.3
+        bigA.alpha = 0.2
+        smallA.font = smallA.font.fontWithSize( CGFloat(settings.getMinFontSize()) )
+        bigA.font = bigA.font.fontWithSize( CGFloat(settings.getMaxFontSize()) )
+        
         localize()
         
         updateUI(textChanged: true, themeChanged: true, languageChanged: true)
-        // Do any additional setup after loading the view.
     }
 
     override func didReceiveMemoryWarning() {

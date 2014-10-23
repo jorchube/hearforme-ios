@@ -253,10 +253,12 @@ class ViewController: UIViewController, settingsDelegate {
         waveView.hidden = true
         activityIndicator.hidesWhenStopped = true
         
-        
         initSpeechRec()
     }
     
+    override func preferredStatusBarStyle() -> UIStatusBarStyle {
+        return settings.theme.statusBarStyle()
+    }
     
     
     func setRecognizerStatusInMainVC(status:integer_t)

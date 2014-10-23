@@ -39,6 +39,13 @@ public struct Theme{
         return UIColor(red: 255/255.0, green: 252/255.0, blue: 235/255.0, alpha: 1)
     }
     
+    func statusBarStyle() -> UIStatusBarStyle {
+        if self.current == Theme.name.lightOnDark {
+            return UIStatusBarStyle.LightContent
+        }
+        return UIStatusBarStyle.Default
+    }
+    
     func waveColor() -> UIColor {
         if self.current == Theme.name.lightOnDark {
             return UIColor(red: 131/255.0, green: 127/255.0, blue: 166/255.0, alpha: 1)
@@ -136,8 +143,8 @@ class Settings: NSObject {
 
     let prefKeys:PreferenceKeys = PreferenceKeys()
     
-    private let _minFontSize:Float = 16
-    private let _maxFontSize:Float = 56
+    private let _minFontSize:Float = 12
+    private let _maxFontSize:Float = 40
     
     private var _fontSize:Float = 20
     
