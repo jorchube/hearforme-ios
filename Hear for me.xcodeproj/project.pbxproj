@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		B51DAE0219F12F9600486972 /* WaveView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B51DAE0119F12F9600486972 /* WaveView.swift */; };
+		B532AFBF19FA659200B76177 /* UIGradView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B532AFBE19FA659200B76177 /* UIGradView.swift */; };
 		B532DBE119D47D62009B4518 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = B532DBE019D47D62009B4518 /* AppDelegate.swift */; };
 		B532DBE319D47D62009B4518 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B532DBE219D47D62009B4518 /* ViewController.swift */; };
 		B532DBE619D47D62009B4518 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = B532DBE419D47D62009B4518 /* Main.storyboard */; };
@@ -46,6 +47,7 @@
 
 /* Begin PBXFileReference section */
 		B51DAE0119F12F9600486972 /* WaveView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WaveView.swift; sourceTree = "<group>"; };
+		B532AFBE19FA659200B76177 /* UIGradView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UIGradView.swift; sourceTree = "<group>"; };
 		B532DBDB19D47D62009B4518 /* Hear for me.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Hear for me.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		B532DBDF19D47D62009B4518 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		B532DBE019D47D62009B4518 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -158,6 +160,7 @@
 				B5EDDD8019ED57A60068D1F5 /* Translator.h */,
 				B5EDDD8119ED57A60068D1F5 /* Translator.m */,
 				B51DAE0119F12F9600486972 /* WaveView.swift */,
+				B532AFBE19FA659200B76177 /* UIGradView.swift */,
 			);
 			path = "Hear for me";
 			sourceTree = "<group>";
@@ -331,6 +334,7 @@
 				B51DAE0219F12F9600486972 /* WaveView.swift in Sources */,
 				B558348519EC1643009EA9C8 /* languageList.swift in Sources */,
 				B532DC3E19D57A74009B4518 /* PreferencesViewController.swift in Sources */,
+				B532AFBF19FA659200B76177 /* UIGradView.swift in Sources */,
 				B558347519EBD483009EA9C8 /* toLanguageViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

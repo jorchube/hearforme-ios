@@ -24,6 +24,7 @@ class ViewController: UIViewController, settingsDelegate {
     @IBOutlet weak var activityIndicator: UIActivityIndicatorView!
     
     
+    var textFadeView: UIGradView?
     let textFadeHeight: CGFloat = 5.0
     
     let audioSamplingPeriod = 0.05
@@ -64,15 +65,9 @@ class ViewController: UIViewController, settingsDelegate {
         mainText.font = mainText.font.fontWithSize( CGFloat(settings.getFontSize()) )
     }
     func setColors() {
+    
         mainText.textColor = settings.theme.fgColor()
-        /*
-            This is poor man's text fading
-            I could do a better/real fading, 
-            but the difference actually is hardly noticeable, as is 1 pixel width.
-            Besides, I would have to mess with the views hierarchy and/or do custom drawing
-            for the UITextView, and I don't feel like it. At least today.
-        */
-        mainText.layer.borderColor = CGColorCreateCopyWithAlpha(settings.theme.bgColor().CGColor, 0.5)
+        
         self.view.backgroundColor = settings.theme.bgColor()
         waveView.backgroundColor = settings.theme.bgColor()
         activityIndicator.color = settings.theme.fgColor()
@@ -297,10 +292,16 @@ class ViewController: UIViewController, settingsDelegate {
         
         // Do any additional setup after loading the view, typically from a nib.
         
-        updateUI(textChanged: true, themeChanged: true)
+        mainText.text = "HHHHH H H H H H H H H H H H H H H H H H H H H H H H H H H H H H H H H H H H H H H H H H H H H H H H H H H H H H H H H H H H H H H H H"
+        //mainText.text = NSLocalizedString("TURN_UPSIDE_DOWN", comment: "")
         
-        mainText.text = NSLocalizedString("TURN_UPSIDE_DOWN", comment: "")
-        mainText.layer.borderWidth = 1
+        textFadeView = UIGradView(frame: mainText.frame)
+        textFadeView?.userInteractionEnabled = false
+        mainText.delegate = textFadeView!
+        mainText.insertSubview(textFadeView!, atIndex: 10)
+        
+        
+        updateUI(textChanged: true, themeChanged: true)
         
         hearButton.hidden = true
         waveView.hidden = true
