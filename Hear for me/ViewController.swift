@@ -25,7 +25,6 @@ class ViewController: UIViewController, settingsDelegate {
     
     
     var textFadeView: UIGradView?
-    let textFadeHeight: CGFloat = 5.0
     
     let audioSamplingPeriod = 0.05
     let networkCheckPeriod = 5.0
@@ -70,6 +69,7 @@ class ViewController: UIViewController, settingsDelegate {
         
         self.view.backgroundColor = settings.theme.bgColor()
         waveView.backgroundColor = settings.theme.bgColor()
+        textFadeView!.setNeedsDisplay()
         activityIndicator.color = settings.theme.fgColor()
         
         /*var blur = UIBlurEffect( style: UIBlurEffectStyle.Dark)
@@ -292,11 +292,23 @@ class ViewController: UIViewController, settingsDelegate {
         
         // Do any additional setup after loading the view, typically from a nib.
         
-        mainText.text = "HHHHH H H H H H H H H H H H H H H H H H H H H H H H H H H H H H H H H H H H H H H H H H H H H H H H H H H H H H H H H H H H H H H H H"
-        //mainText.text = NSLocalizedString("TURN_UPSIDE_DOWN", comment: "")
+        //mainText.text = "HHHHH H H H H H H H H H H H H H H H H H H H H H H H H H H H H H H H H H H H H H H H H H H H H H H H H H H H H H H H H H H H H H H H H"
+        mainText.text = NSLocalizedString("TURN_UPSIDE_DOWN", comment: "")
         
-        textFadeView = UIGradView(frame: mainText.frame)
+        textFadeView = UIGradView(frame:CGRect(
+            origin: mainText.frame.origin,
+            size: CGSize(
+                width: self.view.frame.width,
+                height: self.view.frame.height - 8 - 8 - 20 - 72)))
+        /*
+            TODO: Although hardcoded in the IB, should not hardcode these values here, in case someday they are changed in the IB
+            Should be okay with different screen sizes, anyway.
+            I had problems, hence there are those ugly numbers. Sorry future me.
+        */
+
+        
         textFadeView?.userInteractionEnabled = false
+        textFadeView?.opaque = false
         mainText.delegate = textFadeView!
         mainText.insertSubview(textFadeView!, atIndex: 10)
         

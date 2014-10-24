@@ -28,7 +28,7 @@ class UIGradView: UIView, UITextViewDelegate {
                 components[0], components[1], components[2], 0,
                 components[0], components[1], components[2], 1
             ],
-            [0, 0.2, 0.8, 1],
+            [0, 0.025, 0.975, 1],
             4)
         
         CGContextDrawLinearGradient(
