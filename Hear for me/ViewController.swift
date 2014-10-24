@@ -65,6 +65,14 @@ class ViewController: UIViewController, settingsDelegate {
     }
     func setColors() {
         mainText.textColor = settings.theme.fgColor()
+        /*
+            This is poor man's text fading
+            I could do a better/real fading, 
+            but the difference actually is hardly noticeable, as is 1 pixel width.
+            Besides, I would have to mess with the views hierarchy and/or do custom drawing
+            for the UITextView, and I don't feel like it. At least today.
+        */
+        mainText.layer.borderColor = CGColorCreateCopyWithAlpha(settings.theme.bgColor().CGColor, 0.5)
         self.view.backgroundColor = settings.theme.bgColor()
         waveView.backgroundColor = settings.theme.bgColor()
         activityIndicator.color = settings.theme.fgColor()
@@ -83,30 +91,6 @@ class ViewController: UIViewController, settingsDelegate {
         if themeC {setColors()}
     }
 
-    func fadeTextViewLimits() {
-        
-        /* Fading at top */
-        
-        let topFade: UIView = UIView(frame: CGRect( //Bad positioned!
-            x: self.view.bounds.minX,
-            y: mainText.frame.origin.y,
-            width: self.view.bounds.maxX,
-            height: textFadeHeight))
-        
-        let topGradientLayer = CAGradientLayer()
-        topGradientLayer.frame = topFade.bounds
-       
-        topGradientLayer.colors = [
-            //CGColorCreateCopyWithAlpha(settings.theme.bgColor().CGColor, 1.0),
-            //CGColorCreateCopyWithAlpha(settings.theme.bgColor().CGColor, 0.0)]
-            UIColor.redColor().CGColor,
-            UIColor.blueColor().CGColor]
-        
-        topFade.layer.insertSublayer(topGradientLayer, atIndex: 0)
-        
-        self.view.addSubview(topFade)
-        
-    }
     
     
     // MARK: - Network check
@@ -313,13 +297,10 @@ class ViewController: UIViewController, settingsDelegate {
         
         // Do any additional setup after loading the view, typically from a nib.
         
-        fadeTextViewLimits()
-        
         updateUI(textChanged: true, themeChanged: true)
-        //let target = UIScreen.mainScreen().bounds
-        //mainText.frame = CGRectMake(target.minX, target.minY, target.width, target.height-400)
-    
+        
         mainText.text = NSLocalizedString("TURN_UPSIDE_DOWN", comment: "")
+        mainText.layer.borderWidth = 1
         
         hearButton.hidden = true
         waveView.hidden = true

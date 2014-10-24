@@ -166,20 +166,20 @@
                                 <exclude reference="L8o-Iy-rU8"/>
                             </mask>
                             <mask key="constraints">
+                                <exclude reference="MCh-QR-AI2"/>
+                                <exclude reference="U3X-ix-Roe"/>
+                                <exclude reference="X4X-Jk-ZOf"/>
+                                <exclude reference="kD5-xE-Hxy"/>
+                                <exclude reference="pfK-FF-qBm"/>
+                                <exclude reference="lrA-ml-PAX"/>
+                                <exclude reference="0Uu-eL-Zgk"/>
+                                <exclude reference="9T2-B4-J2e"/>
                                 <exclude reference="ThQ-Gn-0EL"/>
                                 <exclude reference="Ve1-t5-AGa"/>
                                 <exclude reference="VxD-5z-Ddl"/>
                                 <exclude reference="hHd-Rs-Pv0"/>
                                 <exclude reference="LmQ-jy-h0K"/>
                                 <exclude reference="Wcx-zH-b2R"/>
-                                <exclude reference="0Uu-eL-Zgk"/>
-                                <exclude reference="9T2-B4-J2e"/>
-                                <exclude reference="lrA-ml-PAX"/>
-                                <exclude reference="pfK-FF-qBm"/>
-                                <exclude reference="MCh-QR-AI2"/>
-                                <exclude reference="U3X-ix-Roe"/>
-                                <exclude reference="X4X-Jk-ZOf"/>
-                                <exclude reference="kD5-xE-Hxy"/>
                             </mask>
                         </variation>
                         <variation key="heightClass=regular-widthClass=compact">
@@ -191,20 +191,20 @@
                                 <include reference="L8o-Iy-rU8"/>
                             </mask>
                             <mask key="constraints">
+                                <include reference="MCh-QR-AI2"/>
+                                <include reference="U3X-ix-Roe"/>
+                                <include reference="X4X-Jk-ZOf"/>
+                                <include reference="kD5-xE-Hxy"/>
+                                <include reference="pfK-FF-qBm"/>
+                                <include reference="lrA-ml-PAX"/>
+                                <include reference="0Uu-eL-Zgk"/>
+                                <include reference="9T2-B4-J2e"/>
                                 <include reference="ThQ-Gn-0EL"/>
                                 <include reference="Ve1-t5-AGa"/>
                                 <include reference="VxD-5z-Ddl"/>
                                 <include reference="hHd-Rs-Pv0"/>
                                 <include reference="LmQ-jy-h0K"/>
                                 <include reference="Wcx-zH-b2R"/>
-                                <include reference="0Uu-eL-Zgk"/>
-                                <include reference="9T2-B4-J2e"/>
-                                <include reference="lrA-ml-PAX"/>
-                                <include reference="pfK-FF-qBm"/>
-                                <include reference="MCh-QR-AI2"/>
-                                <include reference="U3X-ix-Roe"/>
-                                <include reference="X4X-Jk-ZOf"/>
-                                <include reference="kD5-xE-Hxy"/>
                             </mask>
                         </variation>
                     </view>
