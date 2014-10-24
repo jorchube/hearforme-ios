@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		B5107B7E19FAAD0400A27F7B /* ConnectionChecker.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5107B7D19FAAD0400A27F7B /* ConnectionChecker.swift */; };
 		B51DAE0219F12F9600486972 /* WaveView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B51DAE0119F12F9600486972 /* WaveView.swift */; };
 		B532AFBF19FA659200B76177 /* UIGradView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B532AFBE19FA659200B76177 /* UIGradView.swift */; };
 		B532DBE119D47D62009B4518 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = B532DBE019D47D62009B4518 /* AppDelegate.swift */; };
@@ -46,6 +47,7 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		B5107B7D19FAAD0400A27F7B /* ConnectionChecker.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ConnectionChecker.swift; sourceTree = "<group>"; };
 		B51DAE0119F12F9600486972 /* WaveView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WaveView.swift; sourceTree = "<group>"; };
 		B532AFBE19FA659200B76177 /* UIGradView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UIGradView.swift; sourceTree = "<group>"; };
 		B532DBDB19D47D62009B4518 /* Hear for me.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Hear for me.app"; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -161,6 +163,7 @@
 				B5EDDD8119ED57A60068D1F5 /* Translator.m */,
 				B51DAE0119F12F9600486972 /* WaveView.swift */,
 				B532AFBE19FA659200B76177 /* UIGradView.swift */,
+				B5107B7D19FAAD0400A27F7B /* ConnectionChecker.swift */,
 			);
 			path = "Hear for me";
 			sourceTree = "<group>";
@@ -329,6 +332,7 @@
 				B532DC4619D95710009B4518 /* Settings.swift in Sources */,
 				B558347719EBE68E009EA9C8 /* Protocols.swift in Sources */,
 				B5EDDD8219ED57A60068D1F5 /* Translator.m in Sources */,
+				B5107B7E19FAAD0400A27F7B /* ConnectionChecker.swift in Sources */,
 				B5DFE63719E2A72900833541 /* speechRecognizer.m in Sources */,
 				B58ACDE519E549A400C0F4BE /* fromLanguageViewController.swift in Sources */,
 				B51DAE0219F12F9600486972 /* WaveView.swift in Sources */,

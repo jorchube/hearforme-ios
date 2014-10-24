@@ -11,7 +11,7 @@ import SystemConfiguration
 
 
 
-class ViewController: UIViewController, settingsDelegate {
+class ViewController: UIViewController, settingsDelegate, connectionStatusDemander {
 
     let settings:Settings = Settings.getSettings()
     
@@ -36,8 +36,9 @@ class ViewController: UIViewController, settingsDelegate {
     
     var audioReadTimer: NSTimer?
     
-    let networkCheckURL1: String = "http://www.google.com"
-    let networkCheckURL2: String = "http://www.amazon.co.uk"
+    
+    var networkChecker: ConnectionChecker?
+
     
     /*
         Having a dedicated status variable instead of using the one from the recognizer object,
@@ -188,55 +189,9 @@ class ViewController: UIViewController, settingsDelegate {
         stopDoingTheJob()
     }
     
-    func checkNetworkWithURLFromString(str_url: String ) -> Bool {
-        let URLForNetworkCheck:CFURLRef = NSURL(string: networkCheckURL1)!
-        var diagnostic:Unmanaged<CFNetDiagnostic> = CFNetDiagnosticCreateWithURL(
-            kCFAllocatorDefault,
-            URLForNetworkCheck)
-        let status:CFNetDiagnosticStatus = CFNetDiagnosticCopyNetworkStatusPassively(diagnostic.takeUnretainedValue(), nil)
-        
-        /*
-        I know, all this shitty rawValue and hashValue dance is ugly,
-        but I've not found the supposed correct way (tm).
-        Obj-C examples do what here is done, but without the raw-hash thingy,
-        which seems the only way in Swift. And since Swift is new there is no
-        wild code to hunt...
-        
-        (I coould have left ..ConnectionUp.rawValue,
-        but at least using hashValue in both sides seems more... I don't know, symmetric?)
-        
-        Future me, are you mad at past you?
-        
-        */
-        return status.hashValue == CFNetDiagnosticStatusValues.ConnectionUp.rawValue.hashValue
-    }
     
-    func checkNetworkConnection() -> Bool {
-        /*
-            Sets 'networkAvailable' to true or false, and also returns its value.
-            Triggers relevant actions regarding network availability.
-        */
-
-        if checkNetworkWithURLFromString(networkCheckURL1) {
-            NSLog("Network status Ok")
-            networkCheckSuccessful()
-        }
-        else {
-            /* Double check */
-            if checkNetworkWithURLFromString(networkCheckURL2) {
-                networkCheckSuccessful()
-            }
-            else {
-                NSLog("Network failed")
-                networkCheckFailed()
-            }
-        }
-        
-        return networkAvailable
-    }
-    
-    func periodicNetworkCheck() {
-        if  !checkNetworkConnection() {
+    func receivedNetworkStatus(status: ConnectionChecker.netStatus) {
+        if status == ConnectionChecker.netStatus.down {
             activityIndicator.stopAnimating()
             waveView.hidden = true
             hearButton.hidden = true
@@ -246,7 +201,16 @@ class ViewController: UIViewController, settingsDelegate {
             continueRecognizing = false
             
             recognizerStatus = IDLE
+            
+            networkCheckFailed()
         }
+        if status == ConnectionChecker.netStatus.up {
+            networkCheckSuccessful()
+        }
+    }
+    
+    func periodicNetworkCheck() {
+        networkChecker!.check()
     }
  
     
@@ -290,7 +254,7 @@ class ViewController: UIViewController, settingsDelegate {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        // Do any additional setup after loading the view, typically from a nib.
+        networkChecker = ConnectionChecker(demander: self)
         
         //mainText.text = "HHHHH H H H H H H H H H H H H H H H H H H H H H H H H H H H H H H H H H H H H H H H H H H H H H H H H H H H H H H H H H H H H H H H H"
         mainText.text = NSLocalizedString("TURN_UPSIDE_DOWN", comment: "")
@@ -362,7 +326,7 @@ class ViewController: UIViewController, settingsDelegate {
         }
         recognizerStatus = status
         
-        if recognizerStatus == ERROR { checkNetworkConnection() }
+        if recognizerStatus == ERROR { networkChecker?.check() }
     }
 
 
@@ -452,9 +416,7 @@ class ViewController: UIViewController, settingsDelegate {
             hearButton.hidden = true
             waveView.hidden = true
             
-            if checkNetworkConnection() {
-                startDoingTheJob()
-            }
+            startDoingTheJob()
         }
         else {
             /* back to normal */

@@ -13,3 +13,7 @@ protocol settingsDelegate {
 protocol languagePicker {
     func setSelectedLanguage()
 }
+
+protocol connectionStatusDemander {
+    func receivedNetworkStatus(status: ConnectionChecker.netStatus)
+}
