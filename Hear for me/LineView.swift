@@ -23,7 +23,7 @@ class LineView: UIView {
         line.addQuadCurveToPoint(CGPointMake(self.frame.maxX, 0),
             controlPoint: CGPointMake(self.frame.midX, 0))
         
-        line.lineWidth = 3.0
+        line.lineWidth = 1.0
         line.stroke()
     }
 }

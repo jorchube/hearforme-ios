@@ -21,7 +21,7 @@ class ViewController: UIViewController, settingsDelegate, connectionStatusDemand
     @IBOutlet weak var hearButton: UIButton!
     @IBOutlet weak var waveView: WaveView!
     
-    @IBOutlet weak var languagesPanelView: UIVisualEffectView!
+    @IBOutlet weak var languagesPanelView: LanguagesPanelView!
     
     @IBOutlet weak var activityIndicator: UIActivityIndicatorView!
     
@@ -76,6 +76,7 @@ class ViewController: UIViewController, settingsDelegate, connectionStatusDemand
         textFadeView!.setNeedsDisplay()
         activityIndicator.color = settings.theme.fgColor()
         
+        languagesPanelView.updateBlurView()
         languagesPanelView.setNeedsDisplay()
         
         
@@ -272,6 +273,7 @@ class ViewController: UIViewController, settingsDelegate, connectionStatusDemand
     func setInitialText() {
         mainText.text = initialSpaces()
         mainText.insertText(NSLocalizedString("TURN_UPSIDE_DOWN", comment: ""))
+        //mainText.insertText("HHH HHH HHH HHH HHH HHH HHH HHH HHH HHH HHH HHH HHH HHH HHH HHH HHH HHH HHH HHH HHH HHH HHH HHH HHH HHH HHH HHH HHH HHH HHH HHH HHH HHH HHH HHH HHH HHH")
     }
     
     override func viewDidLoad() {
@@ -305,7 +307,7 @@ class ViewController: UIViewController, settingsDelegate, connectionStatusDemand
         
         initSpeechRec()
         
-        /*
+      /*
         var layer: CALayer = CALayer()
         layer.frame = CGRectMake(20, 20, 200, 200)
         layer.backgroundColor = UIColor.redColor().CGColor
