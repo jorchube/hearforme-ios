@@ -22,7 +22,7 @@ class UIGradView: UIView, UITextViewDelegate {
         let gradient = CGGradientCreateWithColorComponents(
             CGColorSpaceCreateDeviceRGB(),
             [
-                components[0], components[1], components[2], 1,
+                components[0], components[1], components[2], 0, /* Set this alpha to 1 if LanguagesBar gets ditched */
                 components[0], components[1], components[2], 0,
                 components[0], components[1], components[2], 0,
                 components[0], components[1], components[2], 1

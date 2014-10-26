@@ -118,6 +118,7 @@ class PreferencesViewController: UIViewController, languagePicker {
         localize()
         
         updateUI(textChanged: true, themeChanged: true, languageChanged: true)
+        
     }
 
     override func didReceiveMemoryWarning() {

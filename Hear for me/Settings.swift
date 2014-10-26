@@ -63,6 +63,23 @@ public struct Theme{
         }
         return UIColor(red: 206/255.0, green: 134/255.0, blue: 49/255.0, alpha: 1)
     }
+    
+    func getLanguagePickerBlurEffectStyle() -> UIBlurEffectStyle {
+        if self.current == Theme.name.lightOnDark {
+            return UIBlurEffectStyle.ExtraLight
+            
+        }
+        return UIBlurEffectStyle.Dark
+    }
+    
+    func getBlurEffectStyle() -> UIBlurEffectStyle {
+        if self.current == Theme.name.lightOnDark {
+            return UIBlurEffectStyle.Dark
+            
+        }
+        return UIBlurEffectStyle.ExtraLight
+    }
+    
 }
 
 
@@ -154,8 +171,8 @@ class Settings: NSObject {
 
     let prefKeys:PreferenceKeys = PreferenceKeys()
     
-    private let _minFontSize:Float = 12
-    private let _maxFontSize:Float = 40
+    let _minFontSize:Float = 12
+    let _maxFontSize:Float = 40
     
     private var _fontSize:Float = 20
     

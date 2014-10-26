@@ -21,6 +21,8 @@ class ViewController: UIViewController, settingsDelegate, connectionStatusDemand
     @IBOutlet weak var hearButton: UIButton!
     @IBOutlet weak var waveView: WaveView!
     
+    @IBOutlet weak var languagesPanelView: UIVisualEffectView!
+    
     @IBOutlet weak var activityIndicator: UIActivityIndicatorView!
     
     
@@ -63,6 +65,7 @@ class ViewController: UIViewController, settingsDelegate, connectionStatusDemand
     
     func setTextSize() {
         mainText.font = mainText.font.fontWithSize( CGFloat(settings.getFontSize()) )
+        setInitialText()
     }
     func setColors() {
     
@@ -73,6 +76,11 @@ class ViewController: UIViewController, settingsDelegate, connectionStatusDemand
         textFadeView!.setNeedsDisplay()
         activityIndicator.color = settings.theme.fgColor()
         
+        languagesPanelView.setNeedsDisplay()
+        
+        
+        
+                
         /*var blur = UIBlurEffect( style: UIBlurEffectStyle.Dark)
         var blurView = UIVisualEffectView(effect: blur)
         
@@ -102,7 +110,7 @@ class ViewController: UIViewController, settingsDelegate, connectionStatusDemand
             height: frame.height * 8/10))
         
         message.text = NSLocalizedString("NETWORK_ERROR_MESSAGE", comment: "")
-        message.textColor = UIColor.lightGrayColor()
+        message.textColor = UIColor.lightTextColor()
         message.font = message.font.fontWithSize(16)
         message.backgroundColor = UIColor.clearColor()
         message.textAlignment = NSTextAlignment.Center
@@ -117,7 +125,8 @@ class ViewController: UIViewController, settingsDelegate, connectionStatusDemand
             width: frame.width * 4/10,
             height: frame.height * 4/10)
         imageView.contentMode = UIViewContentMode.ScaleAspectFit
-        imageView.alpha = 0.8
+        imageView.alpha = 0.6
+        
         
         var blur = UIBlurEffect( style: UIBlurEffectStyle.Dark)
         var blurView = UIVisualEffectView(effect: blur)
@@ -251,19 +260,30 @@ class ViewController: UIViewController, settingsDelegate, connectionStatusDemand
         
     }
     
+    func initialSpaces() -> String {
+        if settings.getFontSize() / settings._maxFontSize > 0.65 { return "\n\n" }
+        if settings.getFontSize() / settings._maxFontSize > 0.50 { return "\n\n\n" }
+        if settings.getFontSize() / settings._maxFontSize > 0.40 { return "\n\n\n\n" }
+        if settings.getFontSize() / settings._maxFontSize > 0.30 { return "\n\n\n\n\n" }
+        return "\n\n\n\n\n\n"
+        
+    }
+    
+    func setInitialText() {
+        mainText.text = initialSpaces()
+        mainText.insertText(NSLocalizedString("TURN_UPSIDE_DOWN", comment: ""))
+    }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
         networkChecker = ConnectionChecker(demander: self)
         
-        //mainText.text = "HHHHH H H H H H H H H H H H H H H H H H H H H H H H H H H H H H H H H H H H H H H H H H H H H H H H H H H H H H H H H H H H H H H H H"
-        mainText.text = NSLocalizedString("TURN_UPSIDE_DOWN", comment: "")
-        
         textFadeView = UIGradView(frame:CGRect(
             origin: mainText.frame.origin,
             size: CGSize(
                 width: self.view.frame.width,
-                height: self.view.frame.height - 8 - 8 - 20 - 72)))
+                height: self.view.frame.height - 8 - 72))) /* 8: space until bottombar. 72: height of bottom bar.*/
         /*
             TODO: Although hardcoded in the IB, should not hardcode these values here, in case someday they are changed in the IB
             Should be okay with different screen sizes, anyway.
@@ -284,6 +304,13 @@ class ViewController: UIViewController, settingsDelegate, connectionStatusDemand
         activityIndicator.hidesWhenStopped = true
         
         initSpeechRec()
+        
+        /*
+        var layer: CALayer = CALayer()
+        layer.frame = CGRectMake(20, 20, 200, 200)
+        layer.backgroundColor = UIColor.redColor().CGColor
+        self.view.layer.addSublayer(layer)
+        */
     }
     
     //MARK: - Recognition
@@ -411,7 +438,7 @@ class ViewController: UIViewController, settingsDelegate, connectionStatusDemand
             NSLog("Orientation from normal to upside down")
             upsideDown = true
             
-            mainText.text = ""
+            mainText.text = initialSpaces()
             prefButton.hidden = true
             hearButton.hidden = true
             waveView.hidden = true
@@ -432,7 +459,7 @@ class ViewController: UIViewController, settingsDelegate, connectionStatusDemand
             networkCheckTimer = nil*/
             
             stopDoingTheJob()
-            mainText.text = NSLocalizedString("TURN_UPSIDE_DOWN", comment: "")
+            setInitialText()
         }
     }
     

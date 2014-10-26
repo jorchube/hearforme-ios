@@ -56,12 +56,7 @@ class toLanguageViewController: UIViewController, UIPickerViewDelegate, UIPicker
         let lineView: LineView = LineView(frame: UIScreen.mainScreen().bounds)
         lineView.opaque = false
         
-        var blur:UIBlurEffect
-        if settings.theme.current == Theme.name.lightOnDark {
-            blur = UIBlurEffect( style: UIBlurEffectStyle.ExtraLight)
-            
-        }
-        else { blur = UIBlurEffect( style: UIBlurEffectStyle.Dark) }
+        var blur: UIBlurEffect = UIBlurEffect( style: settings.theme.getLanguagePickerBlurEffectStyle())
         
         //var blur = UIBlurEffect( style: UIBlurEffectStyle.ExtraLight)
         var blurView = UIVisualEffectView(effect: blur)

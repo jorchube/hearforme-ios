@@ -24,6 +24,7 @@
 		B57D8A8119FD30730002B2EC /* UIGradView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B57D8A8019FD30730002B2EC /* UIGradView.swift */; };
 		B57D8A8319FD316F0002B2EC /* LanguageSelectorProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = B57D8A8219FD316F0002B2EC /* LanguageSelectorProtocol.swift */; };
 		B58ACDE519E549A400C0F4BE /* fromLanguageViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B58ACDE419E549A400C0F4BE /* fromLanguageViewController.swift */; };
+		B5A19A9E19FD9474006C0A39 /* LanguagesPanelView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5A19A9D19FD9474006C0A39 /* LanguagesPanelView.swift */; };
 		B5DFE63719E2A72900833541 /* speechRecognizer.m in Sources */ = {isa = PBXBuildFile; fileRef = B5DFE63619E2A72900833541 /* speechRecognizer.m */; };
 		B5DFE63C19E2B27000833541 /* SpeechKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B5DFE63319E2A4E300833541 /* SpeechKit.framework */; };
 		B5DFE6B019E2C25700833541 /* AudioToolbox.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B5DFE6A819E2C25700833541 /* AudioToolbox.framework */; };
@@ -69,6 +70,7 @@
 		B57D8A8019FD30730002B2EC /* UIGradView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UIGradView.swift; sourceTree = "<group>"; };
 		B57D8A8219FD316F0002B2EC /* LanguageSelectorProtocol.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LanguageSelectorProtocol.swift; sourceTree = "<group>"; };
 		B58ACDE419E549A400C0F4BE /* fromLanguageViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = fromLanguageViewController.swift; sourceTree = "<group>"; };
+		B5A19A9D19FD9474006C0A39 /* LanguagesPanelView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LanguagesPanelView.swift; sourceTree = "<group>"; };
 		B5D8E4D319ED266700A55B1F /* PrivateKeys.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = PrivateKeys.h; sourceTree = "<group>"; };
 		B5DFE62D19E2997D00833541 /* Hear for me-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "Hear for me-Bridging-Header.h"; sourceTree = "<group>"; };
 		B5DFE63319E2A4E300833541 /* SpeechKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = SpeechKit.framework; sourceTree = "<group>"; };
@@ -248,6 +250,7 @@
 				B532DBE219D47D62009B4518 /* ViewController.swift */,
 				B51DAE0119F12F9600486972 /* WaveView.swift */,
 				B57D8A8019FD30730002B2EC /* UIGradView.swift */,
+				B5A19A9D19FD9474006C0A39 /* LanguagesPanelView.swift */,
 			);
 			name = "main view";
 			sourceTree = "<group>";
@@ -372,6 +375,7 @@
 				B58ACDE519E549A400C0F4BE /* fromLanguageViewController.swift in Sources */,
 				B51DAE0219F12F9600486972 /* WaveView.swift in Sources */,
 				B57D8A8119FD30730002B2EC /* UIGradView.swift in Sources */,
+				B5A19A9E19FD9474006C0A39 /* LanguagesPanelView.swift in Sources */,
 				B558348519EC1643009EA9C8 /* languageList.swift in Sources */,
 				B532DC3E19D57A74009B4518 /* PreferencesViewController.swift in Sources */,
 				B558347519EBD483009EA9C8 /* toLanguageViewController.swift in Sources */,
