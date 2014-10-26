@@ -9,7 +9,6 @@
 /* Begin PBXBuildFile section */
 		B5107B7E19FAAD0400A27F7B /* ConnectionChecker.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5107B7D19FAAD0400A27F7B /* ConnectionChecker.swift */; };
 		B51DAE0219F12F9600486972 /* WaveView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B51DAE0119F12F9600486972 /* WaveView.swift */; };
-		B532AFBF19FA659200B76177 /* UIGradView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B532AFBE19FA659200B76177 /* UIGradView.swift */; };
 		B532DBE119D47D62009B4518 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = B532DBE019D47D62009B4518 /* AppDelegate.swift */; };
 		B532DBE319D47D62009B4518 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B532DBE219D47D62009B4518 /* ViewController.swift */; };
 		B532DBE619D47D62009B4518 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = B532DBE419D47D62009B4518 /* Main.storyboard */; };
@@ -19,9 +18,11 @@
 		B532DC3E19D57A74009B4518 /* PreferencesViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B532DC3D19D57A74009B4518 /* PreferencesViewController.swift */; };
 		B532DC4619D95710009B4518 /* Settings.swift in Sources */ = {isa = PBXBuildFile; fileRef = B532DC4519D95710009B4518 /* Settings.swift */; };
 		B558347519EBD483009EA9C8 /* toLanguageViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B558347419EBD483009EA9C8 /* toLanguageViewController.swift */; };
-		B558347719EBE68E009EA9C8 /* Protocols.swift in Sources */ = {isa = PBXBuildFile; fileRef = B558347619EBE68E009EA9C8 /* Protocols.swift */; };
 		B558348319EBF230009EA9C8 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = B558348119EBF230009EA9C8 /* Localizable.strings */; };
 		B558348519EC1643009EA9C8 /* languageList.swift in Sources */ = {isa = PBXBuildFile; fileRef = B558348419EC1643009EA9C8 /* languageList.swift */; };
+		B57D8A7B19FD2EC50002B2EC /* LineView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B57D8A7A19FD2EC50002B2EC /* LineView.swift */; };
+		B57D8A8119FD30730002B2EC /* UIGradView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B57D8A8019FD30730002B2EC /* UIGradView.swift */; };
+		B57D8A8319FD316F0002B2EC /* LanguageSelectorProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = B57D8A8219FD316F0002B2EC /* LanguageSelectorProtocol.swift */; };
 		B58ACDE519E549A400C0F4BE /* fromLanguageViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B58ACDE419E549A400C0F4BE /* fromLanguageViewController.swift */; };
 		B5DFE63719E2A72900833541 /* speechRecognizer.m in Sources */ = {isa = PBXBuildFile; fileRef = B5DFE63619E2A72900833541 /* speechRecognizer.m */; };
 		B5DFE63C19E2B27000833541 /* SpeechKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B5DFE63319E2A4E300833541 /* SpeechKit.framework */; };
@@ -49,7 +50,6 @@
 /* Begin PBXFileReference section */
 		B5107B7D19FAAD0400A27F7B /* ConnectionChecker.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ConnectionChecker.swift; sourceTree = "<group>"; };
 		B51DAE0119F12F9600486972 /* WaveView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WaveView.swift; sourceTree = "<group>"; };
-		B532AFBE19FA659200B76177 /* UIGradView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UIGradView.swift; sourceTree = "<group>"; };
 		B532DBDB19D47D62009B4518 /* Hear for me.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Hear for me.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		B532DBDF19D47D62009B4518 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		B532DBE019D47D62009B4518 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -63,9 +63,11 @@
 		B532DC3D19D57A74009B4518 /* PreferencesViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PreferencesViewController.swift; sourceTree = "<group>"; };
 		B532DC4519D95710009B4518 /* Settings.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Settings.swift; sourceTree = "<group>"; };
 		B558347419EBD483009EA9C8 /* toLanguageViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = toLanguageViewController.swift; sourceTree = "<group>"; };
-		B558347619EBE68E009EA9C8 /* Protocols.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Protocols.swift; sourceTree = "<group>"; };
 		B558348219EBF230009EA9C8 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/Localizable.strings; sourceTree = "<group>"; };
 		B558348419EC1643009EA9C8 /* languageList.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = languageList.swift; sourceTree = "<group>"; };
+		B57D8A7A19FD2EC50002B2EC /* LineView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LineView.swift; sourceTree = "<group>"; };
+		B57D8A8019FD30730002B2EC /* UIGradView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UIGradView.swift; sourceTree = "<group>"; };
+		B57D8A8219FD316F0002B2EC /* LanguageSelectorProtocol.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LanguageSelectorProtocol.swift; sourceTree = "<group>"; };
 		B58ACDE419E549A400C0F4BE /* fromLanguageViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = fromLanguageViewController.swift; sourceTree = "<group>"; };
 		B5D8E4D319ED266700A55B1F /* PrivateKeys.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = PrivateKeys.h; sourceTree = "<group>"; };
 		B5DFE62D19E2997D00833541 /* Hear for me-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "Hear for me-Bridging-Header.h"; sourceTree = "<group>"; };
@@ -145,24 +147,18 @@
 				B532DC3C19D575C8009B4518 /* resources */,
 				B532DC0019D48383009B4518 /* LICENSE */,
 				B532DBE019D47D62009B4518 /* AppDelegate.swift */,
-				B532DBE219D47D62009B4518 /* ViewController.swift */,
 				B532DBE419D47D62009B4518 /* Main.storyboard */,
 				B532DBE719D47D62009B4518 /* Images.xcassets */,
 				B532DBDE19D47D62009B4518 /* Supporting Files */,
 				B532DC3D19D57A74009B4518 /* PreferencesViewController.swift */,
+				B57D8A7F19FD2FEA0002B2EC /* main view */,
 				B532DC4519D95710009B4518 /* Settings.swift */,
 				B5DFE62D19E2997D00833541 /* Hear for me-Bridging-Header.h */,
-				B5DFE63519E2A72900833541 /* speechRecognizer.h */,
-				B5DFE63619E2A72900833541 /* speechRecognizer.m */,
-				B58ACDE419E549A400C0F4BE /* fromLanguageViewController.swift */,
-				B558347419EBD483009EA9C8 /* toLanguageViewController.swift */,
-				B558347619EBE68E009EA9C8 /* Protocols.swift */,
+				B57D8A7C19FD2F3E0002B2EC /* speech recognizer */,
 				B558348419EC1643009EA9C8 /* languageList.swift */,
 				B5D8E4D319ED266700A55B1F /* PrivateKeys.h */,
-				B5EDDD8019ED57A60068D1F5 /* Translator.h */,
-				B5EDDD8119ED57A60068D1F5 /* Translator.m */,
-				B51DAE0119F12F9600486972 /* WaveView.swift */,
-				B532AFBE19FA659200B76177 /* UIGradView.swift */,
+				B57D8A7E19FD2FDB0002B2EC /* translator */,
+				B57D8A7D19FD2F9F0002B2EC /* language selectors */,
 				B5107B7D19FAAD0400A27F7B /* ConnectionChecker.swift */,
 			);
 			path = "Hear for me";
@@ -215,6 +211,45 @@
 				B558348119EBF230009EA9C8 /* Localizable.strings */,
 			);
 			name = en.lproj;
+			sourceTree = "<group>";
+		};
+		B57D8A7C19FD2F3E0002B2EC /* speech recognizer */ = {
+			isa = PBXGroup;
+			children = (
+				B5DFE63519E2A72900833541 /* speechRecognizer.h */,
+				B5DFE63619E2A72900833541 /* speechRecognizer.m */,
+			);
+			name = "speech recognizer";
+			sourceTree = "<group>";
+		};
+		B57D8A7D19FD2F9F0002B2EC /* language selectors */ = {
+			isa = PBXGroup;
+			children = (
+				B58ACDE419E549A400C0F4BE /* fromLanguageViewController.swift */,
+				B558347419EBD483009EA9C8 /* toLanguageViewController.swift */,
+				B57D8A7A19FD2EC50002B2EC /* LineView.swift */,
+				B57D8A8219FD316F0002B2EC /* LanguageSelectorProtocol.swift */,
+			);
+			name = "language selectors";
+			sourceTree = "<group>";
+		};
+		B57D8A7E19FD2FDB0002B2EC /* translator */ = {
+			isa = PBXGroup;
+			children = (
+				B5EDDD8019ED57A60068D1F5 /* Translator.h */,
+				B5EDDD8119ED57A60068D1F5 /* Translator.m */,
+			);
+			name = translator;
+			sourceTree = "<group>";
+		};
+		B57D8A7F19FD2FEA0002B2EC /* main view */ = {
+			isa = PBXGroup;
+			children = (
+				B532DBE219D47D62009B4518 /* ViewController.swift */,
+				B51DAE0119F12F9600486972 /* WaveView.swift */,
+				B57D8A8019FD30730002B2EC /* UIGradView.swift */,
+			);
+			name = "main view";
 			sourceTree = "<group>";
 		};
 		B5DFE63219E2A4E300833541 /* Frameworks */ = {
@@ -330,16 +365,17 @@
 				B532DBE319D47D62009B4518 /* ViewController.swift in Sources */,
 				B532DBE119D47D62009B4518 /* AppDelegate.swift in Sources */,
 				B532DC4619D95710009B4518 /* Settings.swift in Sources */,
-				B558347719EBE68E009EA9C8 /* Protocols.swift in Sources */,
+				B57D8A7B19FD2EC50002B2EC /* LineView.swift in Sources */,
 				B5EDDD8219ED57A60068D1F5 /* Translator.m in Sources */,
 				B5107B7E19FAAD0400A27F7B /* ConnectionChecker.swift in Sources */,
 				B5DFE63719E2A72900833541 /* speechRecognizer.m in Sources */,
 				B58ACDE519E549A400C0F4BE /* fromLanguageViewController.swift in Sources */,
 				B51DAE0219F12F9600486972 /* WaveView.swift in Sources */,
+				B57D8A8119FD30730002B2EC /* UIGradView.swift in Sources */,
 				B558348519EC1643009EA9C8 /* languageList.swift in Sources */,
 				B532DC3E19D57A74009B4518 /* PreferencesViewController.swift in Sources */,
-				B532AFBF19FA659200B76177 /* UIGradView.swift in Sources */,
 				B558347519EBD483009EA9C8 /* toLanguageViewController.swift in Sources */,
+				B57D8A8319FD316F0002B2EC /* LanguageSelectorProtocol.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

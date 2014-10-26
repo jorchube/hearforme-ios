@@ -41,17 +41,17 @@ class PreferencesViewController: UIViewController, languagePicker {
         smallA.textColor = settings.theme.fgColor()
         bigA.textColor = settings.theme.fgColor()
         
-        backButton.tintColor = settings.theme.getTintColot()
-        fontSlider.tintColor = settings.theme.getTintColot()
-        themeSwitch.tintColor = settings.theme.getTintColot()
+        backButton.tintColor = settings.theme.getTintColor()
+        fontSlider.tintColor = settings.theme.getTintColor()
+        themeSwitch.tintColor = settings.theme.getTintColor()
         
-        hearFromButton.tintColor = settings.theme.getTintColot()
-        translateToButton.tintColor = settings.theme.getTintColot()
+        hearFromButton.tintColor = settings.theme.getTintColor()
+        translateToButton.tintColor = settings.theme.getTintColor()
         
         hearFromLabel.textColor = settings.theme.fgColor()
         translateToLabel.textColor = settings.theme.fgColor()
         
-        backButton.tintColor = settings.theme.getTintColot()
+        backButton.tintColor = settings.theme.getTintColor()
         
     }
     

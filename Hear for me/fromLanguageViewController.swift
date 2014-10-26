@@ -8,6 +8,7 @@
 
 import UIKit
 
+
 class fromLanguageViewController: UIViewController, UIPickerViewDelegate, UIPickerViewDataSource {
 
     @IBOutlet weak var okButton: UIButton!
@@ -17,6 +18,7 @@ class fromLanguageViewController: UIViewController, UIPickerViewDelegate, UIPick
     
     let settings:Settings = Settings.getSettings()
     let blurHeight:CGFloat = 265 /* TODO : Fix this shit */
+    
     
     
     override func preferredStatusBarStyle() -> UIStatusBarStyle {
@@ -31,9 +33,19 @@ class fromLanguageViewController: UIViewController, UIPickerViewDelegate, UIPick
         langPicker.delegate = self
         langPicker.dataSource = self
 
-        okButton.tintColor = settings.theme.getTintColot()
+        okButton.tintColor = settings.theme.getTintColorForBlur()
         
-        var blur = UIBlurEffect( style: UIBlurEffectStyle.ExtraLight)
+        let lineView: LineView = LineView(frame: UIScreen.mainScreen().bounds)
+        lineView.opaque = false
+        
+        var blur:UIBlurEffect
+        if settings.theme.current == Theme.name.lightOnDark {
+            blur = UIBlurEffect( style: UIBlurEffectStyle.ExtraLight)
+            
+        }
+        else { blur = UIBlurEffect( style: UIBlurEffectStyle.Dark) }
+        
+        //var blur = UIBlurEffect( style: UIBlurEffectStyle.ExtraLight)
         var blurView = UIVisualEffectView(effect: blur)
         blurView.frame = CGRectMake(0,
             self.view.frame.maxY - blurHeight,
@@ -44,13 +56,14 @@ class fromLanguageViewController: UIViewController, UIPickerViewDelegate, UIPick
         var vibrancy = UIVibrancyEffect(forBlurEffect: blur)
         var vibrancyView = UIVisualEffectView(effect: vibrancy)
         vibrancyView.frame = CGRectMake(0,
-            self.view.frame.maxY - blurHeight,
+            0,
             self.view.frame.width,
             blurHeight)
         blurView.addSubview(vibrancyView)
     
         vibrancyView.addSubview(okButton)
         vibrancyView.addSubview(langPicker)
+        vibrancyView.addSubview(lineView)
         
         langPicker.selectRow(settings.language.hearingIndex, inComponent: 0, animated: false)
         
@@ -61,17 +74,7 @@ class fromLanguageViewController: UIViewController, UIPickerViewDelegate, UIPick
         // Dispose of any resources that can be recreated.
     }
     
-
-    /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepareForSegue(segue: UIStoryboardSegue!, sender: AnyObject!) {
-        // Get the new view controller using segue.destinationViewController.
-        // Pass the selected object to the new view controller.
-    }
-    */
-
+    
     func updateSettings() {
         settings.language.setHearing(
             settings.language.hearingList[langPicker.selectedRowInComponent(0)],
@@ -84,12 +87,23 @@ class fromLanguageViewController: UIViewController, UIPickerViewDelegate, UIPick
         self.dismissViewControllerAnimated(true, completion: nil)
     }
     
+    func pickerView(pickerView: UIPickerView, attributedTitleForRow row: Int, forComponent component: Int) -> NSAttributedString? {
+        var attrs: NSDictionary
+        if settings.theme.current == Theme.name.lightOnDark {
+            attrs = [ NSForegroundColorAttributeName: UIColor.darkTextColor()]
+        }
+        else {
+            attrs = [ NSForegroundColorAttributeName: UIColor.lightTextColor()]
+        }
+        return NSAttributedString(string: settings.language.hearingList[row].name!, attributes: attrs)
+    }
+    
     func pickerView(pickerView: UIPickerView, numberOfRowsInComponent component: Int) -> Int {
         return settings.language.hearingList.count
     }
-    func pickerView(pickerView: UIPickerView, titleForRow row: Int, forComponent component: Int) -> String! {
+    /*func pickerView(pickerView: UIPickerView, titleForRow row: Int, forComponent component: Int) -> String! {
         return settings.language.hearingList[row].name
-    }
+    }*/
     func numberOfComponentsInPickerView(pickerView: UIPickerView) -> Int {
         return 1
     }

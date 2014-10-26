@@ -8,6 +8,12 @@
 
 import Foundation
 
+
+
+protocol settingsDelegate {
+    func useNewSettings()
+}
+
 private let _settings = {Settings()}()
 
 
@@ -25,11 +31,16 @@ public struct Theme{
         return UIColor.darkGrayColor()
     }
     
-    func getTintColot() -> UIColor {
+    func getTintColor() -> UIColor {
         if self.current == Theme.name.lightOnDark {
             return UIColor(red: 131/255.0, green: 127/255.0, blue: 166/255.0, alpha: 1)
         }
         return UIColor(red: 206/255.0, green: 134/255.0, blue: 49/255.0, alpha: 1)
+    }
+    
+    func getTintColorForBlur() -> UIColor {
+        /* As the blur view inverses the colorscheme, the bgColor is a good fit as tintColor */
+        return self.bgColor()
     }
     
     func bgColor() -> UIColor {

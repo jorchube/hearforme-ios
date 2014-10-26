@@ -33,9 +33,9 @@ class toLanguageViewController: UIViewController, UIPickerViewDelegate, UIPicker
         langPicker.delegate = self
         langPicker.dataSource = self
         
-        okButton.tintColor = settings.theme.getTintColot()
-        translationSwitch.tintColor = settings.theme.getTintColot()
-        translationSwitch.onTintColor = settings.theme.getTintColot()
+        okButton.tintColor = settings.theme.getTintColorForBlur()
+        translationSwitch.tintColor = settings.theme.getTintColorForBlur()
+        translationSwitch.onTintColor = settings.theme.getTintColorForBlur()
         
         if !settings.language.hearingIsTranslatable() {
             translationSwitch.on = false
@@ -46,7 +46,24 @@ class toLanguageViewController: UIViewController, UIPickerViewDelegate, UIPicker
             translationSwitch.on = settings.wantsTranslation
         }
         
-        var blur = UIBlurEffect( style: UIBlurEffectStyle.ExtraLight)
+        if settings.theme.current == Theme.name.lightOnDark {
+            translationLabel.textColor = UIColor.darkTextColor()
+        }
+        else {
+            translationLabel.textColor = UIColor.lightTextColor()
+        }
+        
+        let lineView: LineView = LineView(frame: UIScreen.mainScreen().bounds)
+        lineView.opaque = false
+        
+        var blur:UIBlurEffect
+        if settings.theme.current == Theme.name.lightOnDark {
+            blur = UIBlurEffect( style: UIBlurEffectStyle.ExtraLight)
+            
+        }
+        else { blur = UIBlurEffect( style: UIBlurEffectStyle.Dark) }
+        
+        //var blur = UIBlurEffect( style: UIBlurEffectStyle.ExtraLight)
         var blurView = UIVisualEffectView(effect: blur)
         blurView.frame = CGRectMake(0,
             self.view.frame.maxY - blurHeight,
@@ -57,7 +74,7 @@ class toLanguageViewController: UIViewController, UIPickerViewDelegate, UIPicker
         var vibrancy = UIVibrancyEffect(forBlurEffect: blur)
         var vibrancyView = UIVisualEffectView(effect: vibrancy)
         vibrancyView.frame = CGRectMake(0,
-            self.view.frame.maxY - blurHeight,
+            0,
             self.view.frame.width,
             blurHeight)
         blurView.addSubview(vibrancyView)
@@ -66,6 +83,7 @@ class toLanguageViewController: UIViewController, UIPickerViewDelegate, UIPicker
         vibrancyView.addSubview(langPicker)
         vibrancyView.addSubview(translationSwitch)
         vibrancyView.addSubview(translationLabel)
+        vibrancyView.addSubview(lineView)
         
         
         langPicker.selectRow(settings.language.translatingIndex, inComponent: 0, animated: false)
@@ -99,12 +117,23 @@ class toLanguageViewController: UIViewController, UIPickerViewDelegate, UIPicker
         self.dismissViewControllerAnimated(true, completion: nil)
     }
     
+    func pickerView(pickerView: UIPickerView, attributedTitleForRow row: Int, forComponent component: Int) -> NSAttributedString? {
+        var attrs: NSDictionary
+        if settings.theme.current == Theme.name.lightOnDark {
+            attrs = [ NSForegroundColorAttributeName: UIColor.darkTextColor()]
+        }
+        else {
+            attrs = [ NSForegroundColorAttributeName: UIColor.lightTextColor()]
+        }
+        return NSAttributedString(string: settings.language.hearingList[row].name!, attributes: attrs)
+    }
+    
     func pickerView(pickerView: UIPickerView, numberOfRowsInComponent component: Int) -> Int {
         return settings.language.translatingList.count
     }
-    func pickerView(pickerView: UIPickerView, titleForRow row: Int, forComponent component: Int) -> String! {
+    /*func pickerView(pickerView: UIPickerView, titleForRow row: Int, forComponent component: Int) -> String! {
         return settings.language.translatingList[row].name
-    }
+    }*/
     func numberOfComponentsInPickerView(pickerView: UIPickerView) -> Int {
         return 1
     }

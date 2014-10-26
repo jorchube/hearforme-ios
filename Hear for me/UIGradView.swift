@@ -2,14 +2,13 @@
 //  UIGradView.swift
 //  Hear for me
 //
-//  Created by Jordi Chulia on 24/10/14.
+//  Created by Jordi Chulia on 26/10/14.
 //  Copyright (c) 2014 Jordi Chulia. All rights reserved.
 //
 
-import UIKit
 
 class UIGradView: UIView, UITextViewDelegate {
-
+    
     let settings:Settings = Settings.getSettings()
     
     override func drawRect(rect: CGRect)
@@ -39,9 +38,9 @@ class UIGradView: UIView, UITextViewDelegate {
             0
         )
     }
-
+    
     func scrollViewDidScroll(scrollView: UIScrollView) {
         self.frame.origin = CGPoint(x: 0, y: scrollView.contentOffset.y)
     }
-    
 }
+

@@ -8,6 +8,10 @@
 
 import UIKit
 
+protocol connectionStatusDemander {
+    func receivedNetworkStatus(status: ConnectionChecker.netStatus)
+}
+
 class ConnectionChecker: NSObject {
    
     let networkCheckURL1: String = "http://www.google.com"
