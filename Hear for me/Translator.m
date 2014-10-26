@@ -75,6 +75,8 @@ NSMutableData* receivedData;
     
     NSURLRequest* request = [NSURLRequest requestWithURL:url];
     
+    
+    /* TODO: This should be synchronous */
     [NSURLConnection sendAsynchronousRequest:request
                                        queue:[NSOperationQueue mainQueue]
                            completionHandler:^(NSURLResponse *response, NSData *data, NSError *connectionError)
