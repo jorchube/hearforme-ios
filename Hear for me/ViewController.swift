@@ -363,8 +363,9 @@ class ViewController: UIViewController, settingsDelegate, connectionStatusDemand
     func periodicRecognition() {
         NSLog("Starting periodic recognition")
         
-        speechRec.setHearingLanguage(settings.language.getHearingValue(),
-            translatingLanguage: settings.language.getTranslatingValue(),
+        speechRec.setHearingLanguage(settings.language.getHearingCode(),
+            translatingSource: settings.language.getTranslatingSourceCode(),
+            translatingTarget: settings.language.getTranslatingTargetCode(),
             wantsTranslation: settings.wantsTranslation.boolValue)
         
         while(continueRecognizing && networkAvailable) {

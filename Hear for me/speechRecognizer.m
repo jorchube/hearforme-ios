@@ -25,7 +25,8 @@ const NSString* nuanceHost = @"sslsandbox.nmdp.nuancemobility.net";
 
 
 NSString* hearingLanguage;
-NSString* translatingLanguage;
+NSString* translatingSource;
+NSString* translatingTarget;
 bool    wantsTranslation;
 bool    waitForTranslation;
 integer_t    status;
@@ -101,19 +102,22 @@ ViewController* vc;
         
         NSString* finalText;
         
-        /*if(wantsTranslation){
-            [Translator translate:[results firstResult]
-                           toLang:translatingLanguage
-                       inTextView:textview];
+        if(wantsTranslation){
+            NSString* translatedText = [Translator translate:[results firstResult] fromLang:translatingSource toLang:translatingTarget];
+            if ( translatedText != nil ) {
+                finalText = translatedText;
+            }
+            else { finalText = @"--???--";}
         }
-        else*/ {
+        else {
             finalText = [results firstResult];
-        
-            [textview insertText:finalText];
-            [textview insertText:@"\n"];
-            NSRange range = NSMakeRange([textview.text length]-2, [textview.text length]-1);
-            [textview scrollRangeToVisible:range];
         }
+        
+        [textview insertText:finalText];
+        [textview insertText:@"\n"];
+        NSRange range = NSMakeRange([textview.text length]-2, [textview.text length]-1);
+        [textview scrollRangeToVisible:range];
+
     }
     NSLog(@"Heard string: %@", [textview text]);
     r = nil;
@@ -154,10 +158,11 @@ ViewController* vc;
     [self setRecognizerStatus:IDLE];
 }
 
--(void) setHearingLanguage:(NSString *)hLang translatingLanguage:(NSString *)tLang wantsTranslation:(BOOL)hasToTranslate
+-(void) setHearingLanguage:(NSString *)hLang translatingSource:(NSString *)tSourceLang translatingTarget:(NSString *)tTargetLang wantsTranslation:(BOOL)hasToTranslate
 {
     hearingLanguage = hLang;
-    translatingLanguage = tLang;
+    translatingSource = tSourceLang;
+    translatingTarget = tTargetLang;
     wantsTranslation = hasToTranslate;
 }
 

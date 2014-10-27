@@ -47,6 +47,66 @@ UITextView* _textview;
 NSMutableData* receivedData;
 
 
++(NSString*) translate:(NSString *)str fromLang:(NSString *)sourceLang toLang:(NSString *)targetLang
+{
+    /*NSString* _scheme = @"https";
+    NSString* _host = @"www.googleapis.com";
+    NSString* _path = [NSString stringWithFormat: @"%@%@%@%@%@%@",
+                       @"/language/translate/v2?key=",
+                       key,
+                       @"&target=",
+                       target,
+                       @"&q=",
+                       str];*/
+    
+    /* http://api.mymemory.translated.net/get?q=Hello World!&langpair=en|it */
+    
+    NSString* _scheme = @"http";
+    NSString* _host = @"api.mymemory.translated.net";
+    NSString* _path = [NSString stringWithFormat:@"%@%@%@%@%@%@",
+                       @"/get?q=",
+                       str,
+                       @"&langpair=",
+                       sourceLang,
+                       @"|",
+                       targetLang];
+
+    
+    NSURL* url = [[NSURL alloc] initWithScheme:_scheme host:_host path:_path];
+    
+    //NSLog(@"source:%@, target:%@\n%@", sourceLang, targetLang, [NSString stringWithContentsOfURL:url encoding:NSUTF8StringEncoding error:nil]);
+    
+    NSURLRequest* request = [NSURLRequest requestWithURL:url];
+    
+    NSURLResponse* response;
+    NSError* error;
+    
+    NSData* result = [NSURLConnection sendSynchronousRequest:request
+                          returningResponse:&response
+                                      error:&error];
+    
+    if (error) {
+        NSLog(@"Transalte error");
+    }
+    
+    if (result) {
+        NSDictionary* object = [NSJSONSerialization JSONObjectWithData:result options:NSJSONReadingAllowFragments error:nil];
+        if (object) {
+            NSLog(@"Status: %@", [object valueForKeyPath:@"responseStatus"]);
+            if ( [[object valueForKeyPath:@"responseStatus"] integerValue] == 200 ){
+                NSLog(@"Translation: %@", [object valueForKeyPath:@"matches.translation"][0]);
+                return [object valueForKeyPath:@"matches.translation"][0];
+            }
+        }
+    }
+    
+    return nil;
+}
+
+
+
+
+
 +(void) translate:(NSString *)str toLang: (NSString *) target inTextView:(UITextView *)textview
 {
     _textview = textview;
@@ -76,7 +136,6 @@ NSMutableData* receivedData;
     NSURLRequest* request = [NSURLRequest requestWithURL:url];
     
     
-    /* TODO: This should be synchronous */
     [NSURLConnection sendAsynchronousRequest:request
                                        queue:[NSOperationQueue mainQueue]
                            completionHandler:^(NSURLResponse *response, NSData *data, NSError *connectionError)

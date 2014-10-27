@@ -120,7 +120,7 @@ class toLanguageViewController: UIViewController, UIPickerViewDelegate, UIPicker
         else {
             attrs = [ NSForegroundColorAttributeName: UIColor.lightTextColor()]
         }
-        return NSAttributedString(string: settings.language.hearingList[row].name!, attributes: attrs)
+        return NSAttributedString(string: settings.language.translatingList[row].name!, attributes: attrs)
     }
     
     func pickerView(pickerView: UIPickerView, numberOfRowsInComponent component: Int) -> Int {

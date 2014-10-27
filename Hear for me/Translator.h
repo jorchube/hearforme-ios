@@ -13,4 +13,6 @@
 
 +(void) translate: (NSString*) str toLang: (NSString*) target inTextView:(UITextView*) textview;
 
++(NSString*) translate: (NSString*) str fromLang: (NSString*) sourceLang toLang: (NSString*) targetLang;
+
 @end

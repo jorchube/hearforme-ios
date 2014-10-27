@@ -39,7 +39,7 @@
 -(void) stopRecognitionShouldBroadcastStatus:(BOOL) shouldBroadcast;;
 -(void) cancelRecognitionShouldBroadcastStatus:(BOOL) shouldBroadcast;;
 -(void) destroyRecognizer;
--(void) setHearingLanguage:(NSString*) hLang translatingLanguage:(NSString*) tLang wantsTranslation:(BOOL) hasToTranslate;
+-(void) setHearingLanguage:(NSString*) hLang translatingSource:(NSString*) tSourceLang translatingTarget:(NSString*) tTargetLang  wantsTranslation:(BOOL) hasToTranslate;
 //-(void) translationFinishedWithResult:(NSString*)str;
 -(float) getAudioLevel; /* returns a value between 0 and 1 */
 
