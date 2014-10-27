@@ -33,7 +33,7 @@ public struct Theme{
     
     func getTintColor() -> UIColor {
         if self.current == Theme.name.lightOnDark {
-            return UIColor(red: 131/255.0, green: 127/255.0, blue: 166/255.0, alpha: 1)
+            return UIColor(red: 135/255.0, green: 130/255.0, blue: 196/255.0, alpha: 1)
         }
         return UIColor(red: 206/255.0, green: 134/255.0, blue: 49/255.0, alpha: 1)
     }
