@@ -96,7 +96,7 @@ NSMutableData* receivedData;
         if (object) {
             NSLog(@"Status: %@", [object valueForKeyPath:@"responseStatus"]);
             if ( [[object valueForKeyPath:@"responseStatus"] integerValue] == 200 ){
-                if ( ![[object valueForKeyPath:@"matches.translation"] isEmpty] ) {
+                if ( [[object valueForKeyPath:@"matches.translation"] count] > 0 ) {
                     NSLog(@"Translation: %@",
                           [object valueForKeyPath:@"matches.translation"][0]);
                     return [object valueForKeyPath:@"matches.translation"][0];

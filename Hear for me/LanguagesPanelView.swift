@@ -109,6 +109,10 @@ class LanguagesPanelView: UIView {
         layer.frame = CGRectMake(0, self.frame.maxY, self.frame.maxX, 1.0)
         layer.backgroundColor = settings.theme.getTintColor().CGColor
         self.layer.addSublayer(layer)
+        
+        
+        
+        
     }
 
 }
