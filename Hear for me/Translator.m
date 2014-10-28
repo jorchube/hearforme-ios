@@ -49,6 +49,8 @@ NSMutableData* receivedData;
 
 +(NSString*) translate:(NSString *)str fromLang:(NSString *)sourceLang toLang:(NSString *)targetLang
 {
+    
+    NSLog(@"from: %@, to: %@", sourceLang, targetLang);
     /*NSString* _scheme = @"https";
     NSString* _host = @"www.googleapis.com";
     NSString* _path = [NSString stringWithFormat: @"%@%@%@%@%@%@",
@@ -94,8 +96,11 @@ NSMutableData* receivedData;
         if (object) {
             NSLog(@"Status: %@", [object valueForKeyPath:@"responseStatus"]);
             if ( [[object valueForKeyPath:@"responseStatus"] integerValue] == 200 ){
-                NSLog(@"Translation: %@", [object valueForKeyPath:@"matches.translation"][0]);
-                return [object valueForKeyPath:@"matches.translation"][0];
+                if ( ![[object valueForKeyPath:@"matches.translation"] isEmpty] ) {
+                    NSLog(@"Translation: %@",
+                          [object valueForKeyPath:@"matches.translation"][0]);
+                    return [object valueForKeyPath:@"matches.translation"][0];
+                }
             }
         }
     }

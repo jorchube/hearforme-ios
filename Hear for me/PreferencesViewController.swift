@@ -126,11 +126,6 @@ class PreferencesViewController: UIViewController, languagePicker {
         // Dispose of any resources that can be recreated.
     }
     
-
-
-    
-    
-
     
     @IBAction func backButtonTouched(sender: AnyObject) {
         if delegate != nil {

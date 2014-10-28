@@ -11,7 +11,7 @@ import SystemConfiguration
 
 
 
-class ViewController: UIViewController, settingsDelegate, connectionStatusDemander {
+class ViewController: UIViewController, settingsDelegate, connectionStatusDemander, languagePicker {
 
     let settings:Settings = Settings.getSettings()
     
@@ -25,6 +25,8 @@ class ViewController: UIViewController, settingsDelegate, connectionStatusDemand
     
     @IBOutlet weak var activityIndicator: UIActivityIndicatorView!
     
+    @IBOutlet weak var fromLanguageButton: UIButton!
+    @IBOutlet weak var toLanguageButton: UIButton!
     
     var textFadeView: UIGradView?
     
@@ -76,6 +78,9 @@ class ViewController: UIViewController, settingsDelegate, connectionStatusDemand
         textFadeView!.setNeedsDisplay()
         activityIndicator.color = settings.theme.fgColor()
         
+        fromLanguageButton.tintColor = settings.theme.getTintColor()
+        toLanguageButton.tintColor = settings.theme.getTintColor()
+        
         languagesPanelView.updateBlurView()
         languagesPanelView.setNeedsDisplay()
         
@@ -91,11 +96,45 @@ class ViewController: UIViewController, settingsDelegate, connectionStatusDemand
         
     }
     
-    func updateUI(textChanged textC: Bool, themeChanged themeC: Bool) {
+    /*func updateUI(textChanged textC: Bool, themeChanged themeC: Bool) {
         if textC {setTextSize()}
         if themeC {setColors()}
-    }
+    }*/
 
+    
+    func updateUI(textChanged textC:Bool, themeChanged themeC: Bool, languageChanged langC: Bool)
+    {
+        
+        /*
+        
+        About this zPosition++ mess:
+        
+        This is necessary as the blur panel effect view is destroyed and recreated
+        each time the view is loaded, because it seems impossible to simply change the
+        blur style, and this is required in order to switch themes.
+        
+        */
+        fromLanguageButton.layer.zPosition++
+        toLanguageButton.layer.zPosition++
+        
+        if langC {
+            fromLanguageButton.setTitle(settings.language.getHearingString(), forState: UIControlState.allZeros)
+            fromLanguageButton.sizeToFit()
+            toLanguageButton.setTitle(settings.language.getTranslatingString(), forState: UIControlState.allZeros)
+            toLanguageButton.sizeToFit()
+            
+            if !settings.wantsTranslation || !settings.language.hearingIsTranslatable() {
+                toLanguageButton.hidden = true
+            }
+            else {
+                toLanguageButton.hidden = false
+            }
+        }
+        
+        if themeC { setColors() }
+        if textC {setTextSize()}
+        
+    }
     
     
     // MARK: - Network check
@@ -232,7 +271,7 @@ class ViewController: UIViewController, settingsDelegate, connectionStatusDemand
         Called from the preferencesViewController.
         */
         settings.saveSettings()
-        updateUI(textChanged: true, themeChanged: true)
+        updateUI(textChanged: true, themeChanged: true, languageChanged: true)
     }
     
     func initSpeechRec() {
@@ -299,7 +338,7 @@ class ViewController: UIViewController, settingsDelegate, connectionStatusDemand
         mainText.insertSubview(textFadeView!, atIndex: 10)
         
         
-        updateUI(textChanged: true, themeChanged: true)
+        updateUI(textChanged: true, themeChanged: true, languageChanged: true)
         
         hearButton.hidden = true
         waveView.hidden = true
@@ -385,6 +424,7 @@ class ViewController: UIViewController, settingsDelegate, connectionStatusDemand
     }
     
     func startDoingTheJob() {
+        hearButton.hidden = true
         activityIndicator.startAnimating()
         //initSpeechRec()
         
@@ -468,9 +508,18 @@ class ViewController: UIViewController, settingsDelegate, connectionStatusDemand
     
     
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
+        stopDoingTheJob()
         if segue.identifier == "PrefSegue" {
             let calledVC = segue.destinationViewController as PreferencesViewController
             calledVC.delegate = self
+        }
+        if segue.identifier == "mainFromLanguageSegue" {
+            let calledVC = segue.destinationViewController as fromLanguageViewController
+            calledVC.languagePickerDelegate = self
+        }
+        if segue.identifier == "mainToLanguageSegue" {
+            let calledVC = segue.destinationViewController as toLanguageViewController
+            calledVC.languagePickerDelegate = self
         }
     }
     
@@ -492,6 +541,12 @@ class ViewController: UIViewController, settingsDelegate, connectionStatusDemand
             hearButtonPressed(self)
     }
 
+    // MARK: - LangaugePicker protocol
+    
+    func setSelectedLanguage() {
+        updateUI(textChanged: false, themeChanged: false, languageChanged: true)
+        startDoingTheJob()
+    }
     
     // MARK: - Others
     

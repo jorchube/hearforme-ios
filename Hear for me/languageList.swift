@@ -18,13 +18,13 @@ struct hearingLang {
     let code:String? /* Code specified and needed by the recognizer */
     let translatable:Bool
     let translatorCode:String? /* Code specified and needed by the translator */
-    var translatorEquivalences: Array<translatingLang>
+    var translatorEquivalences: Array<String>
 }
 
 struct translatingLang {
     let name:String?
     let code:String?
-    var hearingEquivalences: Array<hearingLang>
+    var hearingEquivalences: Array<String>
 }
 
 
@@ -61,9 +61,9 @@ let hearingLanguageDict:Dictionary<String,hearingLang> = [
     "yue-CHN" : hearingLang(
         name:NSLocalizedString("yue-CHN", comment: ""),
         code:"yue-CHN",
-        translatable:false,
-        translatorCode:"",
-        translatorEquivalences:[]
+        translatable:true,
+        translatorCode:"zh-CN",
+        translatorEquivalences:["zh-CN"]
     ),
     "cat-ESP" : hearingLang(
         name:NSLocalizedString("cat-ESP", comment: ""),
