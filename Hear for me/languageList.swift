@@ -15,9 +15,9 @@ import Foundation
 
 struct hearingLang {
     let name:String?
-    let code:String?
+    let code:String? /* Code specified and needed by the recognizer */
     let translatable:Bool
-    let translatorCode:String?
+    let translatorCode:String? /* Code specified and needed by the translator */
     var translatorEquivalences: Array<translatingLang>
 }
 
@@ -34,29 +34,29 @@ let hearingLanguageDict:Dictionary<String,hearingLang> = [
         name:NSLocalizedString("ara-EGY", comment: ""),
         code:"ara-EGY",
         translatable:true,
-        translatorCode:"",
-        translatorEquivalences:[]
+        translatorCode:"ar-SA",
+        translatorEquivalences:["ar-SA"]
     ),
     "ara-SAU" : hearingLang(
         name:NSLocalizedString("ara-SAU", comment: ""),
         code:"ara-SAU",
         translatable:true,
-        translatorCode:"",
-        translatorEquivalences:[]
+        translatorCode:"ar-SA",
+        translatorEquivalences:["ar-SA"]
     ),
     "ara-XWW" : hearingLang(
         name:NSLocalizedString("ara-XWW", comment: ""),
         code:"ara-XWW",
         translatable:true,
-        translatorCode:"",
-        translatorEquivalences:[]
+        translatorCode:"ar-SA",
+        translatorEquivalences:["ar-SA"]
     ),
     "ind-IDN" : hearingLang(
         name:NSLocalizedString("ind-IDN", comment: ""),
         code:"ind-IDN",
         translatable:true,
-        translatorCode:"",
-        translatorEquivalences:[]
+        translatorCode:"id-ID",
+        translatorEquivalences:["id-ID"]
     ),
     "yue-CHN" : hearingLang(
         name:NSLocalizedString("yue-CHN", comment: ""),
@@ -70,259 +70,259 @@ let hearingLanguageDict:Dictionary<String,hearingLang> = [
         code:"cat-ESP",
         translatable:true,
         translatorCode:"ca-ES",
-        translatorEquivalences:[]
+        translatorEquivalences:["ca-ES"]
     ),
     "hrv-HRV" : hearingLang(
         name:NSLocalizedString("hrv-HRV", comment: ""),
         code:"hrv-HRV",
         translatable:true,
-        translatorCode:"",
-        translatorEquivalences:[]
+        translatorCode:"hr-HR",
+        translatorEquivalences:["hr-HR"]
     ),
     "ces-CZE" : hearingLang(
         name:NSLocalizedString("ces-CZE", comment: ""),
         code:"ces-CZE",
         translatable:true,
-        translatorCode:"",
-        translatorEquivalences:[]
+        translatorCode:"cs-CZ",
+        translatorEquivalences:["cs-CZ"]
     ),
     "dan-DNK" : hearingLang(
         name:NSLocalizedString("dan-DNK", comment: ""),
         code:"dan-DNK",
         translatable:true,
-        translatorCode:"",
-        translatorEquivalences:[]
+        translatorCode:"da-DK",
+        translatorEquivalences:["da-DK"]
     ),
     "nld-NLD" : hearingLang(
         name:NSLocalizedString("nld-NLD", comment: ""),
         code:"nld-NLD",
         translatable:true,
-        translatorCode:"",
-        translatorEquivalences:[]
+        translatorCode:"nl-NL",
+        translatorEquivalences:["nl-NL"]
     ),
     "eng-AUS" : hearingLang(
         name:NSLocalizedString("eng-AUS", comment: ""),
         code:"eng-AUS",
         translatable:true,
-        translatorCode:"",
-        translatorEquivalences:[]
+        translatorCode:"en-GB",
+        translatorEquivalences:["en-GB"]
     ),
     "eng-GBR" : hearingLang(
         name:NSLocalizedString("eng-GBR", comment: ""),
         code:"eng-GBR",
         translatable:true,
-        translatorCode:"",
-        translatorEquivalences:[]
+        translatorCode:"en-GB",
+        translatorEquivalences:["en-GB"]
     ),
     "eng-USA" : hearingLang(
         name:NSLocalizedString("eng-USA", comment: ""),
         code:"eng-USA",
         translatable:true,
-        translatorCode:"",
-        translatorEquivalences:[]
+        translatorCode:"en-GB",
+        translatorEquivalences:["en-GB"]
     ),
     "eng-IND" : hearingLang(
         name:NSLocalizedString("eng-IND", comment: ""),
         code:"eng-IND",
         translatable:true,
-        translatorCode:"",
-        translatorEquivalences:[]
+        translatorCode:"en-GB",
+        translatorEquivalences:["en-GB"]
     ),
     "fin-FIN" : hearingLang(
         name:NSLocalizedString("fin-FIN", comment: ""),
         code:"fin-FIN",
         translatable:true,
-        translatorCode:"",
-        translatorEquivalences:[]
+        translatorCode:"fi-FI",
+        translatorEquivalences:["fi-FI"]
     ),
     "fra-CAN" : hearingLang(
         name:NSLocalizedString("fra-CAN", comment: ""),
         code:"fra-CAN",
         translatable:true,
-        translatorCode:"",
-        translatorEquivalences:[]
+        translatorCode:"fr-FR",
+        translatorEquivalences:["fr-FR"]
     ),
     "fra-FRA" : hearingLang(
         name:NSLocalizedString("fra-FRA", comment: ""),
         code:"fra-FRA",
         translatable:true,
-        translatorCode:"",
-        translatorEquivalences:[]
+        translatorCode:"fr-FR",
+        translatorEquivalences:["fr-FR"]
     ),
     "deu-DEU" : hearingLang(
         name:NSLocalizedString("deu-DEU", comment: ""),
         code:"deu-DEU",
         translatable:true,
-        translatorCode:"",
-        translatorEquivalences:[]
+        translatorCode:"de-DE",
+        translatorEquivalences:["de-DE"]
     ),
     "ell-GRC" : hearingLang(
         name:NSLocalizedString("ell-GRC", comment: ""),
         code:"ell-GRC",
         translatable:true,
-        translatorCode:"",
-        translatorEquivalences:[]
+        translatorCode:"el-GR",
+        translatorEquivalences:["el-GR"]
     ),
     "heb-ISR" : hearingLang(
         name:NSLocalizedString("heb-ISR", comment: ""),
         code:"heb-ISR",
         translatable:true,
-        translatorCode:"",
-        translatorEquivalences:[]
+        translatorCode:"he-IL",
+        translatorEquivalences:["he-IL"]
     ),
     "hin-IND" : hearingLang(
         name:NSLocalizedString("hin-IND", comment: ""),
         code:"hin-IND",
         translatable:true,
-        translatorCode:"",
-        translatorEquivalences:[]
+        translatorCode:"hi-IN",
+        translatorEquivalences:["hi-IN"]
     ),
     "hun-HUN" : hearingLang(
         name:NSLocalizedString("hun-HUN", comment: ""),
         code:"hun-HUN",
         translatable:true,
-        translatorCode:"",
-        translatorEquivalences:[]
+        translatorCode:"hu-HU",
+        translatorEquivalences:["hu-HU"]
     ),
     "ita-ITA" : hearingLang(
         name:NSLocalizedString("ita-ITA", comment: ""),
         code:"ita-ITA",
         translatable:true,
-        translatorCode:"",
-        translatorEquivalences:[]
+        translatorCode:"it-IT",
+        translatorEquivalences:["it-IT"]
     ),
     "jpn-JPN" : hearingLang(
         name:NSLocalizedString("jpn-JPN", comment: ""),
         code:"jpn-JPN",
         translatable:true,
-        translatorCode:"",
-        translatorEquivalences:[]
+        translatorCode:"ja-JA",
+        translatorEquivalences:["ja-JA"]
     ),
     "kor-KOR" : hearingLang(
         name:NSLocalizedString("kor-KOR", comment: ""),
         code:"kor-KOR",
         translatable:true,
-        translatorCode:"",
-        translatorEquivalences:[]
+        translatorCode:"ko-KR",
+        translatorEquivalences:["ko-KR"]
     ),
     "zlm-MYS" : hearingLang(
         name:NSLocalizedString("zlm-MYS", comment: ""),
         code:"zlm-MYS",
         translatable:true,
-        translatorCode:"",
-        translatorEquivalences:[]
+        translatorCode:"ms-MY",
+        translatorEquivalences:["ms-MY"]
     ),
     "cmn-CHN" : hearingLang(
         name:NSLocalizedString("cmn-CHN", comment: ""),
         code:"cmn-CHN",
         translatable:true,
-        translatorCode:"",
-        translatorEquivalences:[]
+        translatorCode:"zh-CN",
+        translatorEquivalences:["zh-CN"]
     ),
     "cmn-TWN" : hearingLang(
         name:NSLocalizedString("cmn-TWN", comment: ""),
         code:"cmn-TWN",
         translatable:true,
-        translatorCode:"",
-        translatorEquivalences:[]
+        translatorCode:"zh-TW",
+        translatorEquivalences:["zh-TW"]
     ),
     "nor-NOR" : hearingLang(
         name:NSLocalizedString("nor-NOR", comment: ""),
         code:"nor-NOR",
         translatable:true,
-        translatorCode:"",
-        translatorEquivalences:[]
+        translatorCode:"no-NO",
+        translatorEquivalences:["no-NO"]
     ),
     "pol-POL" : hearingLang(
         name:NSLocalizedString("pol-POL", comment: ""),
         code:"pol-POL",
         translatable:true,
-        translatorCode:"",
-        translatorEquivalences:[]
+        translatorCode:"pl-PL",
+        translatorEquivalences:["pl-PL"]
     ),
     "por-BRA" : hearingLang(
         name:NSLocalizedString("por-BRA", comment: ""),
         code:"por-BRA",
         translatable:true,
-        translatorCode:"",
-        translatorEquivalences:[]
+        translatorCode:"pt-PT",
+        translatorEquivalences:["pt-PT"]
     ),
     "por-PRT" : hearingLang(
         name:NSLocalizedString("por-PRT", comment: ""),
         code:"por-PRT",
         translatable:true,
-        translatorCode:"",
-        translatorEquivalences:[]
+        translatorCode:"pt-PT",
+        translatorEquivalences:["pt-PT"]
     ),
     "ron-ROU" : hearingLang(
         name:NSLocalizedString("ron-ROU", comment: ""),
         code:"ron-ROU",
         translatable:true,
-        translatorCode:"",
-        translatorEquivalences:[]
+        translatorCode:"ro-RO",
+        translatorEquivalences:["ro-RO"]
     ),
     "rus-RUS" : hearingLang(
         name:NSLocalizedString("rus-RUS", comment: ""),
         code:"rus-RUS",
         translatable:true,
-        translatorCode:"",
-        translatorEquivalences:[]
+        translatorCode:"ru-RU",
+        translatorEquivalences:["ru-RU"]
     ),
     "slk-SVK" : hearingLang(
         name:NSLocalizedString("slk-SVK", comment: ""),
         code:"slk-SVK",
         translatable:true,
-        translatorCode:"",
-        translatorEquivalences:[]
+        translatorCode:"sk-SK",
+        translatorEquivalences:["sk-SK"]
     ),
     "spa-ESP" : hearingLang(
         name:NSLocalizedString("spa-ESP", comment: ""),
         code:"spa-ESP",
         translatable:true,
         translatorCode:"es-ES",
-        translatorEquivalences:[]
+        translatorEquivalences:["es-ES"]
     ),
     "spa-XLA" : hearingLang(
         name:NSLocalizedString("spa-XLA", comment: ""),
         code:"spa-XLA",
         translatable:true,
-        translatorCode:"",
-        translatorEquivalences:[]
+        translatorCode:"es-ES",
+        translatorEquivalences:["es-ES"]
     ),
     "swe-SWE" : hearingLang(
         name:NSLocalizedString("swe-SWE", comment: ""),
         code:"swe-SWE",
         translatable:true,
-        translatorCode:"",
-        translatorEquivalences:[]
+        translatorCode:"sv-SE",
+        translatorEquivalences:["sv-SE"]
     ),
     "tha-THA" : hearingLang(
         name:NSLocalizedString("tha-THA", comment: ""),
         code:"tha-THA",
         translatable:true,
-        translatorCode:"",
-        translatorEquivalences:[]
+        translatorCode:"th-TH",
+        translatorEquivalences:["th-TH"]
     ),
     "tur-TUR" : hearingLang(
         name:NSLocalizedString("tur-TUR", comment: ""),
         code:"tur-TUR",
         translatable:true,
-        translatorCode:"",
-        translatorEquivalences:[]
+        translatorCode:"tr-TR",
+        translatorEquivalences:["tr-TR"]
     ),
     "ukr-UKR" : hearingLang(
         name:NSLocalizedString("ukr-UKR", comment: ""),
         code:"ukr-UKR",
         translatable:true,
-        translatorCode:"",
-        translatorEquivalences:[]
+        translatorCode:"uk-UA",
+        translatorEquivalences:["uk-UA"]
     ),
     "vie-VNM" : hearingLang(
         name:NSLocalizedString("vie-VNM", comment: ""),
         code:"vie-VNM",
         translatable:true,
-        translatorCode:"",
-        translatorEquivalences:[]
+        translatorCode:"vi-VN",
+        translatorEquivalences:["vi-VN"]
     )
     
 ]
@@ -350,7 +350,7 @@ let translatingLanguageDict: Dictionary<String, translatingLang> = [
     "ar-SA" : translatingLang(
         name: NSLocalizedString("ar-SA", comment:""),
         code:"ar-SA",
-        hearingEquivalences:[]
+        hearingEquivalences:["ara-EGY", "ara-SAU", "ara-XWW"]
     ),
     "hy-AM" : translatingLang(
         name: NSLocalizedString("hy-AM", comment:""),
@@ -420,7 +420,7 @@ let translatingLanguageDict: Dictionary<String, translatingLang> = [
     "ca-ES" : translatingLang(
         name: NSLocalizedString("ca-ES", comment:""),
         code:"ca-ES",
-        hearingEquivalences:[]
+        hearingEquivalences:["cat-ESP"]
     ),
     "cb-PH" : translatingLang(
         name: NSLocalizedString("cb-PH", comment:""),
@@ -435,12 +435,12 @@ let translatingLanguageDict: Dictionary<String, translatingLang> = [
     "zh-CN" : translatingLang(
         name: NSLocalizedString("zh-CN", comment:""),
         code:"zh-CN",
-        hearingEquivalences:[]
+        hearingEquivalences:["cmn-CHN"]
     ),
     "zh-TW" : translatingLang(
         name: NSLocalizedString("zh-TW", comment:""),
         code:"zh-TW",
-        hearingEquivalences:[]
+        hearingEquivalences:["cmn-TWN"]
     ),
     "zdj-KM" : translatingLang(
         name: NSLocalizedString("zdj-KM", comment:""),
@@ -455,22 +455,22 @@ let translatingLanguageDict: Dictionary<String, translatingLang> = [
     "hr-HR" : translatingLang(
         name: NSLocalizedString("hr-HR", comment:""),
         code:"hr-HR",
-        hearingEquivalences:[]
+        hearingEquivalences:["hrv-HRV"]
     ),
     "cs-CZ" : translatingLang(
         name: NSLocalizedString("cs-CZ", comment:""),
         code:"cs-CZ",
-        hearingEquivalences:[]
+        hearingEquivalences:["ces-CZE"]
     ),
     "da-DK" : translatingLang(
         name: NSLocalizedString("da-DK", comment:""),
         code:"da-DK",
-        hearingEquivalences:[]
+        hearingEquivalences:["dan-DNK"]
     ),
     "nl-NL" : translatingLang(
         name: NSLocalizedString("nl-NL", comment:""),
         code:"nl-NL",
-        hearingEquivalences:[]
+        hearingEquivalences:["nld-NLD"]
     ),
     "dz-BT" : translatingLang(
         name: NSLocalizedString("dz-BT", comment:""),
@@ -480,7 +480,7 @@ let translatingLanguageDict: Dictionary<String, translatingLang> = [
     "en-GB" : translatingLang(
         name: NSLocalizedString("en-GB", comment:""),
         code:"en-GB",
-        hearingEquivalences:[]
+        hearingEquivalences:["eng-AUS", "eng-GBR", "eng-USA", "eng-IND"]
     ),
     "eo-EU" : translatingLang(
         name: NSLocalizedString("eo-EU", comment:""),
@@ -505,12 +505,12 @@ let translatingLanguageDict: Dictionary<String, translatingLang> = [
     "fi-FI" : translatingLang(
         name: NSLocalizedString("fi-FI", comment:""),
         code:"fi-FI",
-        hearingEquivalences:[]
+        hearingEquivalences:["fin-FIN"]
     ),
     "fr-FR" : translatingLang(
         name: NSLocalizedString("fr-FR", comment:""),
         code:"fr-FR",
-        hearingEquivalences:[]
+        hearingEquivalences:["fra-CAN", "fra-FRA"]
     ),
     "gl-ES" : translatingLang(
         name: NSLocalizedString("gl-ES", comment:""),
@@ -525,17 +525,17 @@ let translatingLanguageDict: Dictionary<String, translatingLang> = [
     "de-DE" : translatingLang(
         name: NSLocalizedString("de-DE", comment:""),
         code:"de-DE",
-        hearingEquivalences:[]
+        hearingEquivalences:["deu-DEU"]
     ),
     "el-GR" : translatingLang(
         name: NSLocalizedString("el-GR", comment:""),
         code:"el-GR",
-        hearingEquivalences:[]
+        hearingEquivalences:["ell-GRC"]
     ),
     "grc-GR" : translatingLang(
         name: NSLocalizedString("grc-GR", comment:""),
         code:"grc-GR",
-        hearingEquivalences:[]
+        hearingEquivalences:["ell-GRC"]
     ),
     "gu-IN" : translatingLang(
         name: NSLocalizedString("gu-IN", comment:""),
@@ -555,17 +555,17 @@ let translatingLanguageDict: Dictionary<String, translatingLang> = [
     "he-IL" : translatingLang(
         name: NSLocalizedString("he-IL", comment:""),
         code:"he-IL",
-        hearingEquivalences:[]
+        hearingEquivalences:["heb-ISR"]
     ),
     "hi-IN" : translatingLang(
         name: NSLocalizedString("hi-IN", comment:""),
         code:"hi-IN",
-        hearingEquivalences:[]
+        hearingEquivalences:["hin-IND"]
     ),
     "hu-HU" : translatingLang(
         name: NSLocalizedString("hu-HU", comment:""),
         code:"hu-HU",
-        hearingEquivalences:[]
+        hearingEquivalences:["hun-HUN"]
     ),
     "is-IS" : translatingLang(
         name: NSLocalizedString("is-IS", comment:""),
@@ -575,7 +575,7 @@ let translatingLanguageDict: Dictionary<String, translatingLang> = [
     "id-ID" : translatingLang(
         name: NSLocalizedString("id-ID", comment:""),
         code:"id-ID",
-        hearingEquivalences:[]
+        hearingEquivalences:["ind-IND"]
     ),
     "kl-GL" : translatingLang(
         name: NSLocalizedString("kl-GL", comment:""),
@@ -590,12 +590,12 @@ let translatingLanguageDict: Dictionary<String, translatingLang> = [
     "it-IT" : translatingLang(
         name: NSLocalizedString("it-IT", comment:""),
         code:"it-IT",
-        hearingEquivalences:[]
+        hearingEquivalences:["ita-ITA"]
     ),
     "ja-JA" : translatingLang(
         name: NSLocalizedString("ja-JA", comment:""),
         code:"ja-JA",
-        hearingEquivalences:[]
+        hearingEquivalences:["jpn-JPN"]
     ),
     "jw-ID" : translatingLang(
         name: NSLocalizedString("jw-ID", comment:""),
@@ -640,7 +640,7 @@ let translatingLanguageDict: Dictionary<String, translatingLang> = [
     "ko-KR" : translatingLang(
         name: NSLocalizedString("ko-KR", comment:""),
         code:"ko-KR",
-        hearingEquivalences:[]
+        hearingEquivalences:["kor-KOR"]
     ),
     "ku-TR" : translatingLang(
         name: NSLocalizedString("ku-TR", comment:""),
@@ -690,7 +690,7 @@ let translatingLanguageDict: Dictionary<String, translatingLang> = [
     "ms-MY" : translatingLang(
         name: NSLocalizedString("ms-MY", comment:""),
         code:"ms-MY",
-        hearingEquivalences:[]
+        hearingEquivalences:["zlm-MYS"]
     ),
     "dv-MV" : translatingLang(
         name: NSLocalizedString("dv-MV", comment:""),
@@ -745,7 +745,7 @@ let translatingLanguageDict: Dictionary<String, translatingLang> = [
     "no-NO" : translatingLang(
         name: NSLocalizedString("no-NO", comment:""),
         code:"no-NO",
-        hearingEquivalences:[]
+        hearingEquivalences:["nor-NOR"]
     ),
     "ny-MW" : translatingLang(
         name: NSLocalizedString("ny-MW", comment:""),
@@ -790,12 +790,12 @@ let translatingLanguageDict: Dictionary<String, translatingLang> = [
     "pl-PL" : translatingLang(
         name: NSLocalizedString("pl-PL", comment:""),
         code:"pl-PL",
-        hearingEquivalences:[]
+        hearingEquivalences:["pol-POL"]
     ),
     "pt-PT" : translatingLang(
         name: NSLocalizedString("pt-PT", comment:""),
         code:"pt-PT",
-        hearingEquivalences:[]
+        hearingEquivalences:["por-BRA", "por-PRT"]
     ),
     "pot-US" : translatingLang(
         name: NSLocalizedString("pot-US", comment:""),
@@ -810,12 +810,12 @@ let translatingLanguageDict: Dictionary<String, translatingLang> = [
     "ro-RO" : translatingLang(
         name: NSLocalizedString("ro-RO", comment:""),
         code:"ro-RO",
-        hearingEquivalences:[]
+        hearingEquivalences:["ron-ROU"]
     ),
     "ru-RU" : translatingLang(
         name: NSLocalizedString("ru-RU", comment:""),
         code:"ru-RU",
-        hearingEquivalences:[]
+        hearingEquivalences:["rus-RUS"]
     ),
     "sm-WS" : translatingLang(
         name: NSLocalizedString("sm-WS", comment:""),
@@ -850,7 +850,7 @@ let translatingLanguageDict: Dictionary<String, translatingLang> = [
     "sk-SK" : translatingLang(
         name: NSLocalizedString("sk-SK", comment:""),
         code:"sk-SK",
-        hearingEquivalences:[]
+        hearingEquivalences:["slk-SVK"]
     ),
     "sl-SI" : translatingLang(
         name: NSLocalizedString("sl-SI", comment:""),
@@ -870,7 +870,7 @@ let translatingLanguageDict: Dictionary<String, translatingLang> = [
     "es-ES" : translatingLang(
         name: NSLocalizedString("es-ES", comment:""),
         code:"es-ES",
-        hearingEquivalences:[]
+        hearingEquivalences:["spa-ESP", "spa-XLA"]
     ),
     "srn-SR" : translatingLang(
         name: NSLocalizedString("srn-SR", comment:""),
@@ -885,7 +885,7 @@ let translatingLanguageDict: Dictionary<String, translatingLang> = [
     "sv-SE" : translatingLang(
         name: NSLocalizedString("sv-SE", comment:""),
         code:"sv-SE",
-        hearingEquivalences:[]
+        hearingEquivalences:["swe-SWE"]
     ),
     "de-CH" : translatingLang(
         name: NSLocalizedString("de-CH", comment:""),
@@ -930,7 +930,7 @@ let translatingLanguageDict: Dictionary<String, translatingLang> = [
     "th-TH" : translatingLang(
         name: NSLocalizedString("th-TH", comment:""),
         code:"th-TH",
-        hearingEquivalences:[]
+        hearingEquivalences:["tha-THA"]
     ),
     "bo-CN" : translatingLang(
         name: NSLocalizedString("bo-CN", comment:""),
@@ -965,7 +965,7 @@ let translatingLanguageDict: Dictionary<String, translatingLang> = [
     "tr-TR" : translatingLang(
         name: NSLocalizedString("tr-TR", comment:""),
         code:"tr-TR",
-        hearingEquivalences:[]
+        hearingEquivalences:["tur-TUR"]
     ),
     "tk-TM" : translatingLang(
         name: NSLocalizedString("tk-TM", comment:""),
@@ -980,7 +980,7 @@ let translatingLanguageDict: Dictionary<String, translatingLang> = [
     "uk-UA" : translatingLang(
         name: NSLocalizedString("uk-UA", comment:""),
         code:"uk-UA",
-        hearingEquivalences:[]
+        hearingEquivalences:["ukr-UKR"]
     ),
     "ppk-ID" : translatingLang(
         name: NSLocalizedString("ppk-ID", comment:""),
@@ -995,7 +995,7 @@ let translatingLanguageDict: Dictionary<String, translatingLang> = [
     "vi-VN" : translatingLang(
         name: NSLocalizedString("vi-VN", comment:""),
         code:"vi-VN",
-        hearingEquivalences:[]
+        hearingEquivalences:["vie-VNM"]
     ),
     "wls-WF" : translatingLang(
         name: NSLocalizedString("wls-WF", comment:""),
