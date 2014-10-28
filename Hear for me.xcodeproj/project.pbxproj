@@ -14,7 +14,6 @@
 		B532DBE619D47D62009B4518 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = B532DBE419D47D62009B4518 /* Main.storyboard */; };
 		B532DBE819D47D62009B4518 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = B532DBE719D47D62009B4518 /* Images.xcassets */; };
 		B532DBF719D47D62009B4518 /* Hear_for_meTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = B532DBF619D47D62009B4518 /* Hear_for_meTests.swift */; };
-		B532DC0119D48383009B4518 /* LICENSE in Resources */ = {isa = PBXBuildFile; fileRef = B532DC0019D48383009B4518 /* LICENSE */; };
 		B532DC3E19D57A74009B4518 /* PreferencesViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B532DC3D19D57A74009B4518 /* PreferencesViewController.swift */; };
 		B532DC4619D95710009B4518 /* Settings.swift in Sources */ = {isa = PBXBuildFile; fileRef = B532DC4519D95710009B4518 /* Settings.swift */; };
 		B558347519EBD483009EA9C8 /* toLanguageViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B558347419EBD483009EA9C8 /* toLanguageViewController.swift */; };
@@ -26,6 +25,7 @@
 		B58ACDE519E549A400C0F4BE /* fromLanguageViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B58ACDE419E549A400C0F4BE /* fromLanguageViewController.swift */; };
 		B5A19A9E19FD9474006C0A39 /* LanguagesPanelView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5A19A9D19FD9474006C0A39 /* LanguagesPanelView.swift */; };
 		B5B13A3919FF17B300B9D3A2 /* README in Resources */ = {isa = PBXBuildFile; fileRef = B5B13A3819FF17B300B9D3A2 /* README */; };
+		B5B13A3B19FF1A1D00B9D3A2 /* LICENSE in Resources */ = {isa = PBXBuildFile; fileRef = B5B13A3A19FF1A1D00B9D3A2 /* LICENSE */; };
 		B5DFE63719E2A72900833541 /* speechRecognizer.m in Sources */ = {isa = PBXBuildFile; fileRef = B5DFE63619E2A72900833541 /* speechRecognizer.m */; };
 		B5DFE63C19E2B27000833541 /* SpeechKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B5DFE63319E2A4E300833541 /* SpeechKit.framework */; };
 		B5DFE6B019E2C25700833541 /* AudioToolbox.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B5DFE6A819E2C25700833541 /* AudioToolbox.framework */; };
@@ -61,7 +61,6 @@
 		B532DBF019D47D62009B4518 /* Hear for meTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "Hear for meTests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
 		B532DBF519D47D62009B4518 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		B532DBF619D47D62009B4518 /* Hear_for_meTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Hear_for_meTests.swift; sourceTree = "<group>"; };
-		B532DC0019D48383009B4518 /* LICENSE */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = LICENSE; sourceTree = "<group>"; };
 		B532DC3D19D57A74009B4518 /* PreferencesViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PreferencesViewController.swift; sourceTree = "<group>"; };
 		B532DC4519D95710009B4518 /* Settings.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Settings.swift; sourceTree = "<group>"; };
 		B558347419EBD483009EA9C8 /* toLanguageViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = toLanguageViewController.swift; sourceTree = "<group>"; };
@@ -73,6 +72,7 @@
 		B58ACDE419E549A400C0F4BE /* fromLanguageViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = fromLanguageViewController.swift; sourceTree = "<group>"; };
 		B5A19A9D19FD9474006C0A39 /* LanguagesPanelView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LanguagesPanelView.swift; sourceTree = "<group>"; };
 		B5B13A3819FF17B300B9D3A2 /* README */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; name = README; path = ../README; sourceTree = "<group>"; };
+		B5B13A3A19FF1A1D00B9D3A2 /* LICENSE */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = LICENSE; sourceTree = SOURCE_ROOT; };
 		B5D8E4D319ED266700A55B1F /* PrivateKeys.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = PrivateKeys.h; sourceTree = "<group>"; };
 		B5DFE62D19E2997D00833541 /* Hear for me-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "Hear for me-Bridging-Header.h"; sourceTree = "<group>"; };
 		B5DFE63319E2A4E300833541 /* SpeechKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = SpeechKit.framework; sourceTree = "<group>"; };
@@ -149,7 +149,7 @@
 				B558348019EBF1C5009EA9C8 /* en.lproj */,
 				B5DFE63219E2A4E300833541 /* Frameworks */,
 				B532DC3C19D575C8009B4518 /* resources */,
-				B532DC0019D48383009B4518 /* LICENSE */,
+				B5B13A3A19FF1A1D00B9D3A2 /* LICENSE */,
 				B5B13A3819FF17B300B9D3A2 /* README */,
 				B532DBE019D47D62009B4518 /* AppDelegate.swift */,
 				B532DBE419D47D62009B4518 /* Main.storyboard */,
@@ -347,10 +347,10 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				B5B13A3B19FF1A1D00B9D3A2 /* LICENSE in Resources */,
 				B5B13A3919FF17B300B9D3A2 /* README in Resources */,
 				B532DBE619D47D62009B4518 /* Main.storyboard in Resources */,
 				B558348319EBF230009EA9C8 /* Localizable.strings in Resources */,
-				B532DC0119D48383009B4518 /* LICENSE in Resources */,
 				B532DBE819D47D62009B4518 /* Images.xcassets in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
