@@ -25,6 +25,7 @@
 		B57D8A8319FD316F0002B2EC /* LanguageSelectorProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = B57D8A8219FD316F0002B2EC /* LanguageSelectorProtocol.swift */; };
 		B58ACDE519E549A400C0F4BE /* fromLanguageViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B58ACDE419E549A400C0F4BE /* fromLanguageViewController.swift */; };
 		B5A19A9E19FD9474006C0A39 /* LanguagesPanelView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5A19A9D19FD9474006C0A39 /* LanguagesPanelView.swift */; };
+		B5B13A3919FF17B300B9D3A2 /* README in Resources */ = {isa = PBXBuildFile; fileRef = B5B13A3819FF17B300B9D3A2 /* README */; };
 		B5DFE63719E2A72900833541 /* speechRecognizer.m in Sources */ = {isa = PBXBuildFile; fileRef = B5DFE63619E2A72900833541 /* speechRecognizer.m */; };
 		B5DFE63C19E2B27000833541 /* SpeechKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B5DFE63319E2A4E300833541 /* SpeechKit.framework */; };
 		B5DFE6B019E2C25700833541 /* AudioToolbox.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B5DFE6A819E2C25700833541 /* AudioToolbox.framework */; };
@@ -71,6 +72,7 @@
 		B57D8A8219FD316F0002B2EC /* LanguageSelectorProtocol.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LanguageSelectorProtocol.swift; sourceTree = "<group>"; };
 		B58ACDE419E549A400C0F4BE /* fromLanguageViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = fromLanguageViewController.swift; sourceTree = "<group>"; };
 		B5A19A9D19FD9474006C0A39 /* LanguagesPanelView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LanguagesPanelView.swift; sourceTree = "<group>"; };
+		B5B13A3819FF17B300B9D3A2 /* README */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; name = README; path = ../README; sourceTree = "<group>"; };
 		B5D8E4D319ED266700A55B1F /* PrivateKeys.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = PrivateKeys.h; sourceTree = "<group>"; };
 		B5DFE62D19E2997D00833541 /* Hear for me-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "Hear for me-Bridging-Header.h"; sourceTree = "<group>"; };
 		B5DFE63319E2A4E300833541 /* SpeechKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = SpeechKit.framework; sourceTree = "<group>"; };
@@ -148,6 +150,7 @@
 				B5DFE63219E2A4E300833541 /* Frameworks */,
 				B532DC3C19D575C8009B4518 /* resources */,
 				B532DC0019D48383009B4518 /* LICENSE */,
+				B5B13A3819FF17B300B9D3A2 /* README */,
 				B532DBE019D47D62009B4518 /* AppDelegate.swift */,
 				B532DBE419D47D62009B4518 /* Main.storyboard */,
 				B532DBE719D47D62009B4518 /* Images.xcassets */,
@@ -344,6 +347,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				B5B13A3919FF17B300B9D3A2 /* README in Resources */,
 				B532DBE619D47D62009B4518 /* Main.storyboard in Resources */,
 				B558348319EBF230009EA9C8 /* Localizable.strings in Resources */,
 				B532DC0119D48383009B4518 /* LICENSE in Resources */,

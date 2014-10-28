@@ -1,0 +1,14 @@
+Hear For Me
+===========
+
+Hear For Me, currently in development, is an iOS app that, as its name suggests, hears someone's speech on behalf of the user and transcribes it, optionally translating it into another language before presenting the result to the user.
+
+
+Hear For Me will soon be available on the iOS App Store.
+
+Versions for Android and Google Glass are being developed too. You can check those versions' development on the links below:
+
+Android version: https://github.com/tomroima/hearforme-android
+
+Google Glass version: https://github.com/pedropobla/hearforme-glass
+
