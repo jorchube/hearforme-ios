@@ -27,6 +27,7 @@ class ViewController: UIViewController, settingsDelegate, connectionStatusDemand
     
     @IBOutlet weak var fromLanguageButton: UIButton!
     @IBOutlet weak var toLanguageButton: UIButton!
+    @IBOutlet weak var switchLanguageButton: UIArrowButton!
     
     var textFadeView: UIGradView?
     
@@ -114,8 +115,12 @@ class ViewController: UIViewController, settingsDelegate, connectionStatusDemand
         blur style, and this is required in order to switch themes.
         
         */
+        switchLanguageButton.layer.zPosition++
         fromLanguageButton.layer.zPosition++
         toLanguageButton.layer.zPosition++
+        
+        switchLanguageButton.setNeedsDisplay()
+        
         
         if langC {
             fromLanguageButton.setTitle(settings.language.getHearingString(), forState: UIControlState.allZeros)
@@ -125,9 +130,11 @@ class ViewController: UIViewController, settingsDelegate, connectionStatusDemand
             
             if !settings.wantsTranslation || !settings.language.hearingIsTranslatable() {
                 toLanguageButton.hidden = true
+                switchLanguageButton.hidden = true
             }
             else {
                 toLanguageButton.hidden = false
+                switchLanguageButton.hidden = false
             }
         }
         
@@ -424,6 +431,8 @@ class ViewController: UIViewController, settingsDelegate, connectionStatusDemand
     }
     
     func startDoingTheJob() {
+        if !upsideDown { return }
+        
         hearButton.hidden = true
         activityIndicator.startAnimating()
         //initSpeechRec()
@@ -535,6 +544,10 @@ class ViewController: UIViewController, settingsDelegate, connectionStatusDemand
             hearButton.hidden = true
             activityIndicator.startAnimating()
         }
+    }
+    
+    @IBAction func switchLanguageButtonPressed(sender: AnyObject) {
+        NSLog("Switching source-target languages")
     }
     
     @IBAction func wavePressed(sender: UITapGestureRecognizer) {

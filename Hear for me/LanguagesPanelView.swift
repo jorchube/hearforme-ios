@@ -15,7 +15,6 @@ class BlurView: UIView {
     
     var blurView: UIVisualEffectView?
     
-    
     func addBlur() {
         
         var blur: UIBlurEffect = UIBlurEffect( style: settings.theme.getBlurEffectStyle())
@@ -69,7 +68,6 @@ class LanguagesPanelView: UIView {
     let settings:Settings = Settings.getSettings()
 
     var blurView: BlurView?
-    
 
     required init(coder aDecoder: NSCoder) {
         super.init(coder: aDecoder)
@@ -94,25 +92,22 @@ class LanguagesPanelView: UIView {
     }
     
     override func drawRect(rect: CGRect) {
-/*        var context:CGContextRef = UIGraphicsGetCurrentContext()
-        CGContextSetStrokeColorWithColor( context, UIColor.blueColor().CGColor)
-        
-        var line: UIBezierPath = UIBezierPath()
-        line.moveToPoint(CGPointMake(0, self.frame.maxY))
-        line.addQuadCurveToPoint(CGPointMake(self.frame.maxX, self.frame.maxY),
-            controlPoint: CGPointMake(self.frame.midX, self.frame.maxY))
-        
-        line.lineWidth = 10.0
-        line.stroke()*/
-
-        var layer: CALayer = CALayer()
-        layer.frame = CGRectMake(0, self.frame.maxY, self.frame.maxX, 1.0)
-        layer.backgroundColor = settings.theme.getTintColor().CGColor
-        self.layer.addSublayer(layer)
-        
-        
-        
-        
+        var borderLine: CALayer = CALayer() /* no offense */
+        borderLine.frame = CGRectMake(0, self.frame.maxY, self.frame.maxX, 1.0)
+        borderLine.backgroundColor = settings.theme.getTintColor().CGColor
+        self.layer.addSublayer(borderLine)
     }
-
 }
+
+
+
+
+
+
+
+
+
+
+
+
+

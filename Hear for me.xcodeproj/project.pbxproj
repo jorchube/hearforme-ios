@@ -36,6 +36,7 @@
 		B5DFE6B519E2C25700833541 /* Security.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B5DFE6AD19E2C25700833541 /* Security.framework */; };
 		B5DFE6B619E2C25700833541 /* SystemConfiguration.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B5DFE6AE19E2C25700833541 /* SystemConfiguration.framework */; settings = {ATTRIBUTES = (Required, ); }; };
 		B5DFE6B719E2C25700833541 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B5DFE6AF19E2C25700833541 /* UIKit.framework */; };
+		B5E340361A0116A900415136 /* UIArrowButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5E340351A0116A900415136 /* UIArrowButton.swift */; };
 		B5EDDD8219ED57A60068D1F5 /* Translator.m in Sources */ = {isa = PBXBuildFile; fileRef = B5EDDD8119ED57A60068D1F5 /* Translator.m */; };
 /* End PBXBuildFile section */
 
@@ -86,6 +87,7 @@
 		B5DFE6AD19E2C25700833541 /* Security.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Security.framework; path = System/Library/Frameworks/Security.framework; sourceTree = SDKROOT; };
 		B5DFE6AE19E2C25700833541 /* SystemConfiguration.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SystemConfiguration.framework; path = System/Library/Frameworks/SystemConfiguration.framework; sourceTree = SDKROOT; };
 		B5DFE6AF19E2C25700833541 /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
+		B5E340351A0116A900415136 /* UIArrowButton.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UIArrowButton.swift; sourceTree = "<group>"; };
 		B5EDDD8019ED57A60068D1F5 /* Translator.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Translator.h; sourceTree = "<group>"; };
 		B5EDDD8119ED57A60068D1F5 /* Translator.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Translator.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -254,6 +256,7 @@
 				B51DAE0119F12F9600486972 /* WaveView.swift */,
 				B57D8A8019FD30730002B2EC /* UIGradView.swift */,
 				B5A19A9D19FD9474006C0A39 /* LanguagesPanelView.swift */,
+				B5E340351A0116A900415136 /* UIArrowButton.swift */,
 			);
 			name = "main view";
 			sourceTree = "<group>";
@@ -372,6 +375,7 @@
 				B532DBE319D47D62009B4518 /* ViewController.swift in Sources */,
 				B532DBE119D47D62009B4518 /* AppDelegate.swift in Sources */,
 				B532DC4619D95710009B4518 /* Settings.swift in Sources */,
+				B5E340361A0116A900415136 /* UIArrowButton.swift in Sources */,
 				B57D8A7B19FD2EC50002B2EC /* LineView.swift in Sources */,
 				B5EDDD8219ED57A60068D1F5 /* Translator.m in Sources */,
 				B5107B7E19FAAD0400A27F7B /* ConnectionChecker.swift in Sources */,

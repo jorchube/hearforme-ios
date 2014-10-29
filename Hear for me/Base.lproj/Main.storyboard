@@ -186,24 +186,38 @@
                                             <segue destination="UZz-U0-Ufb" kind="presentation" identifier="mainToLanguageSegue" modalPresentationStyle="overCurrentContext" modalTransitionStyle="coverVertical" id="Heq-1B-kRX"/>
                                         </connections>
                                     </button>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="2vT-s4-ow9" customClass="UIArrowButton" customModule="Hear_for_me" customModuleProvider="target">
+                                        <rect key="frame" x="-23" y="-15" width="46" height="30"/>
+                                        <state key="normal">
+                                            <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                        </state>
+                                        <connections>
+                                            <action selector="switchLanguageButtonPressed:" destination="vXZ-lx-hvc" eventType="touchDown" id="S0P-BX-hbo"/>
+                                        </connections>
+                                    </button>
                                 </subviews>
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                 <constraints>
                                     <constraint firstAttribute="trailing" secondItem="l0K-V5-6kX" secondAttribute="trailing" constant="8" id="5wd-6o-gbD"/>
                                     <constraint firstItem="caL-11-OvK" firstAttribute="leading" secondItem="keQ-GD-m9A" secondAttribute="leading" constant="8" id="JCg-bH-JSa"/>
+                                    <constraint firstAttribute="centerX" secondItem="2vT-s4-ow9" secondAttribute="centerX" id="edS-bS-iN1"/>
                                     <constraint firstItem="caL-11-OvK" firstAttribute="top" secondItem="keQ-GD-m9A" secondAttribute="top" constant="26" id="oVo-zV-lEi"/>
                                     <constraint firstAttribute="height" constant="64" id="pis-jF-Wzw"/>
                                     <constraint firstItem="l0K-V5-6kX" firstAttribute="top" secondItem="keQ-GD-m9A" secondAttribute="top" constant="26" id="qIW-PN-qAp"/>
+                                    <constraint firstItem="2vT-s4-ow9" firstAttribute="top" secondItem="keQ-GD-m9A" secondAttribute="top" constant="26" id="wYn-YK-p8j"/>
                                 </constraints>
                                 <variation key="default">
                                     <mask key="subviews">
                                         <exclude reference="caL-11-OvK"/>
                                         <exclude reference="l0K-V5-6kX"/>
+                                        <exclude reference="2vT-s4-ow9"/>
                                     </mask>
                                     <mask key="constraints">
                                         <exclude reference="pis-jF-Wzw"/>
                                         <exclude reference="JCg-bH-JSa"/>
                                         <exclude reference="oVo-zV-lEi"/>
+                                        <exclude reference="edS-bS-iN1"/>
+                                        <exclude reference="wYn-YK-p8j"/>
                                         <exclude reference="5wd-6o-gbD"/>
                                         <exclude reference="qIW-PN-qAp"/>
                                     </mask>
@@ -212,11 +226,14 @@
                                     <mask key="subviews">
                                         <include reference="caL-11-OvK"/>
                                         <include reference="l0K-V5-6kX"/>
+                                        <include reference="2vT-s4-ow9"/>
                                     </mask>
                                     <mask key="constraints">
                                         <include reference="pis-jF-Wzw"/>
                                         <include reference="JCg-bH-JSa"/>
                                         <include reference="oVo-zV-lEi"/>
+                                        <include reference="edS-bS-iN1"/>
+                                        <include reference="wYn-YK-p8j"/>
                                         <include reference="5wd-6o-gbD"/>
                                         <include reference="qIW-PN-qAp"/>
                                     </mask>
@@ -313,6 +330,7 @@
                         <outlet property="languagesPanelView" destination="keQ-GD-m9A" id="q7A-wu-uDC"/>
                         <outlet property="mainText" destination="JhO-am-NVE" id="2dq-ok-Vbk"/>
                         <outlet property="prefButton" destination="5sQ-yy-DoI" id="1YT-0Z-ehg"/>
+                        <outlet property="switchLanguageButton" destination="2vT-s4-ow9" id="Ofy-ni-kRB"/>
                         <outlet property="toLanguageButton" destination="l0K-V5-6kX" id="uT3-yB-2yi"/>
                         <outlet property="waveView" destination="PQY-6l-bHK" id="qav-T4-0eJ"/>
                     </connections>
