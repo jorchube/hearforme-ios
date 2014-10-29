@@ -32,6 +32,9 @@
 "NETWORK_ERROR_APP_SETTINGS_BUTTON" = "Check App Permissions";
 "NETWORK_ERROR_OK_BUTTON" = "OK";
 
+
+"MORE_THAN_ONE_HEARING" = "More than one variations of the new input language are available. Please shoose one";
+
 /*
     Nuance languages
  */
@@ -218,7 +221,6 @@
 "rn-RN" = "Kirundi";
 "ko-KR" = "Korean";
 "ku-TR" = "Kurdish";
-"ku-TR" = "Kurdish Sorani";
 "ky-KG" = "Kyrgyz";
 "lo-LA" = "Lao";
 "la-VA" = "Latin";

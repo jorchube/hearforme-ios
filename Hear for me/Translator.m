@@ -9,6 +9,9 @@
 #import "Translator.h"
 #import "PrivateKeys.h"
 
+#import <Foundation/Foundation.h>
+
+
 
 @implementation Translator
 
@@ -63,11 +66,14 @@ NSMutableData* receivedData;
     
     /* http://api.mymemory.translated.net/get?q=Hello World!&langpair=en|it */
     
+    
+    NSString* sanitizedStr = [str stringByReplacingOccurrencesOfString:@"&" withString:@""];
+    
     NSString* _scheme = @"http";
     NSString* _host = @"api.mymemory.translated.net";
     NSString* _path = [NSString stringWithFormat:@"%@%@%@%@%@%@",
                        @"/get?q=",
-                       str,
+                       sanitizedStr,
                        @"&langpair=",
                        sourceLang,
                        @"|",
@@ -75,6 +81,7 @@ NSMutableData* receivedData;
 
     
     NSURL* url = [[NSURL alloc] initWithScheme:_scheme host:_host path:_path];
+    
     
     //NSLog(@"source:%@, target:%@\n%@", sourceLang, targetLang, [NSString stringWithContentsOfURL:url encoding:NSUTF8StringEncoding error:nil]);
     

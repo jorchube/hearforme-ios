@@ -29,7 +29,11 @@ class ViewController: UIViewController, settingsDelegate, connectionStatusDemand
     @IBOutlet weak var toLanguageButton: UIButton!
     @IBOutlet weak var switchLanguageButton: UIArrowButton!
     
+    
     var textFadeView: UIGradView?
+    
+    var switchLanguageAnimationView: UIView?
+    var languageSwitchConflict: Bool = false
     
     let audioSamplingPeriod = 0.05
     let networkCheckPeriod = 5.0
@@ -143,6 +147,77 @@ class ViewController: UIViewController, settingsDelegate, connectionStatusDemand
         
     }
     
+    override func animationDidStop(anim: CAAnimation!, finished flag: Bool) {
+        if !languageSwitchConflict {
+            fromLanguageButton.hidden = false
+            toLanguageButton.hidden = false
+            updateUI(textChanged: false, themeChanged: false, languageChanged: true)
+        }
+        
+        if switchLanguageAnimationView != nil {
+            switchLanguageAnimationView?.removeFromSuperview()
+        }
+    }
+    
+    func switchLanguagesAnimation() {
+        if switchLanguageAnimationView != nil {
+            switchLanguageAnimationView?.removeFromSuperview()
+        }
+        switchLanguageAnimationView = UIView(frame: languagesPanelView.frame)
+        
+        let duration: CFTimeInterval = 0.75
+        
+        var ltor : CATextLayer = CATextLayer()
+        ltor.frame = fromLanguageButton.titleLabel!.bounds
+        ltor.string = fromLanguageButton.titleLabel!.text
+        ltor.font = fromLanguageButton!.titleLabel?.font
+        ltor.fontSize = 15.0
+        ltor.foregroundColor = settings.theme.getTintColor().CGColor
+        ltor.position = fromLanguageButton.layer.position
+        
+        var rtol : CATextLayer = CATextLayer()
+        rtol.frame = toLanguageButton.titleLabel!.bounds
+        rtol.string = toLanguageButton.titleLabel!.text
+        rtol.font = toLanguageButton!.titleLabel?.font
+        rtol.fontSize = 15.0
+        rtol.foregroundColor = settings.theme.getTintColor().CGColor
+        rtol.position = toLanguageButton.layer.position
+        
+        switchLanguageAnimationView!.layer.addSublayer(ltor)
+        switchLanguageAnimationView!.layer.addSublayer(rtol)
+        
+        self.view.addSubview(switchLanguageAnimationView!)
+        
+        let rpos: CGPoint = rtol.position
+        let lpos: CGPoint = ltor.position
+        
+        var ltorPos : CABasicAnimation = CABasicAnimation(keyPath: "position")
+        ltorPos.delegate = self
+        ltorPos.removedOnCompletion = false
+        ltorPos.duration = duration
+        ltorPos.timingFunction = CAMediaTimingFunction(name: kCAMediaTimingFunctionEaseInEaseOut)
+        ltorPos.fromValue = nil
+        ltorPos.byValue = nil
+        ltorPos.toValue = NSValue(CGPoint: rpos)
+        
+        var rtolPos : CABasicAnimation = CABasicAnimation(keyPath: "position")
+        rtolPos.removedOnCompletion = false
+        rtolPos.duration = duration
+        rtolPos.timingFunction = CAMediaTimingFunction(name: kCAMediaTimingFunctionEaseInEaseOut)
+        rtolPos.fromValue = nil
+        rtolPos.byValue = nil
+        rtolPos.toValue = NSValue(CGPoint: lpos)
+        
+        
+        fromLanguageButton.hidden = true
+        toLanguageButton.hidden = true
+        
+        ltor.addAnimation(ltorPos, forKey: "position")
+        rtol.addAnimation(rtolPos, forKey: "position")
+        
+    }
+    
+
     
     // MARK: - Network check
     
@@ -546,8 +621,76 @@ class ViewController: UIViewController, settingsDelegate, connectionStatusDemand
         }
     }
     
+    
+    func showHearingLanguageSwitchConflicSelectorForTranslatingLanguage(TL:translatingLang) {
+        
+        let alert: UIAlertController = UIAlertController(
+            title: "",
+            message: NSLocalizedString("MORE_THAN_ONE_HEARING", comment: ""),
+            preferredStyle: UIAlertControllerStyle.ActionSheet)
+        
+        let codes: [String] = TL.hearingEquivalences
+        var election: String = ""
+        
+        for i in codes {
+            alert.addAction(UIAlertAction(
+                title: NSLocalizedString(i, comment: ""),
+                style: UIAlertActionStyle.Default,
+                handler: { (alert:UIAlertAction!) in
+                    
+                    self.settings.language.setHearing(
+                        hearingLanguageDict[i]!,
+                        index: self.settings.language.hearingIndex)
+                    self.updateUI(textChanged: false, themeChanged: false, languageChanged: true)
+                    self.fromLanguageButton.hidden = false
+                    self.toLanguageButton.hidden = false
+                    self.languageSwitchConflict = false
+                    self.startDoingTheJob()
+                    
+            }) )
+        }
+        
+        self.presentViewController(alert, animated: true, completion: nil)
+    }
+
+    
     @IBAction func switchLanguageButtonPressed(sender: AnyObject) {
         NSLog("Switching source-target languages")
+        stopDoingTheJob()
+        
+        switchLanguagesAnimation()
+        
+        let HL: hearingLang = settings.language.getHearingLang()
+        let HI: Int = settings.language.hearingIndex
+        
+        let TL: translatingLang = settings.language.getTranslatingLang()
+        let TI: Int = settings.language.translatingIndex
+        
+        if HL.translatorEquivalences.count > 1 {
+            /* Nothing to do for now */
+        }
+        else if HL.translatorEquivalences.count == 1 {
+            let code: String = HL.translatorEquivalences[0]
+            settings.language.setTranslating(
+                translatingLanguageDict[code]!,
+                index: HI)
+        }
+        
+        if TL.hearingEquivalences.count > 1 {
+            languageSwitchConflict = true
+            showHearingLanguageSwitchConflicSelectorForTranslatingLanguage(TL)
+        }
+        else if TL.hearingEquivalences.count == 1 {
+            let code: String = TL.hearingEquivalences[0]
+            settings.language.setHearing(
+                hearingLanguageDict[code]!,
+                index: HI)
+        }
+        
+        if !languageSwitchConflict {
+            //updateUI(textChanged: false, themeChanged: false, languageChanged: true)
+            startDoingTheJob()
+        }
     }
     
     @IBAction func wavePressed(sender: UITapGestureRecognizer) {

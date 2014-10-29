@@ -214,10 +214,10 @@
                                     </mask>
                                     <mask key="constraints">
                                         <exclude reference="pis-jF-Wzw"/>
-                                        <exclude reference="JCg-bH-JSa"/>
-                                        <exclude reference="oVo-zV-lEi"/>
                                         <exclude reference="edS-bS-iN1"/>
                                         <exclude reference="wYn-YK-p8j"/>
+                                        <exclude reference="JCg-bH-JSa"/>
+                                        <exclude reference="oVo-zV-lEi"/>
                                         <exclude reference="5wd-6o-gbD"/>
                                         <exclude reference="qIW-PN-qAp"/>
                                     </mask>
@@ -230,10 +230,10 @@
                                     </mask>
                                     <mask key="constraints">
                                         <include reference="pis-jF-Wzw"/>
-                                        <include reference="JCg-bH-JSa"/>
-                                        <include reference="oVo-zV-lEi"/>
                                         <include reference="edS-bS-iN1"/>
                                         <include reference="wYn-YK-p8j"/>
+                                        <include reference="JCg-bH-JSa"/>
+                                        <include reference="oVo-zV-lEi"/>
                                         <include reference="5wd-6o-gbD"/>
                                         <include reference="qIW-PN-qAp"/>
                                     </mask>
