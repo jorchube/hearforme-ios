@@ -52,6 +52,8 @@ class PreferencesViewController: UIViewController, languagePicker {
         translateToLabel.textColor = settings.theme.fgColor()
         
         backButton.tintColor = settings.theme.getTintColor()
+    
+        self.setNeedsStatusBarAppearanceUpdate()
         
     }
     
