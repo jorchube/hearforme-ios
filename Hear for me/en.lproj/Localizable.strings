@@ -33,7 +33,8 @@
 "NETWORK_ERROR_OK_BUTTON" = "OK";
 
 
-"MORE_THAN_ONE_HEARING" = "More than one variations of the new input language are available. Please shoose one";
+"HEARING_CONFLICT_TITLE" = "Several languages variations available";
+"HEARING_CONFLICT_TEXT" = "More than one language variation is available for recognition. Choosing the right one may increase the chances of a successful speech recognition.";
 
 /*
     Nuance languages

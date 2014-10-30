@@ -38,6 +38,8 @@ class ViewController: UIViewController, settingsDelegate, connectionStatusDemand
     let audioSamplingPeriod = 0.05
     let networkCheckPeriod = 5.0
     
+    let showHideAnimationtime = 0.75
+    
     var speechRec:speechRecognizer = speechRecognizer()
     
     var continueRecognizing = false /* Recognition is over antd the device is back at its normal orientation */
@@ -107,6 +109,51 @@ class ViewController: UIViewController, settingsDelegate, connectionStatusDemand
     }*/
 
     
+    func smoothShow(object: UIView) {
+        if !object.hidden { return }
+        
+        object.alpha = 0
+        object.hidden = false
+        UIView.animateWithDuration(showHideAnimationtime, animations: {object.alpha = 1})
+        object.alpha = 1
+    }
+    
+    func smoothHide(object: UIView) {
+        if object.hidden { return }
+        
+        object.alpha = 1
+        UIView.animateWithDuration(showHideAnimationtime, animations: {object.alpha = 0})
+        object.hidden = true
+        object.alpha = 1
+    }
+    
+    func smoothShow(objects: [UIView]) {
+        for o in objects {
+            smoothShow(o)
+        }
+    }
+    
+    func smoothHide(objects: [UIView]) {
+        for o in objects {
+            smoothHide(o)
+        }
+    }
+    
+    func activityHint(show: Bool) {
+        if show {
+            activityIndicator.alpha = 0
+            activityIndicator.startAnimating()
+            UIView.animateWithDuration(showHideAnimationtime, animations: {self.activityIndicator.alpha = 1})
+            activityIndicator.alpha = 1
+        }
+        else {
+            activityIndicator.alpha = 1
+            UIView.animateWithDuration(showHideAnimationtime, animations: {self.activityIndicator.alpha = 0})
+            activityIndicator.stopAnimating()
+            activityIndicator.alpha = 1
+        }
+    }
+    
     func updateUI(textChanged textC:Bool, themeChanged themeC: Bool, languageChanged langC: Bool)
     {
         
@@ -133,24 +180,34 @@ class ViewController: UIViewController, settingsDelegate, connectionStatusDemand
             toLanguageButton.sizeToFit()
             
             if !settings.wantsTranslation || !settings.language.hearingIsTranslatable() {
-                toLanguageButton.hidden = true
-                switchLanguageButton.hidden = true
+                //toLanguageButton.hidden = true
+                //switchLanguageButton.hidden = true
+                smoothHide([toLanguageButton, switchLanguageButton])
+                
+                fromLanguageButton.layer.position = CGPointMake(languagesPanelView.frame.midX, fromLanguageButton.layer.position.y)
+                
             }
             else {
-                toLanguageButton.hidden = false
-                switchLanguageButton.hidden = false
+                //toLanguageButton.hidden = false
+                //switchLanguageButton.hidden = false
+                smoothShow([toLanguageButton, switchLanguageButton])
             }
         }
         
         if themeC { setColors() }
         if textC {setTextSize()}
         
+        //fromLanguageButton.hidden = false
+        smoothShow(fromLanguageButton)
+        
     }
     
     override func animationDidStop(anim: CAAnimation!, finished flag: Bool) {
         if !languageSwitchConflict {
-            fromLanguageButton.hidden = false
-            toLanguageButton.hidden = false
+            //fromLanguageButton.hidden = false
+            //toLanguageButton.hidden = false
+            smoothShow([fromLanguageButton, toLanguageButton])
+            
             updateUI(textChanged: false, themeChanged: false, languageChanged: true)
         }
         
@@ -209,8 +266,9 @@ class ViewController: UIViewController, settingsDelegate, connectionStatusDemand
         rtolPos.toValue = NSValue(CGPoint: lpos)
         
         
-        fromLanguageButton.hidden = true
-        toLanguageButton.hidden = true
+        //fromLanguageButton.hidden = true
+        //toLanguageButton.hidden = true
+        smoothHide([fromLanguageButton, toLanguageButton])
         
         ltor.addAnimation(ltorPos, forKey: "position")
         rtol.addAnimation(rtolPos, forKey: "position")
@@ -323,9 +381,11 @@ class ViewController: UIViewController, settingsDelegate, connectionStatusDemand
     
     func receivedNetworkStatus(status: ConnectionChecker.netStatus) {
         if status == ConnectionChecker.netStatus.down {
-            activityIndicator.stopAnimating()
-            waveView.hidden = true
-            hearButton.hidden = true
+            //activityIndicator.stopAnimating()
+            activityHint(false)
+            //waveView.hidden = true
+            //hearButton.hidden = true
+            smoothHide([waveView, hearButton])
             
             wantsAnotherRecognition = false
             speechRec.cancelRecognitionShouldBroadcastStatus(false)
@@ -380,6 +440,9 @@ class ViewController: UIViewController, settingsDelegate, connectionStatusDemand
                 repeats: true)
         }
         
+        updateUI(textChanged: false, themeChanged: false, languageChanged: true)
+        
+        
     }
     
     func initialSpaces() -> String {
@@ -428,6 +491,11 @@ class ViewController: UIViewController, settingsDelegate, connectionStatusDemand
         
         initSpeechRec()
         
+        fromLanguageButton.hidden = true
+        toLanguageButton.hidden = true
+        switchLanguageButton.hidden = true
+        
+        
       /*
         var layer: CALayer = CALayer()
         layer.frame = CGRectMake(20, 20, 200, 200)
@@ -448,13 +516,19 @@ class ViewController: UIViewController, settingsDelegate, connectionStatusDemand
         }
         switch status {
             case IDLE:
-                activityIndicator.stopAnimating()
-                hearButton.hidden = false
-                waveView.hidden = true
+                //activityIndicator.stopAnimating()
+                activityHint(false)
+                //hearButton.hidden = false
+                smoothShow(hearButton)
+                //waveView.hidden = true
+                smoothHide(waveView)
             case HEARING:
-                activityIndicator.stopAnimating()
-                hearButton.hidden = true
-                waveView.hidden = false
+                //activityIndicator.stopAnimating()
+                activityHint(false)
+                //hearButton.hidden = true
+                smoothHide(hearButton)
+                //waveView.hidden = false
+                smoothShow(waveView)
             case PROCESSING:
                 fallthrough
             case RESTARTING:
@@ -462,17 +536,24 @@ class ViewController: UIViewController, settingsDelegate, connectionStatusDemand
             case SETUP:
                 fallthrough
             case PREPARING:
-                activityIndicator.startAnimating()
-                waveView.hidden = true
-                hearButton.hidden = true
+                //activityIndicator.startAnimating()
+                activityHint(true)
+                //waveView.hidden = true
+                //hearButton.hidden = true
+                smoothHide([waveView, hearButton])
             case ERROR:
-                activityIndicator.startAnimating()
-                hearButton.hidden = true
-                waveView.hidden = true
+                //activityIndicator.startAnimating()
+                activityHint(true)
+                //hearButton.hidden = true
+                //waveView.hidden = true
+                smoothHide([waveView, hearButton])
             default:
-                activityIndicator.stopAnimating()
-                waveView.hidden = true
-                hearButton.hidden = false
+                //activityIndicator.stopAnimating()
+                activityHint(false)
+                //waveView.hidden = true
+                smoothHide(waveView)
+                //hearButton.hidden = false
+                smoothShow(hearButton)
         }
         recognizerStatus = status
         
@@ -508,8 +589,10 @@ class ViewController: UIViewController, settingsDelegate, connectionStatusDemand
     func startDoingTheJob() {
         if !upsideDown { return }
         
-        hearButton.hidden = true
-        activityIndicator.startAnimating()
+        //hearButton.hidden = true
+        smoothHide(hearButton)
+        //activityIndicator.startAnimating()
+        activityHint(true)
         //initSpeechRec()
         
         continueRecognizing = true
@@ -566,9 +649,11 @@ class ViewController: UIViewController, settingsDelegate, connectionStatusDemand
             upsideDown = true
             
             mainText.text = initialSpaces()
-            prefButton.hidden = true
-            hearButton.hidden = true
-            waveView.hidden = true
+            //prefButton.hidden = true
+            //hearButton.hidden = true
+            //waveView.hidden = true
+            
+            smoothHide([mainText, prefButton, waveView])
             
             startDoingTheJob()
         }
@@ -577,10 +662,14 @@ class ViewController: UIViewController, settingsDelegate, connectionStatusDemand
             NSLog("Orientation again normal")
             upsideDown = false
             
-            prefButton.hidden = false
-            hearButton.hidden = true
-            waveView.hidden = true
-            activityIndicator.stopAnimating()
+            //prefButton.hidden = false
+            smoothShow(prefButton)
+            //hearButton.hidden = true
+            //waveView.hidden = true
+            smoothHide([hearButton, waveView])
+            
+            //activityIndicator.stopAnimating()
+            activityHint(false)
             
             /*networkCheckTimer?.invalidate()
             networkCheckTimer = nil*/
@@ -612,12 +701,15 @@ class ViewController: UIViewController, settingsDelegate, connectionStatusDemand
         if !wantsAnotherRecognition {
             //activityIndicator.stopAnimating()
             speechRec.stopRecognitionShouldBroadcastStatus(true)
-            hearButton.hidden = true
-            waveView.hidden = true
+            //hearButton.hidden = true
+            //waveView.hidden = true
+            smoothHide([hearButton, waveView])
         }
         else {
-            hearButton.hidden = true
-            activityIndicator.startAnimating()
+            //hearButton.hidden = true
+            smoothHide(hearButton)
+            //activityIndicator.startAnimating()
+            activityHint(true)
         }
     }
     
@@ -625,12 +717,11 @@ class ViewController: UIViewController, settingsDelegate, connectionStatusDemand
     func showHearingLanguageSwitchConflicSelectorForTranslatingLanguage(TL:translatingLang) {
         
         let alert: UIAlertController = UIAlertController(
-            title: "",
-            message: NSLocalizedString("MORE_THAN_ONE_HEARING", comment: ""),
+            title: NSLocalizedString("HEARING_CONFLICT_TITLE", comment: ""),
+            message: NSLocalizedString("HEARING_CONFLICT_TEXT", comment: ""),
             preferredStyle: UIAlertControllerStyle.ActionSheet)
         
         let codes: [String] = TL.hearingEquivalences
-        var election: String = ""
         
         for i in codes {
             alert.addAction(UIAlertAction(
@@ -640,7 +731,7 @@ class ViewController: UIViewController, settingsDelegate, connectionStatusDemand
                     
                     self.settings.language.setHearing(
                         hearingLanguageDict[i]!,
-                        index: self.settings.language.hearingIndex)
+                        index: self.settings.language.indexOfHearingLanguageWithCode(i))
                     self.updateUI(textChanged: false, themeChanged: false, languageChanged: true)
                     self.fromLanguageButton.hidden = false
                     self.toLanguageButton.hidden = false
@@ -661,10 +752,7 @@ class ViewController: UIViewController, settingsDelegate, connectionStatusDemand
         switchLanguagesAnimation()
         
         let HL: hearingLang = settings.language.getHearingLang()
-        let HI: Int = settings.language.hearingIndex
-        
         let TL: translatingLang = settings.language.getTranslatingLang()
-        let TI: Int = settings.language.translatingIndex
         
         if HL.translatorEquivalences.count > 1 {
             /* Nothing to do for now */
@@ -673,7 +761,7 @@ class ViewController: UIViewController, settingsDelegate, connectionStatusDemand
             let code: String = HL.translatorEquivalences[0]
             settings.language.setTranslating(
                 translatingLanguageDict[code]!,
-                index: HI)
+                index: settings.language.indexOfTranslatingLanguageWithCode(code))
         }
         
         if TL.hearingEquivalences.count > 1 {
@@ -684,7 +772,7 @@ class ViewController: UIViewController, settingsDelegate, connectionStatusDemand
             let code: String = TL.hearingEquivalences[0]
             settings.language.setHearing(
                 hearingLanguageDict[code]!,
-                index: HI)
+                index: settings.language.indexOfHearingLanguageWithCode(code))
         }
         
         if !languageSwitchConflict {

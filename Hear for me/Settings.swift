@@ -148,6 +148,21 @@ public struct Languages{
     func hearingIsTranslatable() -> Bool {
         return self.hearingSelection.translatable
     }
+    
+    func indexOfHearingLanguageWithCode(code: String) -> Int {
+        for i in 0...hearingList.count {
+            if hearingList[i].code == code { return i }
+        }
+        return 0
+    }
+    
+    func indexOfTranslatingLanguageWithCode(code: String) -> Int {
+        for i in 0...translatingList.count {
+            if translatingList[i].code == code { return i }
+        }
+        return 0
+    }
+    
 }
 
 struct PreferenceKeys {
