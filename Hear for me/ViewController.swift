@@ -60,7 +60,7 @@ class ViewController: UIViewController, settingsDelegate, connectionStatusDemand
     var recognizerStatus:integer_t = IDLE
     
     var networkAvailable:Bool = true
-    var networkUnreachableOverlay:UIView?
+    var networkUnreachableOverlay:NoNetworkOverlayView?
     var networkCheckTimer: NSTimer?
     
     var upsideDown:Bool = false

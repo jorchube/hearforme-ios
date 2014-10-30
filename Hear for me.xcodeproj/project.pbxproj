@@ -38,6 +38,7 @@
 		B5DFE6B719E2C25700833541 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B5DFE6AF19E2C25700833541 /* UIKit.framework */; };
 		B5E340361A0116A900415136 /* UIArrowButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5E340351A0116A900415136 /* UIArrowButton.swift */; };
 		B5EDDD8219ED57A60068D1F5 /* Translator.m in Sources */ = {isa = PBXBuildFile; fileRef = B5EDDD8119ED57A60068D1F5 /* Translator.m */; };
+		B5FB1D341A029BA30092E48B /* NoNetworkOverlay.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5FB1D331A029BA30092E48B /* NoNetworkOverlay.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -90,6 +91,7 @@
 		B5E340351A0116A900415136 /* UIArrowButton.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UIArrowButton.swift; sourceTree = "<group>"; };
 		B5EDDD8019ED57A60068D1F5 /* Translator.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Translator.h; sourceTree = "<group>"; };
 		B5EDDD8119ED57A60068D1F5 /* Translator.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Translator.m; sourceTree = "<group>"; };
+		B5FB1D331A029BA30092E48B /* NoNetworkOverlay.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NoNetworkOverlay.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -158,6 +160,7 @@
 				B532DBE719D47D62009B4518 /* Images.xcassets */,
 				B532DBDE19D47D62009B4518 /* Supporting Files */,
 				B532DC3D19D57A74009B4518 /* PreferencesViewController.swift */,
+				B5FB1D331A029BA30092E48B /* NoNetworkOverlay.swift */,
 				B57D8A7F19FD2FEA0002B2EC /* main view */,
 				B532DC4519D95710009B4518 /* Settings.swift */,
 				B5DFE62D19E2997D00833541 /* Hear for me-Bridging-Header.h */,
@@ -374,6 +377,7 @@
 			files = (
 				B532DBE319D47D62009B4518 /* ViewController.swift in Sources */,
 				B532DBE119D47D62009B4518 /* AppDelegate.swift in Sources */,
+				B5FB1D341A029BA30092E48B /* NoNetworkOverlay.swift in Sources */,
 				B532DC4619D95710009B4518 /* Settings.swift in Sources */,
 				B5E340361A0116A900415136 /* UIArrowButton.swift in Sources */,
 				B57D8A7B19FD2EC50002B2EC /* LineView.swift in Sources */,
