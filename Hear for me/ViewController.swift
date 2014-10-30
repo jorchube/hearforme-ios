@@ -653,7 +653,7 @@ class ViewController: UIViewController, settingsDelegate, connectionStatusDemand
             //hearButton.hidden = true
             //waveView.hidden = true
             
-            smoothHide([mainText, prefButton, waveView])
+            smoothHide([hearButton, prefButton, waveView])
             
             startDoingTheJob()
         }
