@@ -60,7 +60,7 @@ class ViewController: UIViewController, settingsDelegate, connectionStatusDemand
     var recognizerStatus:integer_t = IDLE
     
     var networkAvailable:Bool = true
-    var networkUnreachableOverlay:UIView?
+    var networkUnreachableOverlay:NoNetworkOverlayView?
     var networkCheckTimer: NSTimer?
     
     var upsideDown:Bool = false
@@ -282,45 +282,8 @@ class ViewController: UIViewController, settingsDelegate, connectionStatusDemand
     func transitionToNetworkUnreachableOverlay()
     {
         let frame: CGRect = UIScreen.mainScreen().bounds
-        networkUnreachableOverlay = UIView(frame: frame)
-        let message: UITextView = UITextView(frame: CGRect(
-            x: frame.width * 1/10,
-            y: frame.height * 1/10,
-            width: frame.width * 8/10,
-            height: frame.height * 8/10))
-        
-        message.text = NSLocalizedString("NETWORK_ERROR_MESSAGE", comment: "")
-        message.textColor = UIColor.lightTextColor()
-        message.font = message.font.fontWithSize(16)
-        message.backgroundColor = UIColor.clearColor()
-        message.textAlignment = NSTextAlignment.Center
-        message.editable = false
-        
-        var image = UIImage(named: "sad_cloud.png")
-        
-        let imageView: UIImageView = UIImageView(image: image)
-        imageView.frame = CGRect(
-            x: frame.width * 3/10,
-            y: frame.height * 5/10,
-            width: frame.width * 4/10,
-            height: frame.height * 4/10)
-        imageView.contentMode = UIViewContentMode.ScaleAspectFit
-        imageView.alpha = 0.6
-        
-        
-        var blur = UIBlurEffect( style: UIBlurEffectStyle.Dark)
-        var blurView = UIVisualEffectView(effect: blur)
-        blurView.frame = frame
-        networkUnreachableOverlay!.addSubview(blurView)
-        
-        var vibrancy = UIVibrancyEffect(forBlurEffect: blur)
-        var vibrancyView = UIVisualEffectView(effect: vibrancy)
-        vibrancyView.frame = frame
-        blurView.addSubview(vibrancyView)
-        
-        vibrancyView.addSubview(message)
-        vibrancyView.addSubview(imageView)
-        
+        //networkUnreachableOverlay = UIView(frame: frame)
+        networkUnreachableOverlay = NoNetworkOverlayView(frame: frame)
         
         networkUnreachableOverlay!.alpha = 0
         self.view.addSubview(networkUnreachableOverlay!)
