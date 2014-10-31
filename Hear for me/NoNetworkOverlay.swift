@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import AudioToolbox
 
 class NoNetworkOverlayView: UIView {
 
@@ -44,7 +45,7 @@ class NoNetworkOverlayView: UIView {
         imageView!.alpha = 0.6
         
         imageView!.addTarget(self,
-            action: "yaaaaaay:",
+            action: "pop:",
             forControlEvents: UIControlEvents.TouchDownRepeat)
 
 
@@ -94,16 +95,21 @@ class NoNetworkOverlayView: UIView {
     func smoothKill(object: UIView, duration: NSTimeInterval) {
         if object.hidden { return }
         
+        let name: String? = "blop"; let type: String? = "wav"; let dir: String? = "sounds"
+        let soundURL: NSURL? = NSURL(fileURLWithPath: NSBundle.mainBundle().pathForResource(name, ofType: type)!)
+        var soundID: SystemSoundID = SystemSoundID()
+        AudioServicesCreateSystemSoundID(soundURL, &soundID)
+        AudioServicesPlaySystemSound(soundID)
+        
         var image = UIImage(named: "cartoon_rainbow.png")
         (object as UIButton).setImage(image, forState: UIControlState.allZeros)
+        object.userInteractionEnabled = false
         
         object.alpha = 1
         //UIView.animateWithDuration(duration, animations: {object.alpha = 0})
         UIView.animateWithDuration(duration,
             animations: {object.alpha = 0},
             completion: {Bool in object.removeFromSuperview()})
-        
-        respawn()
     }
     
     
@@ -122,7 +128,7 @@ class NoNetworkOverlayView: UIView {
         but.alpha = 0.6
         
         but.addTarget(self,
-            action: "yaaaaaay:",
+            action: "pop:",
             forControlEvents: UIControlEvents.TouchDown)
         
         self.addSubview(but)
@@ -130,7 +136,7 @@ class NoNetworkOverlayView: UIView {
     }
     
     func randomBetweenNumbers(firstNum: CGFloat, secondNum: CGFloat) -> CGFloat{
-        return CGFloat(arc4random()) / CGFloat(UINT32_MAX) * abs(firstNum - secondNum) + min(firstNum, secondNum)
+        return ( ( CGFloat(arc4random()) / CGFloat(UINT32_MAX) ) * (secondNum - firstNum) ) + firstNum
     }
     
     func respawn() {
@@ -139,8 +145,8 @@ class NoNetworkOverlayView: UIView {
         var side1: CGFloat = randomBetweenNumbers(20.0, secondNum: frame.width/2)
         if side1 < 20 { side1 += 20}
         let position1: CGRect = CGRectMake(
-            randomBetweenNumbers(20, secondNum: frame.width - 20),
-            randomBetweenNumbers(20, secondNum: frame.height - 20),
+            randomBetweenNumbers(20, secondNum: frame.width - 20) - side1/2,
+            randomBetweenNumbers(20, secondNum: frame.height - 20) - side1/2,
             side1,
             side1)
         
@@ -148,8 +154,8 @@ class NoNetworkOverlayView: UIView {
         var side2: CGFloat = randomBetweenNumbers(20.0, secondNum: frame.width/2)
         if side2 < 20 { side2 += 20}
         let position2: CGRect = CGRectMake(
-            randomBetweenNumbers(20, secondNum: frame.width - 20),
-            randomBetweenNumbers(20, secondNum: frame.height - 20),
+            randomBetweenNumbers(20, secondNum: frame.width - 20) - side2/2,
+            randomBetweenNumbers(20, secondNum: frame.height - 20) - side2/2,
             side2,
             side2)
         
@@ -161,18 +167,9 @@ class NoNetworkOverlayView: UIView {
     }
     
     
-    func kill(object: UIView) {
-        
-        let frame: CGRect = object.frame
-        smoothKill(object, duration: 2)
-        //smoothKill(createRainbow(frame), duration: 1)
-    }
-    
-    func yaaaaaay(sender: UIView ) {
-        NSLog("yaay")
-        
-        kill(sender)
-        
+    func pop(sender: UIView ) {
+        smoothKill(sender, duration: 10)
+        respawn()
     }
     
     
